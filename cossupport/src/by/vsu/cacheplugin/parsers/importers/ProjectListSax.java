@@ -7,14 +7,12 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class ProjectListSax extends DefaultHandler  {
+public class ProjectListSax extends DefaultHandler {
 
     private String workspaceURL;
-    private boolean hasClass=false;
-    private boolean hasRoutine=false;
+    private boolean hasClass = false;
+    private boolean hasRoutine = false;
 
     public boolean isHasClass() {
         return hasClass;
@@ -43,11 +41,11 @@ public class ProjectListSax extends DefaultHandler  {
 
     @Override
     public void startElement(String uri, String local_name, String raw_name, Attributes amap) throws SAXException {
-        String filename = "";
-        if (!hasClass&&local_name.equalsIgnoreCase("Class")) {
+        String filename = null;
+        if (!hasClass && local_name.equalsIgnoreCase("Class")) {
             hasClass = true;
         }
-        if (!hasRoutine&&local_name.equalsIgnoreCase("Routine")) {
+        if (!hasRoutine && local_name.equalsIgnoreCase("Routine")) {
             hasRoutine = true;
         }
         if (local_name.equalsIgnoreCase("ProjectItem")) {
@@ -61,7 +59,7 @@ public class ProjectListSax extends DefaultHandler  {
     }
 
     private void createFile(String name) {
-        String  filename = name.replace(".", ":");
+        String filename = name.replace(".", ":");
         String[] folders = filename.split(":");
         filename = workspaceURL;
         for (int i = 0; i < folders.length - 2; i++) {
@@ -72,8 +70,12 @@ public class ProjectListSax extends DefaultHandler  {
         filename += File.separatorChar + folders[folders.length - 2] + "." + folders[folders.length - 1];
         File f = new File(filename);
         try {
-            f.createNewFile();
+            if (!f.createNewFile()) {
+                throw new Exception("File " + filename + " can't be created");
+            }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

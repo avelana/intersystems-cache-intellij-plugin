@@ -19,14 +19,14 @@ public class CacheImport extends AnAction {
         int retval = fileChooser.showOpenDialog(fileChooser.getParent());
         if (retval == JFileChooser.APPROVE_OPTION) {
             String xmlURL = fileChooser.getSelectedFile().getPath();
-            String workspaceURL = fileChooser.getSelectedFile().getParent()+ File.separatorChar+"test";
+            String workspaceURL = fileChooser.getSelectedFile().getParent() + File.separatorChar + "test";
             ProjectListSax listSax = new ProjectListSax(workspaceURL);
             listSax.buildFileTree(xmlURL);
-            if(listSax.isHasRoutine()){
+            if (listSax.isHasRoutine()) {
                 AbstractObjectSax routineSax = new RoutineSax(workspaceURL, xmlURL);
                 routineSax.run();
             }
-            if(listSax.isHasClass()){
+            if (listSax.isHasClass()) {
                 AbstractObjectSax classSax = new ClassSax(workspaceURL, xmlURL);
                 classSax.run();
             }

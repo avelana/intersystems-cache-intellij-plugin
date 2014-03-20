@@ -1,6 +1,5 @@
 import by.vsu.cacheplugin.parsers.importers.ProjectListSax;
 import by.vsu.cacheplugin.parsers.importers.filetypes.AbstractObjectSax;
-import by.vsu.cacheplugin.parsers.importers.filetypes.ClassSax;
 import by.vsu.cacheplugin.parsers.importers.filetypes.RoutineSax;
 
 import javax.swing.*;

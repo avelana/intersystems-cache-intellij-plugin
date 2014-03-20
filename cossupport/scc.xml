@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25" zv="Cache for Windows (x86-32) 2013.1.4 (Build 801U)" ts="2014-03-14 13:34:06">
-<Routine name="Untitled1" type="MAC" languagemode="0" timestamp="63007,37229.624386"><![CDATA[
+    <Routine name="Untitled1" type="MAC" languagemode="0" timestamp="63007,37229.624386"><![CDATA[
  /*	do ##class(model.Projects).%KillExtent()
 	do ##class(model.Projects).Populate(20,1)
 	do ##class(model.Developer).%KillExtent()
@@ -58,7 +58,7 @@
 ]]></Routine>
 
 
-<Routine name="csp" type="INC" timestamp="63007,38184.778219"><![CDATA[
+    <Routine name="csp" type="INC" timestamp="63007,38184.778219"><![CDATA[
  #; подключаемый файл определений csp.inc 
  #; смотри  первую строчку в классе service.person
  /// сокращает код извлечения параметров запроса
@@ -69,7 +69,7 @@
 ]]></Routine>
 
 
-<Routine name="generator" type="MAC" languagemode="0" timestamp="63006,42348.393249"><![CDATA[
+    <Routine name="generator" type="MAC" languagemode="0" timestamp="63006,42348.393249"><![CDATA[
 	do ##class(model.Developer).%KillExtent()
 	do ##class(model.Developer).Populate(20,1)
 	do ##class(model.Projects).%KillExtent()
@@ -80,78 +80,80 @@
 ]]></Routine>
 
 
-<Class name="model.Address">
-<Super>%SerialObject,%Populate</Super>
-<TimeChanged>63260,47903.885798</TimeChanged>
-<TimeCreated>62968,7735.151537</TimeCreated>
+    <Class name="model.Address">
+        <Super>%SerialObject,%Populate</Super>
+        <TimeChanged>63260,47903.885798</TimeChanged>
+        <TimeCreated>62968,7735.151537</TimeCreated>
 
-<Property name="city">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="city">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="cityIndex">
-<Properties>city</Properties>
-</Index>
+        <Index name="cityIndex">
+            <Properties>city</Properties>
+        </Index>
 
-<Property name="street">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="street">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="streetIndex">
-<Properties>street</Properties>
-</Index>
+        <Index name="streetIndex">
+            <Properties>street</Properties>
+        </Index>
 
-<Property name="house">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="house">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="houseIndex">
-<Properties>house</Properties>
-</Index>
+        <Index name="houseIndex">
+            <Properties>house</Properties>
+        </Index>
 
-<Property name="flat">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="flat">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="flatIndex">
-<Properties>flat</Properties>
-</Index>
+        <Index name="flatIndex">
+            <Properties>flat</Properties>
+        </Index>
 
-<Parameter name="POPSPEC">
-<Default>city:##Class(service.DataTest).CityName(),street:##Class(service.DataTest).StreetName(),house:##Class(service.DataTest).HouseName(),flat:##Class(service.DataTest).FlatName()</Default>
-</Parameter>
-</Class>
+        <Parameter name="POPSPEC">
+            <Default>
+                city:##Class(service.DataTest).CityName(),street:##Class(service.DataTest).StreetName(),house:##Class(service.DataTest).HouseName(),flat:##Class(service.DataTest).FlatName()
+            </Default>
+        </Parameter>
+    </Class>
 
 
-<Class name="model.Developer">
-<Super>%Persistent,Utilizer</Super>
-<TimeChanged>63260,47914.50198</TimeChanged>
-<TimeCreated>63003,73317.063387</TimeCreated>
+    <Class name="model.Developer">
+        <Super>%Persistent,Utilizer</Super>
+        <TimeChanged>63260,47914.50198</TimeChanged>
+        <TimeCreated>63003,73317.063387</TimeCreated>
 
-<Property name="skill">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="skill">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="skillIndex">
-<Properties>skill</Properties>
-</Index>
+        <Index name="skillIndex">
+            <Properties>skill</Properties>
+        </Index>
 
-<Property name="tasks">
-<Type>model.Task</Type>
-<Cardinality>many</Cardinality>
-<Inverse>performer</Inverse>
-<Relationship>1</Relationship>
-</Property>
+        <Property name="tasks">
+            <Type>model.Task</Type>
+            <Cardinality>many</Cardinality>
+            <Inverse>performer</Inverse>
+            <Relationship>1</Relationship>
+        </Property>
 
-<Method name="OnPopulate">
-<ReturnType>%Status</ReturnType>
-<ServerOnly>1</ServerOnly>
-<Implementation><![CDATA[
+        <Method name="OnPopulate">
+            <ReturnType>%Status</ReturnType>
+            <ServerOnly>1</ServerOnly>
+            <Implementation><![CDATA[
 	s gender=$r(2)
 	if (gender=0) {
 		s ..lastName=##class(service.DataTest).MenLastName()
@@ -170,37 +172,37 @@
 	s ..phone=##class(service.DataTest).Phone()
 	q $$$OK
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="model.Owner">
-<Super>%SerialObject,Utilizer</Super>
-<TimeChanged>63260,47923.643887</TimeChanged>
-<TimeCreated>63003,79542.463009</TimeCreated>
+    <Class name="model.Owner">
+        <Super>%SerialObject,Utilizer</Super>
+        <TimeChanged>63260,47923.643887</TimeChanged>
+        <TimeCreated>63003,79542.463009</TimeCreated>
 
-<Property name="post">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="post">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="postIndex">
-<Properties>post</Properties>
-</Index>
+        <Index name="postIndex">
+            <Properties>post</Properties>
+        </Index>
 
-<Property name="company">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="company">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="companyIndex">
-<Properties>post</Properties>
-</Index>
+        <Index name="companyIndex">
+            <Properties>post</Properties>
+        </Index>
 
-<Method name="OnPopulate">
-<ReturnType>%Status</ReturnType>
-<ServerOnly>1</ServerOnly>
-<Implementation><![CDATA[
+        <Method name="OnPopulate">
+            <ReturnType>%Status</ReturnType>
+            <ServerOnly>1</ServerOnly>
+            <Implementation><![CDATA[
 	s gender=$r(2)
 	if (gender=0) {
 		s ..lastName=##class(service.DataTest).MenLastName()
@@ -220,108 +222,110 @@
 	s ..company=##class(service.DataTest).Company()
 	q $$$OK
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="model.Projects">
-<Super>%Persistent,%Populate</Super>
-<TimeChanged>63260,47932.061892</TimeChanged>
-<TimeCreated>63004,56876.101365</TimeCreated>
+    <Class name="model.Projects">
+        <Super>%Persistent,%Populate</Super>
+        <TimeChanged>63260,47932.061892</TimeChanged>
+        <TimeCreated>63004,56876.101365</TimeCreated>
 
-<Property name="Ntasks">
-<Type>model.Task</Type>
-<Cardinality>children</Cardinality>
-<Inverse>project</Inverse>
-<Relationship>1</Relationship>
-</Property>
+        <Property name="Ntasks">
+            <Type>model.Task</Type>
+            <Cardinality>children</Cardinality>
+            <Inverse>project</Inverse>
+            <Relationship>1</Relationship>
+        </Property>
 
-<Property name="name">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="name">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="nameIndex">
-<Properties>name</Properties>
-</Index>
+        <Index name="nameIndex">
+            <Properties>name</Properties>
+        </Index>
 
-<Method name="OnPopulate">
-<ReturnType>%Status</ReturnType>
-<ServerOnly>1</ServerOnly>
-<Implementation><![CDATA[
+        <Method name="OnPopulate">
+            <ReturnType>%Status</ReturnType>
+            <ServerOnly>1</ServerOnly>
+            <Implementation><![CDATA[
 	s ..name="Project "_($r(255)+1)
 	q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="GetMaster">
-<ReturnType>Developer</ReturnType>
-<Implementation><![CDATA[	q ..Ntasks.GetAt(0).performer
+        <Method name="GetMaster">
+            <ReturnType>Developer</ReturnType>
+            <Implementation><![CDATA[	q ..Ntasks.GetAt(0).performer
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Property name="owner">
-<Type>Owner</Type>
-<Required>1</Required>
-<Parameter name="POPSPEC" value=".owner.PopulateSerial()"/>
-</Property>
+        <Property name="owner">
+            <Type>Owner</Type>
+            <Required>1</Required>
+            <Parameter name="POPSPEC" value=".owner.PopulateSerial()"/>
+        </Property>
 
-<Index name="ownerIndex">
-<Properties>owner</Properties>
-</Index>
+        <Index name="ownerIndex">
+            <Properties>owner</Properties>
+        </Index>
 
-<Property name="startDate">
-<Type>%Date</Type>
-<Calculated>1</Calculated>
-<SqlComputeCode>	s {startDate}=##class(model.Projects).GetStart({ID})</SqlComputeCode>
-<SqlComputed>1</SqlComputed>
-</Property>
+        <Property name="startDate">
+            <Type>%Date</Type>
+            <Calculated>1</Calculated>
+            <SqlComputeCode>s {startDate}=##class(model.Projects).GetStart({ID})</SqlComputeCode>
+            <SqlComputed>1</SqlComputed>
+        </Property>
 
-<Property name="endDate">
-<Type>%Date</Type>
-<Calculated>1</Calculated>
-<SqlComputeCode>	s {endDate}=##class(model.Projects).GetEnd({ID})</SqlComputeCode>
-<SqlComputed>1</SqlComputed>
-</Property>
+        <Property name="endDate">
+            <Type>%Date</Type>
+            <Calculated>1</Calculated>
+            <SqlComputeCode>s {endDate}=##class(model.Projects).GetEnd({ID})</SqlComputeCode>
+            <SqlComputed>1</SqlComputed>
+        </Property>
 
-<Method name="GetStart">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>id:%Integer</FormalSpec>
-<ReturnType>%Date</ReturnType>
-<Implementation><![CDATA[
+        <Method name="GetStart">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>id:%Integer</FormalSpec>
+            <ReturnType>%Date</ReturnType>
+            <Implementation><![CDATA[
  set startDate=""
  &sql(SELECT MIN(startDate) INTO :startDate 
 			 FROM model.Task
 		 	 WHERE project=:id)
  q startDate
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="GetEnd">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>id:%Integer</FormalSpec>
-<ReturnType>%Date</ReturnType>
-<Implementation><![CDATA[
+        <Method name="GetEnd">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>id:%Integer</FormalSpec>
+            <ReturnType>%Date</ReturnType>
+            <Implementation><![CDATA[
  set endDate=""
  &sql(SELECT MAX(expectedEndDate) INTO :endDate 
 			 FROM model.Task
 		 	 WHERE project=:id)
  q endDate
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Query name="ByID">
-<Type>%SQLQuery</Type>
-<FormalSpec>id:%Integer</FormalSpec>
-<SqlQuery>SELECT lastName,name from model.Developer where ID in (SELECT performer from model.Task where project=:id)</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="ByID">
+            <Type>%SQLQuery</Type>
+            <FormalSpec>id:%Integer</FormalSpec>
+            <SqlQuery>SELECT lastName,name from model.Developer where ID in (SELECT performer from model.Task where
+                project=:id)
+            </SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Method name="team">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>id:%Integer</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="team">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>id:%Integer</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=""
 	set rs = ##class(%Library.ResultSet).%New("model.Projects:ByID")
 	do rs.Execute(id)
@@ -334,77 +338,77 @@
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="model.Task">
-<Super>%Persistent,%Populate</Super>
-<TimeChanged>63260,47942.917182</TimeChanged>
-<TimeCreated>63003,81277.718679</TimeCreated>
+    <Class name="model.Task">
+        <Super>%Persistent,%Populate</Super>
+        <TimeChanged>63260,47942.917182</TimeChanged>
+        <TimeCreated>63003,81277.718679</TimeCreated>
 
-<Property name="name">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="name">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="nameIndex">
-<Properties>name</Properties>
-</Index>
+        <Index name="nameIndex">
+            <Properties>name</Properties>
+        </Index>
 
-<Property name="description">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="description">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="descriptionIndex">
-<Properties>description</Properties>
-</Index>
+        <Index name="descriptionIndex">
+            <Properties>description</Properties>
+        </Index>
 
-<Property name="performer">
-<Type>model.Developer</Type>
-<Cardinality>one</Cardinality>
-<Inverse>tasks</Inverse>
-<Relationship>1</Relationship>
-</Property>
+        <Property name="performer">
+            <Type>model.Developer</Type>
+            <Cardinality>one</Cardinality>
+            <Inverse>tasks</Inverse>
+            <Relationship>1</Relationship>
+        </Property>
 
-<Property name="project">
-<Type>model.Projects</Type>
-<Cardinality>parent</Cardinality>
-<Inverse>Ntasks</Inverse>
-<Relationship>1</Relationship>
-</Property>
+        <Property name="project">
+            <Type>model.Projects</Type>
+            <Cardinality>parent</Cardinality>
+            <Inverse>Ntasks</Inverse>
+            <Relationship>1</Relationship>
+        </Property>
 
-<Property name="startDate">
-<Type>%Date</Type>
-<Required>1</Required>
-</Property>
+        <Property name="startDate">
+            <Type>%Date</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="startDateIndex">
-<Properties>startDate</Properties>
-</Index>
+        <Index name="startDateIndex">
+            <Properties>startDate</Properties>
+        </Index>
 
-<Property name="expectedEndDate">
-<Type>%Date</Type>
-<Required>1</Required>
-</Property>
+        <Property name="expectedEndDate">
+            <Type>%Date</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="expectedEndDateIndex">
-<Properties>expectedEndDate</Properties>
-</Index>
+        <Index name="expectedEndDateIndex">
+            <Properties>expectedEndDate</Properties>
+        </Index>
 
-<Property name="endDate">
-<Type>%Date</Type>
-</Property>
+        <Property name="endDate">
+            <Type>%Date</Type>
+        </Property>
 
-<Index name="endDateIndex">
-<Properties>endDate</Properties>
-</Index>
+        <Index name="endDateIndex">
+            <Properties>endDate</Properties>
+        </Index>
 
-<Method name="OnPopulate">
-<ReturnType>%Status</ReturnType>
-<ServerOnly>1</ServerOnly>
-<Implementation><![CDATA[
+        <Method name="OnPopulate">
+            <ReturnType>%Status</ReturnType>
+            <ServerOnly>1</ServerOnly>
+            <Implementation><![CDATA[
 	s ..name=##class(service.DataTest).Task(..project.name)
 	s ..description=##class(service.DataTest).Description(..name)
 	s ..startDate=##class(%Date).DisplayToLogical(##class(service.DataTest).StartDate())
@@ -415,151 +419,151 @@
 	}
 	q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="GetProject">
-<ReturnType>Projects</ReturnType>
-<Implementation><![CDATA[	q ..project
+        <Method name="GetProject">
+            <ReturnType>Projects</ReturnType>
+            <Implementation><![CDATA[	q ..project
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="model.Utilizer">
-<Abstract>1</Abstract>
-<Super>%Populate</Super>
-<TimeChanged>63007,57125.697127</TimeChanged>
-<TimeCreated>63003,73310.395696</TimeCreated>
+    <Class name="model.Utilizer">
+        <Abstract>1</Abstract>
+        <Super>%Populate</Super>
+        <TimeChanged>63007,57125.697127</TimeChanged>
+        <TimeCreated>63003,73310.395696</TimeCreated>
 
-<Property name="lastName">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="lastName">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="lastNameIndex">
-<Properties>lastName</Properties>
-</Index>
+        <Index name="lastNameIndex">
+            <Properties>lastName</Properties>
+        </Index>
 
-<Property name="name">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="name">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="nameIndex">
-<Properties>name</Properties>
-</Index>
+        <Index name="nameIndex">
+            <Properties>name</Properties>
+        </Index>
 
-<Property name="login">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="login">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="loginIndex">
-<Properties>lastName</Properties>
-</Index>
+        <Index name="loginIndex">
+            <Properties>lastName</Properties>
+        </Index>
 
-<Property name="password">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="password">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="passwordIndex">
-<Properties>password</Properties>
-</Index>
+        <Index name="passwordIndex">
+            <Properties>password</Properties>
+        </Index>
 
-<Property name="patronymic">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="patronymic">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="patronymicIndex">
-<Properties>patronymic</Properties>
-</Index>
+        <Index name="patronymicIndex">
+            <Properties>patronymic</Properties>
+        </Index>
 
-<Property name="roles">
-<Type>%String</Type>
-<Required>1</Required>
-</Property>
+        <Property name="roles">
+            <Type>%String</Type>
+            <Required>1</Required>
+        </Property>
 
-<Index name="rolesIndex">
-<Properties>roles</Properties>
-</Index>
+        <Index name="rolesIndex">
+            <Properties>roles</Properties>
+        </Index>
 
-<Property name="address">
-<Type>Address</Type>
-<Parameter name="POPSPEC" value=".address.PopulateSerial()"/>
-</Property>
+        <Property name="address">
+            <Type>Address</Type>
+            <Parameter name="POPSPEC" value=".address.PopulateSerial()"/>
+        </Property>
 
-<Index name="addressIndex">
-<Properties>address</Properties>
-</Index>
+        <Index name="addressIndex">
+            <Properties>address</Properties>
+        </Index>
 
-<Property name="email">
-<Type>%String</Type>
-<Parameter name="PATTERN" value="1.15E1&quot;@&quot;1.5A1&quot;.com&quot;"/>
-</Property>
+        <Property name="email">
+            <Type>%String</Type>
+            <Parameter name="PATTERN" value="1.15E1&quot;@&quot;1.5A1&quot;.com&quot;"/>
+        </Property>
 
-<Index name="emailIndex">
-<Properties>email</Properties>
-</Index>
+        <Index name="emailIndex">
+            <Properties>email</Properties>
+        </Index>
 
-<Property name="phone">
-<Type>%String</Type>
-<Parameter name="MAXLEN" value="12"/>
-<Parameter name="PATTERN" value="3n1&quot;-&quot;3n1&quot;-&quot;4n"/>
-</Property>
-</Class>
-
-
-<Project name="scrum" LastModified="2014-03-14 13:21:27.018929">
-  <Items>
-    <ProjectItem name="Untitled1.MAC" type="MAC"></ProjectItem>
-    <ProjectItem name="csp.INC" type="MAC"></ProjectItem>
-    <ProjectItem name="generator.MAC" type="MAC"></ProjectItem>
-    <ProjectItem name="model.Address" type="CLS"></ProjectItem>
-    <ProjectItem name="model.Developer" type="CLS"></ProjectItem>
-    <ProjectItem name="model.Owner" type="CLS"></ProjectItem>
-    <ProjectItem name="model.Projects" type="CLS"></ProjectItem>
-    <ProjectItem name="model.Task" type="CLS"></ProjectItem>
-    <ProjectItem name="model.Utilizer" type="CLS"></ProjectItem>
-    <ProjectItem name="service.Additional" type="CLS"></ProjectItem>
-    <ProjectItem name="service.AdminProjectService" type="CLS"></ProjectItem>
-    <ProjectItem name="service.AdminService" type="CLS"></ProjectItem>
-    <ProjectItem name="service.Authorization" type="CLS"></ProjectItem>
-    <ProjectItem name="service.BaseService" type="CLS"></ProjectItem>
-    <ProjectItem name="service.DataTest" type="CLS"></ProjectItem>
-    <ProjectItem name="service.DeveloperService" type="CLS"></ProjectItem>
-    <ProjectItem name="service.ProjectService" type="CLS"></ProjectItem>
-    <ProjectItem name="service.TaskService" type="CLS"></ProjectItem>
-    <ProjectItem name="view.BaseView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.IndexView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.StartPageView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.TeamView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.admin.DeveloperView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.admin.ProjectsView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.admin.TaskView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.developer.DeveloperView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.developer.ProjectsView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.developer.TaskView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.master.DeveloperView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.master.ProjectsView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.master.TaskView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.owner.DeveloperView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.owner.ProjectsView" type="CLS"></ProjectItem>
-    <ProjectItem name="view.owner.TaskView" type="CLS"></ProjectItem>
-  </Items>
-</Project>
+        <Property name="phone">
+            <Type>%String</Type>
+            <Parameter name="MAXLEN" value="12"/>
+            <Parameter name="PATTERN" value="3n1&quot;-&quot;3n1&quot;-&quot;4n"/>
+        </Property>
+    </Class>
 
 
-<Class name="service.Additional">
-<TimeChanged>63007,38263.80428</TimeChanged>
-<TimeCreated>63007,36890.98829</TimeCreated>
+    <Project name="scrum" LastModified="2014-03-14 13:21:27.018929">
+        <Items>
+            <ProjectItem name="Untitled1.MAC" type="MAC"></ProjectItem>
+            <ProjectItem name="csp.INC" type="MAC"></ProjectItem>
+            <ProjectItem name="generator.MAC" type="MAC"></ProjectItem>
+            <ProjectItem name="model.Address" type="CLS"></ProjectItem>
+            <ProjectItem name="model.Developer" type="CLS"></ProjectItem>
+            <ProjectItem name="model.Owner" type="CLS"></ProjectItem>
+            <ProjectItem name="model.Projects" type="CLS"></ProjectItem>
+            <ProjectItem name="model.Task" type="CLS"></ProjectItem>
+            <ProjectItem name="model.Utilizer" type="CLS"></ProjectItem>
+            <ProjectItem name="service.Additional" type="CLS"></ProjectItem>
+            <ProjectItem name="service.AdminProjectService" type="CLS"></ProjectItem>
+            <ProjectItem name="service.AdminService" type="CLS"></ProjectItem>
+            <ProjectItem name="service.Authorization" type="CLS"></ProjectItem>
+            <ProjectItem name="service.BaseService" type="CLS"></ProjectItem>
+            <ProjectItem name="service.DataTest" type="CLS"></ProjectItem>
+            <ProjectItem name="service.DeveloperService" type="CLS"></ProjectItem>
+            <ProjectItem name="service.ProjectService" type="CLS"></ProjectItem>
+            <ProjectItem name="service.TaskService" type="CLS"></ProjectItem>
+            <ProjectItem name="view.BaseView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.IndexView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.StartPageView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.TeamView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.admin.DeveloperView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.admin.ProjectsView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.admin.TaskView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.developer.DeveloperView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.developer.ProjectsView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.developer.TaskView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.master.DeveloperView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.master.ProjectsView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.master.TaskView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.owner.DeveloperView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.owner.ProjectsView" type="CLS"></ProjectItem>
+            <ProjectItem name="view.owner.TaskView" type="CLS"></ProjectItem>
+        </Items>
+    </Project>
 
-<Method name="Translate">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>word:%String</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+
+    <Class name="service.Additional">
+        <TimeChanged>63007,38263.80428</TimeChanged>
+        <TimeCreated>63007,36890.98829</TimeCreated>
+
+        <Method name="Translate">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>word:%String</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 		s translate=""
 		if (word="Владелец") s translate="owner"
 		if (word="Администратор") s translate="admin"
@@ -567,36 +571,36 @@
 		if (word="Разработчик") s translate="developer"
 		q translate
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Link">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>word:%String,page:%String</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Link">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>word:%String,page:%String</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 		s translate=..Translate(word)
 		q "view."_translate_$e(page,5,$l(page))
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.AdminProjectService">
-<IncludeCode>csp</IncludeCode>
-<Super>BaseService</Super>
-<TimeChanged>63006,59139.321864</TimeChanged>
-<TimeCreated>63006,59139.321864</TimeCreated>
+    <Class name="service.AdminProjectService">
+        <IncludeCode>csp</IncludeCode>
+        <Super>BaseService</Super>
+        <TimeChanged>63006,59139.321864</TimeChanged>
+        <TimeCreated>63006,59139.321864</TimeCreated>
 
-<Query name="ByID">
-<Type>%SQLQuery</Type>
-<SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="ByID">
+            <Type>%SQLQuery</Type>
+            <SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Method name="projects">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="projects">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=""
 	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:ByID")
 	do rs.Execute()
@@ -609,12 +613,12 @@
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSearch">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>where:%String,params:%String</FormalSpec>
-<Implementation><![CDATA[
+        <Method name="initSearch">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>where:%String,params:%String</FormalSpec>
+            <Implementation><![CDATA[
 	
 		s pname=$$$get( "name" ) if ( pname'="" ) {
             s where=where_$ListBuild( "name Like ?" )
@@ -676,59 +680,62 @@
         }
         s where=$ListToString(where," AND ")
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getTableName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q "model.Projects"
+        <Method name="getTableName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q "model.Projects"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getEntity">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>rs:%ResultSet</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="getEntity">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>rs:%ResultSet</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
 	s startDate=##class(%Date).LogicalToDisplay(rs.%Get("startDate"))
 	s endDate=##class(%Date).LogicalToDisplay(rs.%Get("endDate"))
 	q "{""id"":"_rs.ID_",""name"":"_$$$json(rs.name)_",""startDate"":"_$$$json(startDate)_",""endDate"":"_$$$json(endDate)_",""owner.lastName"":"_$$$json(rs.%Get("owner_lastName"))_",""owner.name"":"_$$$json(rs.%Get("owner_name"))_",""owner.patronymic"":"_$$$json(rs.%Get("owner_patronymic"))_",""owner.company"":"_$$$json(rs.%Get("owner_company"))_",""owner.post"":"_$$$json(rs.%Get("owner_post"))_",""owner.address.city"":"_$$$json(rs.%Get("owner_address_city"))_",""owner.address.street"":"_$$$json(rs.%Get("owner_address_street"))_",""owner.address.house"":"_$$$json(rs.%Get("owner_address_house"))_",""owner.address.flat"":"_$$$json(rs.%Get("owner_address_flat"))_",""owner.phone"":"_$$$json(rs.%Get("owner_phone"))_",""owner.email"":"_$$$json(rs.%Get("owner_email"))_"}"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Add">
-<Description>
-Создаем новый объект</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Add">
+            <Description>
+                Создаем новый объект
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s obj=##class(model.Projects).%New()
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Edit">
-<Description>
-Открываем и редактируем существующий</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Edit">
+            <Description>
+                Открываем и редактируем существующий
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), obj=##class(model.Projects).%OpenId(id,.sc)
     if $$$ISERR( sc ) {
         Q ..wResult( sc, id )	
     }
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Set">
-<Description>
-Обновление свойств, сохранение изменений, вывод результата</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>obj:model.Projects</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Set">
+            <Description>
+                Обновление свойств, сохранение изменений, вывод результата
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>obj:model.Projects</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
         s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
         Q ..wResult( sc )
@@ -752,24 +759,25 @@
     
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Del">
-<Description>
-Удаление объекта</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Del">
+            <Description>
+                Удаление объекта
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), sc=##class(model.Projects).%DeleteId(id)
     Q ..wResult( sc, id )
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSort">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="initSort">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
    s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
    if $ListFind( $ListBuild("name","name"), sidx ) {
         s:sidx="name" sidx="""name""" ;
@@ -788,20 +796,20 @@
     }  
     q order
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.AdminService">
-<IncludeCode>csp</IncludeCode>
-<Super>BaseService</Super>
-<TimeChanged>63006,59562.755023</TimeChanged>
-<TimeCreated>63004,82805.232343</TimeCreated>
+    <Class name="service.AdminService">
+        <IncludeCode>csp</IncludeCode>
+        <Super>BaseService</Super>
+        <TimeChanged>63006,59562.755023</TimeChanged>
+        <TimeCreated>63004,82805.232343</TimeCreated>
 
-<Method name="initSearch">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>where:%String,params:%String</FormalSpec>
-<Implementation><![CDATA[
+        <Method name="initSearch">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>where:%String,params:%String</FormalSpec>
+            <Implementation><![CDATA[
 		s lastName=$$$get( "lastName" ) if ( lastName'="" ) {
             s where=where_$ListBuild( "lastName Like ?" )
             , params( $increment(params) )="%"_lastName_"%"
@@ -850,57 +858,60 @@
         }
         s where=$ListToString(where," AND ")
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getTableName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q "model.Developer"
+        <Method name="getTableName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q "model.Developer"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getEntity">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>rs:%ResultSet</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="getEntity">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>rs:%ResultSet</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
 	q "{""id"":"_rs.ID_",""lastName"":"_$$$json(rs.lastName)_",""name"":"_$$$json(rs.name)_",""patronymic"":"_$$$json(rs.patronymic)_",""roles"":"_$$$json(rs.roles)_",""login"":"_$$$json(rs.login)_",""password"":"_$$$json(rs.password)_",""skill"":"_$$$json(rs.skill)_",""address.city"":"_$$$json(rs.%Get("address_city"))_",""address.street"":"_$$$json(rs.%Get("address_street"))_",""address.house"":"_$$$json(rs.%Get("address_house"))_",""address.flat"":"_$$$json(rs.%Get("address_flat"))_"}"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Add">
-<Description>
-Создаем новый объект</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Add">
+            <Description>
+                Создаем новый объект
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s obj=##class(model.Developer).%New()
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Edit">
-<Description>
-Открываем и редактируем существующий</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Edit">
+            <Description>
+                Открываем и редактируем существующий
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), obj=##class(model.Developer).%OpenId(id,.sc)
     if $$$ISERR( sc ) {
         Q ..wResult( sc, id )	
     }
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Set">
-<Description>
-Обновление свойств, сохранение изменений, вывод результата</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>obj:model.Developer</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Set">
+            <Description>
+                Обновление свойств, сохранение изменений, вывод результата
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>obj:model.Developer</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
         s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
         Q ..wResult( sc )
@@ -922,24 +933,25 @@
     
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Del">
-<Description>
-Удаление объекта</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Del">
+            <Description>
+                Удаление объекта
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), sc=##class(model.Developer).%DeleteId(id)
     Q ..wResult( sc, id )
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSort">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="initSort">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
     if $ListFind( $ListBuild("name","lastName"), sidx ) {
         s:sidx="lastName" sidx="""lastName""" ;
@@ -978,20 +990,20 @@
     } 
     q order
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.Authorization">
-<Super>%CSP.Page</Super>
-<TimeChanged>63007,38331.828528</TimeChanged>
-<TimeCreated>62987,41878.85654</TimeCreated>
+    <Class name="service.Authorization">
+        <Super>%CSP.Page</Super>
+        <TimeChanged>63007,38331.828528</TimeChanged>
+        <TimeCreated>62987,41878.85654</TimeCreated>
 
-<Method name="CheckUser">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>login:%String,password:%String</FormalSpec>
-<ReturnType>%Integer</ReturnType>
-<Implementation><![CDATA[
+        <Method name="CheckUser">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>login:%String,password:%String</FormalSpec>
+            <ReturnType>%Integer</ReturnType>
+            <Implementation><![CDATA[
 	if (login'="")
 		{
 		set userid=""
@@ -1050,12 +1062,12 @@
 	
 	quit status
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	set result = ..CheckUser(%request.Get("login"),%request.Get("password"))
 	if (result'=-1){
 		
@@ -1076,33 +1088,35 @@
     	Quit $$$OK
 	}
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.BaseService">
-<Abstract>1</Abstract>
-<IncludeCode>csp</IncludeCode>
-<Super>%CSP.Page</Super>
-<TimeChanged>63007,48609.223876</TimeChanged>
-<TimeCreated>62977,41793.405871</TimeCreated>
+    <Class name="service.BaseService">
+        <Abstract>1</Abstract>
+        <IncludeCode>csp</IncludeCode>
+        <Super>%CSP.Page</Super>
+        <TimeChanged>63007,48609.223876</TimeChanged>
+        <TimeCreated>62977,41793.405871</TimeCreated>
 
-<Parameter name="DOMAIN">
-<Description>
-node для текстовых ресурсов</Description>
-<Default>model</Default>
-</Parameter>
+        <Parameter name="DOMAIN">
+            <Description>
+                node для текстовых ресурсов
+            </Description>
+            <Default>model</Default>
+        </Parameter>
 
-<Parameter name="PRIVATE">
-<Description>
-Can only be referenced from another CSP page</Description>
-<Default>1</Default>
-</Parameter>
+        <Parameter name="PRIVATE">
+            <Description>
+                Can only be referenced from another CSP page
+            </Description>
+            <Default>1</Default>
+        </Parameter>
 
-<Method name="OnPage">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPage">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 
     #; см. csp.inc
     set oper=$$$get("oper") ;определяем тип запроса
@@ -1116,48 +1130,48 @@ Can only be referenced from another CSP page</Description>
     
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Add">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-</Method>
+        <Method name="Add">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+        </Method>
 
-<Method name="Edit">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-</Method>
+        <Method name="Edit">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+        </Method>
 
-<Method name="initSort">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-</Method>
+        <Method name="initSort">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+        </Method>
 
-<Method name="initSearch">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>where:%String,params:%String</FormalSpec>
-</Method>
+        <Method name="initSearch">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>where:%String,params:%String</FormalSpec>
+        </Method>
 
-<Method name="getTableName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-</Method>
+        <Method name="getTableName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+        </Method>
 
-<Method name="getEntity">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>rs:%ResultSet</FormalSpec>
-<ReturnType>%String</ReturnType>
-</Method>
+        <Method name="getEntity">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>rs:%ResultSet</FormalSpec>
+            <ReturnType>%String</ReturnType>
+        </Method>
 
-<Method name="Del">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-</Method>
+        <Method name="Del">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+        </Method>
 
-<Method name="List">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="List">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	#; Во всех остальных случаях - режим просмотра данных
     #;количеством строк в порции данных приводим к положительному целому числу
     set rows=$$$get("rows")\1 ;целочисленное деление
@@ -1258,15 +1272,16 @@ Can only be referenced from another CSP page</Description>
     w "]}"
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="wResult">
-<Description>
-Вывод результата</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>sc:%String="",id:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="wResult">
+            <Description>
+                Вывод результата
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>sc:%String="",id:%String</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s result="false", msg="", id=$g(id)
     if $$$ISOK( $g(sc) ) {
         s result="true"
@@ -1276,270 +1291,270 @@ Can only be referenced from another CSP page</Description>
     w "[",result,",",..QuoteJS(msg),",",..QuoteJS(id),"]"	
     Q $$$OK
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.DataTest">
-<TimeChanged>63006,42085.222055</TimeChanged>
-<TimeCreated>62968,37021.343604</TimeCreated>
+    <Class name="service.DataTest">
+        <TimeChanged>63006,42085.222055</TimeChanged>
+        <TimeCreated>62968,37021.343604</TimeCreated>
 
-<Method name="CityName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="CityName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s city=$lb("Минск","Витебск","Могилев","Гомель","Брест","Гродно","Орша","Сенно","Рогачев","Борисов","Кричев","Несвиж","Климовичи","Полоцк","Глубокое","Ушачи","Логойск","Браслав","Пинск","Столин","Слуцк")
 	q $lg(city,$r(21)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="StreetName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="StreetName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s street=$lb("ул. Чкалова","пр-т Фрунзе","ул. Кирова","пр-т Людникова","пр-т Победы","пр-т Московский","ул. Правды","пр-т Строителей","пер. Доватора","пер. Молодежный","ул. Ленина")
 	q $lg(street,$r(11)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Skill">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Skill">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s skill=$lb("Java-программист","Дизайнер","Тестировщик","C# программист","Бизнес-аналитик","Архитектор БД","Web-дизайнер")
 	q $lg(skill,$r(7)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="login">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="login">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s login=$lb("user","me","emp","utilizer","qwert","owl","fox","thor")
 	q $lg(login,$r(8)+1)_($r(2013)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="password">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="password">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s passwd=$lb("12345")
 	q $lg(passwd,$r(1)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="HouseName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="HouseName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s house=$lb("А","Б","В","Г","Д")
 	q $lg(house,$r(5)+1)_($r(21)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="FlatName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q $r(21)+1
+        <Method name="FlatName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q $r(21)+1
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="OfficeName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OfficeName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s officeName=$lb("Сказка","Офис 1","Офис 2","Офис 3","Офис 4","Офис 5","Радуга","Фруктовый","Фрукты")
 	q $lg(officeName,$r(9)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="SaleSize">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Float</ReturnType>
-<Implementation><![CDATA[	q $r(1000000) // размер продажи в белорусских рублях
+        <Method name="SaleSize">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Float</ReturnType>
+            <Implementation><![CDATA[	q $r(1000000) // размер продажи в белорусских рублях
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="MenLastName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="MenLastName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s mensLastNames=$lb("Симаш","Борисевич","Василевский","Дятковский","Боровков","Гренков","Москалев","Киселев","Ковалев","Кибисов","Ропаков","Станкевич","Похомович","Павлыго","Малиновский","Рудьков","Горень","Гаранский","Толстых","Ландарский")
 	q $lg(mensLastNames,$r(20)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="MenName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="MenName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s mensNames=$lb("Дмитрий","Максим","Роман","Илья","Игорь","Павел","Кирилл","Евгений","Николай","Александр","Антон","Алексей","Сергей","Иван","Петр","Ян","Семен","Степан","Исак","Федор")
 	q $lg(mensNames,$r(20)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="MenPatronymic">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="MenPatronymic">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s mensPatronymic=$lb("Викторович","Сергеевич","Олегович","Николаевич","Игорович","Павлович","Евгеньевич","Александрович","Алексеевич","Антонович","Иванович","Петрович","Максимович","Дмитриевич","Романович","Андреевич","Семенович","Степанович","Федотович","Никитович")
 	q $lg(mensPatronymic,$r(20)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="FemaleLastName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="FemaleLastName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s femalesLastNames=$lb("Симаш","Борисевич","Василевская","Дятковская","Боровкова","Гренкова","Москалева","Киселева","Ковалева","Кибисова","Ропакова","Станкевич","Похомович","Павлыго","Малиновская","Рудькова","Горень","Гаранская","Толстых","Ландарская")
 	q $lg(femalesLastNames,$r(20)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="FemaleName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="FemaleName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s femalesNames=$lb("Светлана","Татьяна","Ирина","Любовь","Екатерина","Инна","Надежда","Ксения","Снежана","Мария","Виктория","Алеся","Лариса","Людмила","Афродита","Милана","Елизавета","Клавдия","Анжелика","Кристина")
 	q $lg(femalesNames,$r(20)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="FemalePatronymic">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="FemalePatronymic">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s femalesPatronymic=$lb("Викторовна","Сергеевна","Олеговна","Николаевна","Игоровна","Павловна","Евгеньевна","Александровна","Алексеевна","Антоновна","Ивановна","Петровна","Максимовна","Дмитриевна","Романовна","Андреевна","Семеновна","Степановна","Федотовна","Никитовна")
 	q $lg(femalesPatronymic,$r(20)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="PostName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="PostName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s post=$lb("Администратор","Руководитель компании","Менеджер","Топ-мнеджер")
 	q $lg(post,$r(4)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="GetDate">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Date</ReturnType>
-<Implementation><![CDATA[
+        <Method name="GetDate">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Date</ReturnType>
+            <Implementation><![CDATA[
 	s date = ##class(%Date).DisplayToLogical("01/01/2013")
 	s ldate = ##class(%PopulateUtils).Date(date)
 	q ##class(%Date).LogicalToDisplay(ldate)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="DeveloperRoles">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="DeveloperRoles">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s post=$lb("Разработчик","Мастер","Администратор")
 	q $lg(post,$r(3)+1)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="OwnerRoles">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q "Владелец"
+        <Method name="OwnerRoles">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q "Владелец"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="StartDate">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="StartDate">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s date = ##class(%Date).DisplayToLogical("01/01/2013")
 	s ldate = ##class(%PopulateUtils).Date(date)
 	q ##class(%Date).LogicalToDisplay(ldate)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="ExpectedDate">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>d:%Date</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="ExpectedDate">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>d:%Date</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	
 	s dateint=+d
 	s ldate = (3+dateint)_",00000"
 	q ##class(%Date).LogicalToDisplay(ldate)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="RealDate">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>d:%Date</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="RealDate">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>d:%Date</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s rand=$r(7)+1
 	s dateint=+d
 	s ldate = (rand+dateint)_",00000"
 	q ##class(%Date).LogicalToDisplay(ldate)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Task">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>Name:%String</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Task">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>Name:%String</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=$lb("CRUD","UI","database","documenation","diagramm","test","production version")
 	q $lg(text,$r(4)+1)_" for "_Name
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Description">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>Name:%String</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Description">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>Name:%String</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=$lb("Create","Repair","Add","Make")
 	q $lg(text,$r(4)+1)_" "_Name
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Phone">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q ##class(%PopulateUtils).USPhone()
+        <Method name="Phone">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q ##class(%PopulateUtils).USPhone()
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Email">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>login:%String</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q login_"@gmial.com"
+        <Method name="Email">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>login:%String</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q login_"@gmial.com"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Company">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Company">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s com=$lb("Epam","Edmunds","Facebook","RedHat","Gmail","Google.inc","Yandex","Ferrari","Youtube","ZTE","HTC","Nokia","Samsung")
 	q $lg(com,$r(13)+1)
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.DeveloperService">
-<IncludeCode>csp</IncludeCode>
-<Super>BaseService</Super>
-<TimeChanged>63006,41325.647633</TimeChanged>
-<TimeCreated>63004,64068.878892</TimeCreated>
+    <Class name="service.DeveloperService">
+        <IncludeCode>csp</IncludeCode>
+        <Super>BaseService</Super>
+        <TimeChanged>63006,41325.647633</TimeChanged>
+        <TimeCreated>63004,64068.878892</TimeCreated>
 
-<Method name="initSearch">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>where:%String,params:%String</FormalSpec>
-<Implementation><![CDATA[
+        <Method name="initSearch">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>where:%String,params:%String</FormalSpec>
+            <Implementation><![CDATA[
 		s lastName=$$$get( "lastName" ) if ( lastName'="" ) {
             s where=where_$ListBuild( "lastName Like ?" )
             , params( $increment(params) )="%"_lastName_"%"
@@ -1585,57 +1600,60 @@ Can only be referenced from another CSP page</Description>
         }
         s where=$ListToString(where," AND ")
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getTableName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q "model.Developer"
+        <Method name="getTableName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q "model.Developer"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getEntity">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>rs:%ResultSet</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="getEntity">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>rs:%ResultSet</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
 	q "{""id"":"_rs.ID_",""lastName"":"_$$$json(rs.lastName)_",""name"":"_$$$json(rs.name)_",""patronymic"":"_$$$json(rs.patronymic)_",""skill"":"_$$$json(rs.skill)_",""address.city"":"_$$$json(rs.%Get("address_city"))_",""address.street"":"_$$$json(rs.%Get("address_street"))_",""address.house"":"_$$$json(rs.%Get("address_house"))_",""address.flat"":"_$$$json(rs.%Get("address_flat"))_",""phone"":"_$$$json(rs.%Get("phone"))_",""email"":"_$$$json(rs.%Get("email"))_"}"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Add">
-<Description>
-Создаем новый объект</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Add">
+            <Description>
+                Создаем новый объект
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s obj=##class(model.Developer).%New()
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Edit">
-<Description>
-Открываем и редактируем существующий</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Edit">
+            <Description>
+                Открываем и редактируем существующий
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), obj=##class(model.Developer).%OpenId(id,.sc)
     if $$$ISERR( sc ) {
         Q ..wResult( sc, id )	
     }
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Set">
-<Description>
-Обновление свойств, сохранение изменений, вывод результата</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>obj:model.Developer</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Set">
+            <Description>
+                Обновление свойств, сохранение изменений, вывод результата
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>obj:model.Developer</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
         s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
         Q ..wResult( sc )
@@ -1656,24 +1674,25 @@ Can only be referenced from another CSP page</Description>
     
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Del">
-<Description>
-Удаление объекта</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Del">
+            <Description>
+                Удаление объекта
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), sc=##class(model.Developer).%DeleteId(id)
     Q ..wResult( sc, id )
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSort">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="initSort">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
     if $ListFind( $ListBuild("name","lastName"), sidx ) {
         s:sidx="lastName" sidx="""lastName""" ;
@@ -1709,41 +1728,43 @@ Can only be referenced from another CSP page</Description>
     }  
     q order
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.ProjectService">
-<IncludeCode>csp</IncludeCode>
-<Super>BaseService</Super>
-<TimeChanged>63007,47537.462144</TimeChanged>
-<TimeCreated>63005,60622.838413</TimeCreated>
+    <Class name="service.ProjectService">
+        <IncludeCode>csp</IncludeCode>
+        <Super>BaseService</Super>
+        <TimeChanged>63007,47537.462144</TimeChanged>
+        <TimeCreated>63005,60622.838413</TimeCreated>
 
-<Query name="all">
-<Type>%SQLQuery</Type>
-<SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="all">
+            <Type>%SQLQuery</Type>
+            <SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Query name="byID">
-<Type>%SQLQuery</Type>
-<FormalSpec>performerid:%Integer</FormalSpec>
-<SqlQuery>SELECT ID,name from model.Projects where ID in (select project from model.Task where performer=:performerid)</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="byID">
+            <Type>%SQLQuery</Type>
+            <FormalSpec>performerid:%Integer</FormalSpec>
+            <SqlQuery>SELECT ID,name from model.Projects where ID in (select project from model.Task where
+                performer=:performerid)
+            </SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Query name="byOID">
-<Type>%SQLQuery</Type>
-<FormalSpec>ownerid:%Integer</FormalSpec>
-<SqlQuery>SELECT ID,name from model.Projects where ID = :ownerid</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="byOID">
+            <Type>%SQLQuery</Type>
+            <FormalSpec>ownerid:%Integer</FormalSpec>
+            <SqlQuery>SELECT ID,name from model.Projects where ID = :ownerid</SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Method name="onProject">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>pid:%Integer,uid:%Integer</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="onProject">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>pid:%Integer,uid:%Integer</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	s text=-1
 	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:byID")
 	do rs.Execute(uid)
@@ -1755,12 +1776,12 @@ Can only be referenced from another CSP page</Description>
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="selectOwnerProjects">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="selectOwnerProjects">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=""
 	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:byOID")
 	do rs.Execute(%session.Data("userID"))
@@ -1773,12 +1794,12 @@ Can only be referenced from another CSP page</Description>
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="selectDevProjects">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="selectDevProjects">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=""
 	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:byID")
 	do rs.Execute(%session.Data("userID"))
@@ -1791,12 +1812,12 @@ Can only be referenced from another CSP page</Description>
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="projects">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="projects">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=""
 	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:all")
 	do rs.Execute()
@@ -1809,12 +1830,12 @@ Can only be referenced from another CSP page</Description>
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSearch">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>where:%String,params:%String</FormalSpec>
-<Implementation><![CDATA[
+        <Method name="initSearch">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>where:%String,params:%String</FormalSpec>
+            <Implementation><![CDATA[
 	
 		s pname=$$$get( "name" ) if ( pname'="" ) {
             s where=where_$ListBuild( "name Like ?" )
@@ -1880,20 +1901,20 @@ Can only be referenced from another CSP page</Description>
         }
         s where=$ListToString(where," AND ")
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getTableName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q "model.Projects"
+        <Method name="getTableName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q "model.Projects"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getEntity">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>rs:%ResultSet</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="getEntity">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>rs:%ResultSet</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
      
 	s role=%session.Data("role")
 	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
@@ -1929,40 +1950,43 @@ Can only be referenced from another CSP page</Description>
 		}
 	q -1
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Add">
-<Description>
-Создаем новый объект</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Add">
+            <Description>
+                Создаем новый объект
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s obj=##class(model.Projects).%New()
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Edit">
-<Description>
-Открываем и редактируем существующий</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Edit">
+            <Description>
+                Открываем и редактируем существующий
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), obj=##class(model.Projects).%OpenId(id,.sc)
     if $$$ISERR( sc ) {
         Q ..wResult( sc, id )	
     }
     Q ..Set(.obj)
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Set">
-<Description>
-Обновление свойств, сохранение изменений, вывод результата</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>obj:model.Projects</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Set">
+            <Description>
+                Обновление свойств, сохранение изменений, вывод результата
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>obj:model.Projects</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
         s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
         Q ..wResult( sc )
@@ -1989,24 +2013,25 @@ Can only be referenced from another CSP page</Description>
     
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Del">
-<Description>
-Удаление объекта</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Del">
+            <Description>
+                Удаление объекта
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s id=$$$get("id"), sc=##class(model.Projects).%DeleteId(id)
     Q ..wResult( sc, id )
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSort">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="initSort">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
    s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
    if $ListFind( $ListBuild("name","name"), sidx ) {
         s:sidx="name" sidx="""name""" ;
@@ -2025,58 +2050,59 @@ Can only be referenced from another CSP page</Description>
     }  
     q order
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="service.TaskService">
-<IncludeCode>csp</IncludeCode>
-<Super>BaseService</Super>
-<TimeChanged>63008,41941.165719</TimeChanged>
-<TimeCreated>62977,46056.568602</TimeCreated>
+    <Class name="service.TaskService">
+        <IncludeCode>csp</IncludeCode>
+        <Super>BaseService</Super>
+        <TimeChanged>63008,41941.165719</TimeChanged>
+        <TimeCreated>62977,46056.568602</TimeCreated>
 
-<Query name="projs">
-<Type>%SQLQuery</Type>
-<SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="projs">
+            <Type>%SQLQuery</Type>
+            <SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Query name="ts">
-<Type>%SQLQuery</Type>
-<SqlQuery>SELECT ID,lastName,name from model.Developer</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="ts">
+            <Type>%SQLQuery</Type>
+            <SqlQuery>SELECT ID,lastName,name from model.Developer</SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Query name="ownerTasks">
-<Type>%SQLQuery</Type>
-<FormalSpec>oid:%Integer</FormalSpec>
-<SqlQuery>SELECT ID from model.Task where project=:oid</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="ownerTasks">
+            <Type>%SQLQuery</Type>
+            <FormalSpec>oid:%Integer</FormalSpec>
+            <SqlQuery>SELECT ID from model.Task where project=:oid</SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Query name="devTasks">
-<Type>%SQLQuery</Type>
-<FormalSpec>did:%Integer</FormalSpec>
-<SqlQuery>SELECT ID from model.Task where performer=:did</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="devTasks">
+            <Type>%SQLQuery</Type>
+            <FormalSpec>did:%Integer</FormalSpec>
+            <SqlQuery>SELECT ID from model.Task where performer=:did</SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Query name="masterTasks">
-<Type>%SQLQuery</Type>
-<FormalSpec>mid:%Integer</FormalSpec>
-<SqlQuery>SELECT ID from model.Task where project in 
-	(Select ID from model.Projects where ID in 
-		(Select project from model.Task where performer=:mid
-		)
-	)</SqlQuery>
-<Parameter name="CONTAINID" value="1"/>
-</Query>
+        <Query name="masterTasks">
+            <Type>%SQLQuery</Type>
+            <FormalSpec>mid:%Integer</FormalSpec>
+            <SqlQuery>SELECT ID from model.Task where project in
+                (Select ID from model.Projects where ID in
+                (Select project from model.Task where performer=:mid
+                )
+                )
+            </SqlQuery>
+            <Parameter name="CONTAINID" value="1"/>
+        </Query>
 
-<Method name="taskOwnCheck">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>id:%Integer</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="taskOwnCheck">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>id:%Integer</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	s role=%session.Data("role")
 	s text=-1
 	if (role="Администратор"){
@@ -2108,12 +2134,12 @@ Can only be referenced from another CSP page</Description>
 		}
 	q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="projects">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="projects">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=""
 	set rs = ##class(%Library.ResultSet).%New("service.TaskService:projs")
 	do rs.Execute()
@@ -2125,12 +2151,12 @@ Can only be referenced from another CSP page</Description>
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="tasks">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="tasks">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s text=""
 	set rs = ##class(%Library.ResultSet).%New("service.TaskService:ts")
 	do rs.Execute()
@@ -2143,12 +2169,12 @@ Can only be referenced from another CSP page</Description>
 	do rs.Close()	; закрыть запрос
     q text
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSearch">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>where:%String,params:%String</FormalSpec>
-<Implementation><![CDATA[
+        <Method name="initSearch">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>where:%String,params:%String</FormalSpec>
+            <Implementation><![CDATA[
 		s name=$$$get( "name" ) if ( name'="" ) {
             s where=where_$ListBuild( "name Like ?" )
             s params( $increment(params) )="%"_name_"%"
@@ -2181,20 +2207,20 @@ Can only be referenced from another CSP page</Description>
         }
         s where=$ListToString(where," AND ")
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getTableName">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[	q "model.Task"
+        <Method name="getTableName">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[	q "model.Task"
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="getEntity">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>rs:%ResultSet</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="getEntity">
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>rs:%ResultSet</FormalSpec>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
 	s startDate=##class(%Date).LogicalToDisplay(rs.%Get("startDate"))
 	s expectedEndDate=##class(%Date).LogicalToDisplay(rs.%Get("expectedEndDate"))
@@ -2204,25 +2230,27 @@ Can only be referenced from another CSP page</Description>
 		}
 		else {q -1}
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Add">
-<Description>
-Создаем новый объект</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Add">
+            <Description>
+                Создаем новый объект
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s obj=##class(model.Task).Populate(1)
     Q ..Set(.obj,"add")
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Edit">
-<Description>
-Открываем и редактируем существующий</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Edit">
+            <Description>
+                Открываем и редактируем существующий
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
     s pid=""
 	s name=$$$get("id")
  
@@ -2237,15 +2265,16 @@ Can only be referenced from another CSP page</Description>
     }
     Q ..Set(.obj,"edit")
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Set">
-<Description>
-Обновление свойств, сохранение изменений, вывод результата</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>obj:model.Task,param:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Set">
+            <Description>
+                Обновление свойств, сохранение изменений, вывод результата
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <FormalSpec>obj:model.Task,param:%String</FormalSpec>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	
     if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
         s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
@@ -2279,14 +2308,15 @@ Can only be referenced from another CSP page</Description>
     
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="Del">
-<Description>
-Удаление объекта</Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="Del">
+            <Description>
+                Удаление объекта
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	s pid=""
 	s name=$$$get("id")
  
@@ -2297,12 +2327,12 @@ Can only be referenced from another CSP page</Description>
     Q ..wResult( sc, id )
     Q $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="initSort">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+        <Method name="initSort">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%String</ReturnType>
+            <Implementation><![CDATA[
 	s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
     if $ListFind( $ListBuild("name","name"), sidx ) {
         s:sidx="name" sidx="""name""" ;
@@ -2336,29 +2366,29 @@ Can only be referenced from another CSP page</Description>
     } 
     q order
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.BaseView">
-<Abstract>1</Abstract>
-<IncludeCode>csp</IncludeCode>
-<Super>%CSP.Page</Super>
-<TimeChanged>63007,46507.629962</TimeChanged>
-<TimeCreated>62977,42470.908312</TimeCreated>
+    <Class name="view.BaseView">
+        <Abstract>1</Abstract>
+        <IncludeCode>csp</IncludeCode>
+        <Super>%CSP.Page</Super>
+        <TimeChanged>63007,46507.629962</TimeChanged>
+        <TimeCreated>62977,42470.908312</TimeCreated>
 
-<Parameter name="DOMAIN">
-<Description><![CDATA[
+        <Parameter name="DOMAIN">
+            <Description><![CDATA[
 Базовый класс для отображения данных экземпляров классов пакета model
 с помощью <a href="http://www.trirand.com/blog/">jqgrid</a>
 node для локализации текстовых ресурсов]]></Description>
-<Default>model</Default>
-</Parameter>
+            <Default>model</Default>
+        </Parameter>
 
-<Method name="writeCSS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeCSS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 
 ///#($r(16)+1)#
 	&html<
@@ -2423,12 +2453,12 @@ node для локализации текстовых ресурсов]]></Descr
     </style>
     >
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeHeader">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeHeader">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	&html<<!DOCTYPE html>
 <html lang="ru"><head>
     <meta charset="ru"/>
@@ -2467,12 +2497,12 @@ node для локализации текстовых ресурсов]]></Descr
     <script src="js/jqBootstrapValidation.js"></script>
 >
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeMenu">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeMenu">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 
 	 &html<
 
@@ -2546,12 +2576,12 @@ node для локализации текстовых ресурсов]]></Descr
     </div>
     >
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeHTML">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeHTML">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	&html<
     <!-- Элемент для грида c адресом источника данных -->
     <table id="grid"></table>
@@ -2561,14 +2591,15 @@ node для локализации текстовых ресурсов]]></Descr
     <div id="theme"></div>
     >
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="OnPage">
-<Description>
-Метод вывода содержимого страницы </Description>
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPage">
+            <Description>
+                Метод вывода содержимого страницы
+            </Description>
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	do ..writeHeader()
 	do ..writeCSS()
 	&html<</head><body>>
@@ -2579,25 +2610,25 @@ node для локализации текстовых ресурсов]]></Descr
  	&html<</body></html>>
     Quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-</Method>
-</Class>
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+        </Method>
+    </Class>
 
 
-<Class name="view.IndexView">
-<IncludeCode>csp</IncludeCode>
-<Super>BaseView</Super>
-<TimeChanged>63007,35233.445262</TimeChanged>
-<TimeCreated>62987,18014.352801</TimeCreated>
+    <Class name="view.IndexView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>BaseView</Super>
+        <TimeChanged>63007,35233.445262</TimeChanged>
+        <TimeCreated>62987,18014.352801</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ($Data(%session.Data("userID"))) {
 		do $SYSTEM.Security.Audit("scc","Авторизация","Выход из системы"
 				,"Пользователь успешно вышел из системы"
@@ -2609,12 +2640,12 @@ node для локализации текстовых ресурсов]]></Descr
 	
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeHTML">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeHTML">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	&html<
 		
 	<div ><h5>Сегодня: #($Zdate($Horolog,4))#</h5></div>
@@ -2634,30 +2665,30 @@ node для локализации текстовых ресурсов]]></Descr
     </div>
 	>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.StartPageView">
-<Super>BaseView</Super>
-<TimeChanged>63007,37942.406695</TimeChanged>
-<TimeCreated>63005,34288.633969</TimeCreated>
+    <Class name="view.StartPageView">
+        <Super>BaseView</Super>
+        <TimeChanged>63007,37942.406695</TimeChanged>
+        <TimeCreated>63005,34288.633969</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeHTML">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeHTML">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	 s role=%session.Data("role")
 	 s link1="view.DeveloperView.cls"
 	 s link1=$$$link(role,link1)
@@ -2686,20 +2717,20 @@ node для локализации текстовых ресурсов]]></Descr
    </div>
     >
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.TeamView">
-<IncludeCode>csp</IncludeCode>
-<Super>BaseView</Super>
-<TimeChanged>63007,40720.484176</TimeChanged>
-<TimeCreated>63006,54068.870216</TimeCreated>
+    <Class name="view.TeamView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>BaseView</Super>
+        <TimeChanged>63007,40720.484176</TimeChanged>
+        <TimeCreated>63006,54068.870216</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -2717,12 +2748,12 @@ node для локализации текстовых ресурсов]]></Descr
 		}*/
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeHTML">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeHTML">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
 	 s role=%session.Data("role")
 	 s link1="view.ProjectsView.cls"
 	 s link1=$$$link(role,link1)
@@ -2735,20 +2766,20 @@ node для локализации текстовых ресурсов]]></Descr
     >
     q $$$OK
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.admin.DeveloperView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,39471.241752</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.admin.DeveloperView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,39471.241752</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -2759,12 +2790,12 @@ node для локализации текстовых ресурсов]]></Descr
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
      <p>#(%session.Data("role"))#</p>
    <!-- инициализации страницы -->
@@ -2855,20 +2886,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.admin.ProjectsView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,40126.923259</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.admin.ProjectsView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,40126.923259</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -2879,12 +2910,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
   <p>Просмотреть команду разработчиков для проекта:</p>
      <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
@@ -2989,20 +3020,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.admin.TaskView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,39542.242944</TimeChanged>
-<TimeCreated>62977,43652.458129</TimeCreated>
+    <Class name="view.admin.TaskView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,39542.242944</TimeChanged>
+        <TimeCreated>62977,43652.458129</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3013,12 +3044,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
 
    <!-- инициализации страницы -->
@@ -3106,20 +3137,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.developer.DeveloperView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,74617.737306</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.developer.DeveloperView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,74617.737306</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3130,12 +3161,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
      <p>#(%session.Data("role"))#</p>
    <!-- инициализации страницы -->
@@ -3226,20 +3257,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.developer.ProjectsView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,49120.071472</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.developer.ProjectsView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,49120.071472</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		/*quit $$$OK*/
@@ -3250,12 +3281,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
   <p>Просмотреть команду разработчиков для проекта:</p>
      <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
@@ -3358,20 +3389,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.developer.TaskView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,49056.182316</TimeChanged>
-<TimeCreated>62977,43652.458129</TimeCreated>
+    <Class name="view.developer.TaskView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,49056.182316</TimeChanged>
+        <TimeCreated>62977,43652.458129</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3382,12 +3413,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
 
    <!-- инициализации страницы -->
@@ -3475,20 +3506,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.master.DeveloperView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,49416.238617</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.master.DeveloperView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,49416.238617</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3499,12 +3530,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
      <p>#(%session.Data("role"))#</p>
    <!-- инициализации страницы -->
@@ -3594,20 +3625,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.master.ProjectsView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,49107.724791</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.master.ProjectsView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,49107.724791</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3618,12 +3649,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
        &html<
   <p>Просмотреть команду разработчиков для проекта:</p>
      <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
@@ -3727,20 +3758,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.master.TaskView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,49263.677766</TimeChanged>
-<TimeCreated>62977,43652.458129</TimeCreated>
+    <Class name="view.master.TaskView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,49263.677766</TimeChanged>
+        <TimeCreated>62977,43652.458129</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3751,12 +3782,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
 
    <!-- инициализации страницы -->
@@ -3844,20 +3875,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.owner.DeveloperView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,39285.779526</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.owner.DeveloperView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,39285.779526</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3868,12 +3899,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
      <p>#(%session.Data("role"))#</p>
    <!-- инициализации страницы -->
@@ -3963,20 +3994,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.owner.ProjectsView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,49075.100812</TimeChanged>
-<TimeCreated>62977,43054.35361</TimeCreated>
+    <Class name="view.owner.ProjectsView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,49075.100812</TimeChanged>
+        <TimeCreated>62977,43054.35361</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -3987,12 +4018,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
   <p>Просмотреть команду разработчиков для проекта:</p>
      <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
@@ -4095,20 +4126,20 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 
 
-<Class name="view.owner.TaskView">
-<IncludeCode>csp</IncludeCode>
-<Super>view.BaseView</Super>
-<TimeChanged>63007,76467.418277</TimeChanged>
-<TimeCreated>62977,43652.458129</TimeCreated>
+    <Class name="view.owner.TaskView">
+        <IncludeCode>csp</IncludeCode>
+        <Super>view.BaseView</Super>
+        <TimeChanged>63007,76467.418277</TimeChanged>
+        <TimeCreated>62977,43652.458129</TimeCreated>
 
-<Method name="OnPreHTTP">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Boolean</ReturnType>
-<Implementation><![CDATA[
+        <Method name="OnPreHTTP">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Boolean</ReturnType>
+            <Implementation><![CDATA[
 	if ('$Data(%session.Data("userID"))) {
 		set %response.Redirect = "view.IndexView.cls"
 		quit $$$OK
@@ -4119,12 +4150,12 @@ $( function(){ //функция обработчик document.ready
 		}
 	quit $$$OK
 ]]></Implementation>
-</Method>
+        </Method>
 
-<Method name="writeJS">
-<ClassMethod>1</ClassMethod>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+        <Method name="writeJS">
+            <ClassMethod>1</ClassMethod>
+            <ReturnType>%Status</ReturnType>
+            <Implementation><![CDATA[
      &html<
 
    <!-- инициализации страницы -->
@@ -4212,6 +4243,6 @@ $( function(){ //функция обработчик document.ready
 
 });</script>>
 ]]></Implementation>
-</Method>
-</Class>
+        </Method>
+    </Class>
 </Export>

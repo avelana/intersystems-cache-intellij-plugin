@@ -1,6 +1,5 @@
 package by.vsu.cacheplugin.parsers.importers.filetypes;
 
-import by.vsu.cacheplugin.parsers.importers.filetypes.AbstractObjectSax;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
