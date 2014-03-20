@@ -1,0 +1,27 @@
+<idea-plugin version="2">
+    <id>by.vsu.cacheSupport</id>
+    <name>CacheSupport</name>
+    <version>1.0</version>
+    <vendor email="mmaya@tut.by" url="http://www.vsu.by">VSU</vendor>
+
+    <idea-version since-build="107.105"/>
+
+    <project-components>
+    </project-components>
+
+    <actions>
+        <group id="CacheStudioMenu" text="Cache Studio options" description="Import/export with Cache Studio"
+               popup="true">
+            <action id="CacheExport" class="by.vsu.cacheplugin.actions.CacheExport" text="Export to Cache Studio XML"
+                    description="Export to Cache Studio XML file">
+            </action>
+            <action id="CacheImport" class="by.vsu.cacheplugin.actions.CacheImport" text="Import from Cache Studio XML"
+                    description="Import from Cache Studio XML file">
+            </action>
+            <add-to-group group-id="MainMenu" relative-to-action="HelpMenu" anchor="before"/>
+        </group>
+    </actions>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+</idea-plugin>

@@ -1,0 +1,4217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-32) 2013.1.4 (Build 801U)" ts="2014-03-14 13:34:06">
+<Routine name="Untitled1" type="MAC" languagemode="0" timestamp="63007,37229.624386"><![CDATA[
+ /*	do ##class(model.Projects).%KillExtent()
+	do ##class(model.Projects).Populate(20,1)
+	do ##class(model.Developer).%KillExtent()
+	do ##class(model.Developer).Populate(20,1)
+	do ##class(model.Task).%KillExtent()
+	do ##class(model.Task).Populate(20,1)
+ 	set ^VisitCount = 1*/
+ 	/*s val = ##class(%Date).DisplayToLogical(##class(service.DataTest).StartDate())
+ 	write ##class(service.DataTest).ExpectedDate(val),!
+ 	write ##class(service.DataTest).RealDate(val)*/
+ 	    #dim RS as %SQL.StatementResult
+   /* s stmt=##class(%SQL.Statement).%New()
+    #; строим выражение для вывода данных
+    #; оптимизируем проход по результату, отбирая только ID 
+    s sql=" SELECT * From model.Developer"
+    
+    s sc=stmt.%Prepare(sql) 
+    s RS=stmt.%Execute(params...) 
+    if RS.%SQLCODE d ##class(%SYSTEM.SQL).SQLCODE(RS.%SQLCODE) Q 0
+
+    #;здесь нам понадобится макрос квотирования данных 
+    #;в соответствии со стандартом JSON - http://json.org
+    #;стандартное квотирование ..QuoteJS() не подходит 
+    #;из-за символа одинарной кавычки
+    #define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+    
+    #;выводим строки 
+    s sc="" for { s sc=RS.%Next() Quit:sc=0
+        s rnum=RS.%ROWCOUNT
+        w ##class(service.DeveloperService).getEntity(RS),!
+    }
+        #; строим выражение для вывода данных
+    #; оптимизируем проход по результату, отбирая только ID 
+    s sql=" SELECT * From model.Projects"
+    
+    s sc=stmt.%Prepare(sql) 
+    s RS=stmt.%Execute(params...) 
+    if RS.%SQLCODE d ##class(%SYSTEM.SQL).SQLCODE(RS.%SQLCODE) Q 0
+
+    #;здесь нам понадобится макрос квотирования данных 
+    #;в соответствии со стандартом JSON - http://json.org
+    #;стандартное квотирование ..QuoteJS() не подходит 
+    #;из-за символа одинарной кавычки
+    #define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+    
+    #;выводим строки 
+    s sc="" for { s sc=RS.%Next() Quit:sc=0
+        s rnum=RS.%ROWCOUNT
+        w ##class(service.ProjectService).getEntity(RS),!
+    }
+    w ##class(service.ProjectService).initSort()
+    s p=##class(model.Projects).%OpenId(2)
+    w ##class(model.Projects).team(2)
+    w p.startDate*/
+]]></Routine>
+
+
+<Routine name="csp" type="INC" timestamp="63007,38184.778219"><![CDATA[
+ #; подключаемый файл определений csp.inc 
+ #; смотри  первую строчку в классе service.person
+ /// сокращает код извлечения параметров запроса
+ /// из системной переменной %request
+ #define get(%name) $g(%request.Data(%name,1))
+ #define package(%role) ##class(service.Additional).Translate(%role) 
+ #define link(%role,%page) ##class(service.Additional).Link(%role,%page)    
+]]></Routine>
+
+
+<Routine name="generator" type="MAC" languagemode="0" timestamp="63006,42348.393249"><![CDATA[
+	do ##class(model.Developer).%KillExtent()
+	do ##class(model.Developer).Populate(20,1)
+	do ##class(model.Projects).%KillExtent()
+	do ##class(model.Projects).Populate(20,1)
+	do ##class(model.Task).%KillExtent()
+	do ##class(model.Task).Populate(20,1)
+ 	set ^VisitCount = 1
+]]></Routine>
+
+
+<Class name="model.Address">
+<Super>%SerialObject,%Populate</Super>
+<TimeChanged>63260,47903.885798</TimeChanged>
+<TimeCreated>62968,7735.151537</TimeCreated>
+
+<Property name="city">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="cityIndex">
+<Properties>city</Properties>
+</Index>
+
+<Property name="street">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="streetIndex">
+<Properties>street</Properties>
+</Index>
+
+<Property name="house">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="houseIndex">
+<Properties>house</Properties>
+</Index>
+
+<Property name="flat">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="flatIndex">
+<Properties>flat</Properties>
+</Index>
+
+<Parameter name="POPSPEC">
+<Default>city:##Class(service.DataTest).CityName(),street:##Class(service.DataTest).StreetName(),house:##Class(service.DataTest).HouseName(),flat:##Class(service.DataTest).FlatName()</Default>
+</Parameter>
+</Class>
+
+
+<Class name="model.Developer">
+<Super>%Persistent,Utilizer</Super>
+<TimeChanged>63260,47914.50198</TimeChanged>
+<TimeCreated>63003,73317.063387</TimeCreated>
+
+<Property name="skill">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="skillIndex">
+<Properties>skill</Properties>
+</Index>
+
+<Property name="tasks">
+<Type>model.Task</Type>
+<Cardinality>many</Cardinality>
+<Inverse>performer</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Method name="OnPopulate">
+<ReturnType>%Status</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+	s gender=$r(2)
+	if (gender=0) {
+		s ..lastName=##class(service.DataTest).MenLastName()
+		s ..name=##class(service.DataTest).MenName()
+		s ..patronymic=##class(service.DataTest).MenPatronymic()
+	} else {
+		s ..lastName=##class(service.DataTest).FemaleLastName()
+		s ..name=##class(service.DataTest).FemaleName()
+		s ..patronymic=##class(service.DataTest).FemalePatronymic()
+	}
+	s ..login=##class(service.DataTest).login()
+	s ..password=##class(service.DataTest).password()	
+	s ..roles=##class(service.DataTest).DeveloperRoles()
+	s ..skill=##class(service.DataTest).Skill()
+	s ..email=##class(service.DataTest).Email(..login)
+	s ..phone=##class(service.DataTest).Phone()
+	q $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="model.Owner">
+<Super>%SerialObject,Utilizer</Super>
+<TimeChanged>63260,47923.643887</TimeChanged>
+<TimeCreated>63003,79542.463009</TimeCreated>
+
+<Property name="post">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="postIndex">
+<Properties>post</Properties>
+</Index>
+
+<Property name="company">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="companyIndex">
+<Properties>post</Properties>
+</Index>
+
+<Method name="OnPopulate">
+<ReturnType>%Status</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+	s gender=$r(2)
+	if (gender=0) {
+		s ..lastName=##class(service.DataTest).MenLastName()
+		s ..name=##class(service.DataTest).MenName()
+		s ..patronymic=##class(service.DataTest).MenPatronymic()
+	} else {
+		s ..lastName=##class(service.DataTest).FemaleLastName()
+		s ..name=##class(service.DataTest).FemaleName()
+		s ..patronymic=##class(service.DataTest).FemalePatronymic()
+	}
+	s ..login=##class(service.DataTest).login()
+	s ..password=##class(service.DataTest).password()	
+	s ..roles=##class(service.DataTest).OwnerRoles()
+	s ..post=##class(service.DataTest).PostName()
+	s ..email=##class(service.DataTest).Email(..login)
+	s ..phone=##class(service.DataTest).Phone()
+	s ..company=##class(service.DataTest).Company()
+	q $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="model.Projects">
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>63260,47932.061892</TimeChanged>
+<TimeCreated>63004,56876.101365</TimeCreated>
+
+<Property name="Ntasks">
+<Type>model.Task</Type>
+<Cardinality>children</Cardinality>
+<Inverse>project</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="name">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="nameIndex">
+<Properties>name</Properties>
+</Index>
+
+<Method name="OnPopulate">
+<ReturnType>%Status</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+	s ..name="Project "_($r(255)+1)
+	q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="GetMaster">
+<ReturnType>Developer</ReturnType>
+<Implementation><![CDATA[	q ..Ntasks.GetAt(0).performer
+]]></Implementation>
+</Method>
+
+<Property name="owner">
+<Type>Owner</Type>
+<Required>1</Required>
+<Parameter name="POPSPEC" value=".owner.PopulateSerial()"/>
+</Property>
+
+<Index name="ownerIndex">
+<Properties>owner</Properties>
+</Index>
+
+<Property name="startDate">
+<Type>%Date</Type>
+<Calculated>1</Calculated>
+<SqlComputeCode>	s {startDate}=##class(model.Projects).GetStart({ID})</SqlComputeCode>
+<SqlComputed>1</SqlComputed>
+</Property>
+
+<Property name="endDate">
+<Type>%Date</Type>
+<Calculated>1</Calculated>
+<SqlComputeCode>	s {endDate}=##class(model.Projects).GetEnd({ID})</SqlComputeCode>
+<SqlComputed>1</SqlComputed>
+</Property>
+
+<Method name="GetStart">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%Integer</FormalSpec>
+<ReturnType>%Date</ReturnType>
+<Implementation><![CDATA[
+ set startDate=""
+ &sql(SELECT MIN(startDate) INTO :startDate 
+			 FROM model.Task
+		 	 WHERE project=:id)
+ q startDate
+]]></Implementation>
+</Method>
+
+<Method name="GetEnd">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%Integer</FormalSpec>
+<ReturnType>%Date</ReturnType>
+<Implementation><![CDATA[
+ set endDate=""
+ &sql(SELECT MAX(expectedEndDate) INTO :endDate 
+			 FROM model.Task
+		 	 WHERE project=:id)
+ q endDate
+]]></Implementation>
+</Method>
+
+<Query name="ByID">
+<Type>%SQLQuery</Type>
+<FormalSpec>id:%Integer</FormalSpec>
+<SqlQuery>SELECT lastName,name from model.Developer where ID in (SELECT performer from model.Task where project=:id)</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Method name="team">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%Integer</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=""
+	set rs = ##class(%Library.ResultSet).%New("model.Projects:ByID")
+	do rs.Execute(id)
+	while (rs.Next() '= 0) {
+		s text=text_"<br><h3>"
+		s text=text_rs.Get("lastName")
+		s text=text_" "_rs.Get("name")
+		s text=text_"</h3>"
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="model.Task">
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>63260,47942.917182</TimeChanged>
+<TimeCreated>63003,81277.718679</TimeCreated>
+
+<Property name="name">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="nameIndex">
+<Properties>name</Properties>
+</Index>
+
+<Property name="description">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="descriptionIndex">
+<Properties>description</Properties>
+</Index>
+
+<Property name="performer">
+<Type>model.Developer</Type>
+<Cardinality>one</Cardinality>
+<Inverse>tasks</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="project">
+<Type>model.Projects</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>Ntasks</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="startDate">
+<Type>%Date</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="startDateIndex">
+<Properties>startDate</Properties>
+</Index>
+
+<Property name="expectedEndDate">
+<Type>%Date</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="expectedEndDateIndex">
+<Properties>expectedEndDate</Properties>
+</Index>
+
+<Property name="endDate">
+<Type>%Date</Type>
+</Property>
+
+<Index name="endDateIndex">
+<Properties>endDate</Properties>
+</Index>
+
+<Method name="OnPopulate">
+<ReturnType>%Status</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+	s ..name=##class(service.DataTest).Task(..project.name)
+	s ..description=##class(service.DataTest).Description(..name)
+	s ..startDate=##class(%Date).DisplayToLogical(##class(service.DataTest).StartDate())
+	s ..expectedEndDate=##class(%Date).DisplayToLogical(##class(service.DataTest).ExpectedDate(..startDate))
+	s gender=$r(2)
+	if (gender=0) {
+	s ..endDate=##class(%Date).DisplayToLogical(##class(service.DataTest).RealDate(..startDate))	
+	}
+	q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="GetProject">
+<ReturnType>Projects</ReturnType>
+<Implementation><![CDATA[	q ..project
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="model.Utilizer">
+<Abstract>1</Abstract>
+<Super>%Populate</Super>
+<TimeChanged>63007,57125.697127</TimeChanged>
+<TimeCreated>63003,73310.395696</TimeCreated>
+
+<Property name="lastName">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="lastNameIndex">
+<Properties>lastName</Properties>
+</Index>
+
+<Property name="name">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="nameIndex">
+<Properties>name</Properties>
+</Index>
+
+<Property name="login">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="loginIndex">
+<Properties>lastName</Properties>
+</Index>
+
+<Property name="password">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="passwordIndex">
+<Properties>password</Properties>
+</Index>
+
+<Property name="patronymic">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="patronymicIndex">
+<Properties>patronymic</Properties>
+</Index>
+
+<Property name="roles">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Index name="rolesIndex">
+<Properties>roles</Properties>
+</Index>
+
+<Property name="address">
+<Type>Address</Type>
+<Parameter name="POPSPEC" value=".address.PopulateSerial()"/>
+</Property>
+
+<Index name="addressIndex">
+<Properties>address</Properties>
+</Index>
+
+<Property name="email">
+<Type>%String</Type>
+<Parameter name="PATTERN" value="1.15E1&quot;@&quot;1.5A1&quot;.com&quot;"/>
+</Property>
+
+<Index name="emailIndex">
+<Properties>email</Properties>
+</Index>
+
+<Property name="phone">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="12"/>
+<Parameter name="PATTERN" value="3n1&quot;-&quot;3n1&quot;-&quot;4n"/>
+</Property>
+</Class>
+
+
+<Project name="scrum" LastModified="2014-03-14 13:21:27.018929">
+  <Items>
+    <ProjectItem name="Untitled1.MAC" type="MAC"></ProjectItem>
+    <ProjectItem name="csp.INC" type="MAC"></ProjectItem>
+    <ProjectItem name="generator.MAC" type="MAC"></ProjectItem>
+    <ProjectItem name="model.Address" type="CLS"></ProjectItem>
+    <ProjectItem name="model.Developer" type="CLS"></ProjectItem>
+    <ProjectItem name="model.Owner" type="CLS"></ProjectItem>
+    <ProjectItem name="model.Projects" type="CLS"></ProjectItem>
+    <ProjectItem name="model.Task" type="CLS"></ProjectItem>
+    <ProjectItem name="model.Utilizer" type="CLS"></ProjectItem>
+    <ProjectItem name="service.Additional" type="CLS"></ProjectItem>
+    <ProjectItem name="service.AdminProjectService" type="CLS"></ProjectItem>
+    <ProjectItem name="service.AdminService" type="CLS"></ProjectItem>
+    <ProjectItem name="service.Authorization" type="CLS"></ProjectItem>
+    <ProjectItem name="service.BaseService" type="CLS"></ProjectItem>
+    <ProjectItem name="service.DataTest" type="CLS"></ProjectItem>
+    <ProjectItem name="service.DeveloperService" type="CLS"></ProjectItem>
+    <ProjectItem name="service.ProjectService" type="CLS"></ProjectItem>
+    <ProjectItem name="service.TaskService" type="CLS"></ProjectItem>
+    <ProjectItem name="view.BaseView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.IndexView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.StartPageView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.TeamView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.admin.DeveloperView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.admin.ProjectsView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.admin.TaskView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.developer.DeveloperView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.developer.ProjectsView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.developer.TaskView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.master.DeveloperView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.master.ProjectsView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.master.TaskView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.owner.DeveloperView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.owner.ProjectsView" type="CLS"></ProjectItem>
+    <ProjectItem name="view.owner.TaskView" type="CLS"></ProjectItem>
+  </Items>
+</Project>
+
+
+<Class name="service.Additional">
+<TimeChanged>63007,38263.80428</TimeChanged>
+<TimeCreated>63007,36890.98829</TimeCreated>
+
+<Method name="Translate">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>word:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+		s translate=""
+		if (word="Владелец") s translate="owner"
+		if (word="Администратор") s translate="admin"
+		if (word="Мастер") s translate="master"
+		if (word="Разработчик") s translate="developer"
+		q translate
+]]></Implementation>
+</Method>
+
+<Method name="Link">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>word:%String,page:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+		s translate=..Translate(word)
+		q "view."_translate_$e(page,5,$l(page))
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.AdminProjectService">
+<IncludeCode>csp</IncludeCode>
+<Super>BaseService</Super>
+<TimeChanged>63006,59139.321864</TimeChanged>
+<TimeCreated>63006,59139.321864</TimeCreated>
+
+<Query name="ByID">
+<Type>%SQLQuery</Type>
+<SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Method name="projects">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=""
+	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:ByID")
+	do rs.Execute()
+	while (rs.Next() '= 0) {
+		s text=text_"<option value="
+		s text=text_rs.Get("ID")
+		s text=text_"> "_rs.Get("name")
+		s text=text_"</option>"
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+
+<Method name="initSearch">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>where:%String,params:%String</FormalSpec>
+<Implementation><![CDATA[
+	
+		s pname=$$$get( "name" ) if ( pname'="" ) {
+            s where=where_$ListBuild( "name Like ?" )
+            , params( $increment(params) )="%"_pname_"%"
+        }
+        s stdate=$$$get( "startDate" ) if ( stdate'="" ) {
+            s where=where_$ListBuild( "startDate Like ?" )
+            , params( $increment(params) )="%"_##class(%Date).DisplayToLogical(stdate)_"%"
+        }
+        s date=$$$get( "endDate" ) if ( date'="" ) {
+            s where=where_$ListBuild( "endDate Like ?" )
+            , params( $increment(params) )="%"_##class(%Date).DisplayToLogical(date)_"%"
+        }
+		s lastName=$$$get( "owner.lastName" ) if ( lastName'="" ) {
+            s where=where_$ListBuild( "owner_lastName Like ?" )
+            , params( $increment(params) )="%"_lastName_"%"
+        }
+
+		s name=$$$get( "owner.name" ) if ( name'="" ) {
+            s where=where_$ListBuild( "owner_name Like ?" )
+            , params( $increment(params) )="%"_name_"%"
+        }
+        
+		s patronymic=$$$get( "owner.patronymic" ) if ( patronymic'="" ) {
+            s where=where_$ListBuild( "owner_patronymic Like ?" )
+            , params( $increment(params) )="%"_patronymic_"%"
+        }
+        s company=$$$get( "owner.company" ) if ( company'="" ) {
+            s where=where_$ListBuild( "owner_company Like ?" )
+            , params( $increment(params) )="%"_company_"%"
+        }
+		s post=$$$get( "owner.post" ) if ( post'="" ) {
+            s where=where_$ListBuild( "owner_post Like ?" )
+            , params( $increment(params) )="%"_post_"%"
+        }
+         s addressC=$$$get( "owner.address.city" ) if ( addressC'="" ) {
+            s where=where_$ListBuild( "owner_address_city Like ?" )
+            , params( $increment(params) )="%"_addressC_"%"
+        }
+ 		s addressS=$$$get( "owner.address.street" ) if ( addressS'="" ) {
+            s where=where_$ListBuild( "owner_address_street Like ?" )
+            , params( $increment(params) )="%"_addressS_"%"
+        }
+        s addressH=$$$get( "owner.address.house" ) if ( addressH'="" ) {
+            s where=where_$ListBuild( "owner_address_house Like ?" )
+            , params( $increment(params) )="%"_addressH_"%"
+        }
+        s addressF=$$$get( "owner.address.flat" ) if ( addressF'="" ) {
+            s where=where_$ListBuild( "owner_address_flat Like ?" )
+            , params( $increment(params) )="%"_addressF_"%"
+        }
+        s phone=$$$get( "owner.phone" ) if ( phone'="" ) {
+            s where=where_$ListBuild( "owner_phone Like ?" )
+            , params( $increment(params) )="%"_phone_"%"
+        }
+        s email=$$$get( "owner.email" ) if ( email'="" ) {
+            s where=where_$ListBuild( "owner_email Like ?" )
+            , params( $increment(params) )="%"_email_"%"
+        }
+        s where=$ListToString(where," AND ")
+]]></Implementation>
+</Method>
+
+<Method name="getTableName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q "model.Projects"
+]]></Implementation>
+</Method>
+
+<Method name="getEntity">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>rs:%ResultSet</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+	s startDate=##class(%Date).LogicalToDisplay(rs.%Get("startDate"))
+	s endDate=##class(%Date).LogicalToDisplay(rs.%Get("endDate"))
+	q "{""id"":"_rs.ID_",""name"":"_$$$json(rs.name)_",""startDate"":"_$$$json(startDate)_",""endDate"":"_$$$json(endDate)_",""owner.lastName"":"_$$$json(rs.%Get("owner_lastName"))_",""owner.name"":"_$$$json(rs.%Get("owner_name"))_",""owner.patronymic"":"_$$$json(rs.%Get("owner_patronymic"))_",""owner.company"":"_$$$json(rs.%Get("owner_company"))_",""owner.post"":"_$$$json(rs.%Get("owner_post"))_",""owner.address.city"":"_$$$json(rs.%Get("owner_address_city"))_",""owner.address.street"":"_$$$json(rs.%Get("owner_address_street"))_",""owner.address.house"":"_$$$json(rs.%Get("owner_address_house"))_",""owner.address.flat"":"_$$$json(rs.%Get("owner_address_flat"))_",""owner.phone"":"_$$$json(rs.%Get("owner_phone"))_",""owner.email"":"_$$$json(rs.%Get("owner_email"))_"}"
+]]></Implementation>
+</Method>
+
+<Method name="Add">
+<Description>
+Создаем новый объект</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s obj=##class(model.Projects).%New()
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Edit">
+<Description>
+Открываем и редактируем существующий</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), obj=##class(model.Projects).%OpenId(id,.sc)
+    if $$$ISERR( sc ) {
+        Q ..wResult( sc, id )	
+    }
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Set">
+<Description>
+Обновление свойств, сохранение изменений, вывод результата</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>obj:model.Projects</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
+        s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
+        Q ..wResult( sc )
+    } 
+    s obj.name=$$$get("name")
+    s obj.owner=##class(model.Owner).Populate(1)
+    s obj.owner.lastName=$$$get("owner.lastName")
+    s obj.owner.name=$$$get("owner.name")
+    s obj.owner.patronymic=$$$get("owner.patronymic")
+    s obj.owner.post=$$$get("post")
+    s obj.owner.address.city=$$$get("owner.address.city")
+    s obj.owner.address.street=$$$get("owner.address.street")
+    s obj.owner.address.house=$$$get("owner.address.house")
+    s obj.owner.address.flat=$$$get("owner.address.flat")
+    s obj.owner.phone=$$$get("owner.phone")
+    s obj.owner.email=$$$get("owner.email")
+    s obj.owner.company=$$$get("owner.company")
+    s id="", sc=obj.%Save() 
+    s:$$$ISOK(sc) id=obj.%Id()
+    Q ..wResult( sc, id ) 
+    
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Del">
+<Description>
+Удаление объекта</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), sc=##class(model.Projects).%DeleteId(id)
+    Q ..wResult( sc, id )
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="initSort">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+   s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
+   if $ListFind( $ListBuild("name","name"), sidx ) {
+        s:sidx="name" sidx="""name""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+    if $ListFind( $ListBuild("name","startDate"), sidx ) {
+        s:sidx="startDate" sidx="""startDate""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } if $ListFind( $ListBuild("name","endDate"), sidx ) {
+        s:sidx="endDate" sidx="""endDate""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }
+    if $ListFind( $ListBuild("name","owner"), sidx ) {
+        s:sidx="owner" sidx="""owner""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }  
+    q order
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.AdminService">
+<IncludeCode>csp</IncludeCode>
+<Super>BaseService</Super>
+<TimeChanged>63006,59562.755023</TimeChanged>
+<TimeCreated>63004,82805.232343</TimeCreated>
+
+<Method name="initSearch">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>where:%String,params:%String</FormalSpec>
+<Implementation><![CDATA[
+		s lastName=$$$get( "lastName" ) if ( lastName'="" ) {
+            s where=where_$ListBuild( "lastName Like ?" )
+            , params( $increment(params) )="%"_lastName_"%"
+        }
+
+		s name=$$$get( "name" ) if ( name'="" ) {
+            s where=where_$ListBuild( "name Like ?" )
+            , params( $increment(params) )="%"_name_"%"
+        }
+         s roles=$$$get( "roles" ) if ( roles'="" ) {
+            s where=where_$ListBuild( "roles Like ?" )
+            , params( $increment(params) )="%"_roles_"%"
+        }
+        s login=$$$get( "login" ) if ( login'="" ) {
+            s where=where_$ListBuild( "login Like ?" )
+            , params( $increment(params) )="%"_login_"%"
+        }
+		s password=$$$get( "password" ) if ( password'="" ) {
+            s where=where_$ListBuild( "password Like ?" )
+            , params( $increment(params) )="%"_password_"%"
+        }
+		s patronymic=$$$get( "patronymic" ) if ( patronymic'="" ) {
+            s where=where_$ListBuild( "patronymic Like ?" )
+            , params( $increment(params) )="%"_patronymic_"%"
+        }
+
+		s skill=$$$get( "skill" ) if ( skill'="" ) {
+            s where=where_$ListBuild( "skill Like ?" )
+            , params( $increment(params) )="%"_skill_"%"
+        }
+        s addressC=$$$get( "address.city" ) if ( addressC'="" ) {
+            s where=where_$ListBuild( "address_city Like ?" )
+            , params( $increment(params) )="%"_addressC_"%"
+        }
+ 		s addressS=$$$get( "address.street" ) if ( addressS'="" ) {
+            s where=where_$ListBuild( "address_street Like ?" )
+            , params( $increment(params) )="%"_addressS_"%"
+        }
+        s addressH=$$$get( "address.house" ) if ( addressH'="" ) {
+            s where=where_$ListBuild( "address_house Like ?" )
+            , params( $increment(params) )="%"_addressH_"%"
+        }
+        s addressF=$$$get( "address.flat" ) if ( addressF'="" ) {
+            s where=where_$ListBuild( "address_flat Like ?" )
+            , params( $increment(params) )="%"_addressF_"%"
+        }
+        s where=$ListToString(where," AND ")
+]]></Implementation>
+</Method>
+
+<Method name="getTableName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q "model.Developer"
+]]></Implementation>
+</Method>
+
+<Method name="getEntity">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>rs:%ResultSet</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+	q "{""id"":"_rs.ID_",""lastName"":"_$$$json(rs.lastName)_",""name"":"_$$$json(rs.name)_",""patronymic"":"_$$$json(rs.patronymic)_",""roles"":"_$$$json(rs.roles)_",""login"":"_$$$json(rs.login)_",""password"":"_$$$json(rs.password)_",""skill"":"_$$$json(rs.skill)_",""address.city"":"_$$$json(rs.%Get("address_city"))_",""address.street"":"_$$$json(rs.%Get("address_street"))_",""address.house"":"_$$$json(rs.%Get("address_house"))_",""address.flat"":"_$$$json(rs.%Get("address_flat"))_"}"
+]]></Implementation>
+</Method>
+
+<Method name="Add">
+<Description>
+Создаем новый объект</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s obj=##class(model.Developer).%New()
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Edit">
+<Description>
+Открываем и редактируем существующий</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), obj=##class(model.Developer).%OpenId(id,.sc)
+    if $$$ISERR( sc ) {
+        Q ..wResult( sc, id )	
+    }
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Set">
+<Description>
+Обновление свойств, сохранение изменений, вывод результата</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>obj:model.Developer</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
+        s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
+        Q ..wResult( sc )
+    } 
+    s obj.lastName=$$$get("lastName")
+    s obj.name=$$$get("name")
+    s obj.roles=$$$get("roles")
+    s obj.login=$$$get("login")
+    s obj.password=$$$get("password")
+    s obj.patronymic=$$$get("patronymic")
+    s obj.skill=$$$get("skill")
+    s obj.address.city=$$$get("address.city")
+    s obj.address.street=$$$get("address.street")
+    s obj.address.house=$$$get("address.house")
+    s obj.address.flat=$$$get("address.flat")
+    s id="", sc=obj.%Save() 
+    s:$$$ISOK(sc) id=obj.%Id()
+    Q ..wResult( sc, id ) 
+    
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Del">
+<Description>
+Удаление объекта</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), sc=##class(model.Developer).%DeleteId(id)
+    Q ..wResult( sc, id )
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="initSort">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
+    if $ListFind( $ListBuild("name","lastName"), sidx ) {
+        s:sidx="lastName" sidx="""lastName""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }
+
+    if $ListFind( $ListBuild("name","name"), sidx ) {
+        s:sidx="name" sidx="""name""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+    if $ListFind( $ListBuild("name","roles"), sidx ) {
+        s:sidx="roles" sidx="""roles""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+    if $ListFind( $ListBuild("name","patronymic"), sidx ) {
+        s:sidx="patronymic" sidx="""patronymic""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }
+    
+    if $ListFind( $ListBuild("name","skill"), sidx ) {
+        s:sidx="skill" sidx="""skill""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+
+    if $ListFind( $ListBuild("name","address"), sidx ) {
+        s:sidx="address" sidx="""address""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+     if $ListFind( $ListBuild("name","login"), sidx ) {
+        s:sidx="login" sidx="""login""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } 
+    if $ListFind( $ListBuild("name","password"), sidx ) {
+        s:sidx="password" sidx="""password""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } 
+    q order
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.Authorization">
+<Super>%CSP.Page</Super>
+<TimeChanged>63007,38331.828528</TimeChanged>
+<TimeCreated>62987,41878.85654</TimeCreated>
+
+<Method name="CheckUser">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>login:%String,password:%String</FormalSpec>
+<ReturnType>%Integer</ReturnType>
+<Implementation><![CDATA[
+	if (login'="")
+		{
+		set userid=""
+		&sql(SELECT ID INTO :userid 
+			 FROM model.Developer
+		 	 WHERE login=:login)
+			if (userid'="")
+				{ 	
+				set man=##class(model.Developer).%OpenId(userid)
+				if (man.password'=password) 
+					 {
+					 set status=-1 
+					 } 
+				else 
+					 {
+						Set %session.Data("userID")=userid
+						Set %session.Data("username")=man.name_" "_man.lastName
+						Set %session.Data("role")=man.roles
+						set status=userid
+					 }
+				} 
+			else 
+				{ 
+				set status=-1
+				} 
+		if (status=-1){
+		set projid=""
+		&sql(SELECT ID INTO :projid 
+			 FROM model.Projects
+		 	 WHERE owner_login=:login)
+			if (projid'="")
+				{ 	
+				set man=##class(model.Projects).%OpenId(projid)
+				if (man.owner.password'=password) 
+					 {
+					 set status=-1 
+					 } 
+				else 
+					 {
+						Set %session.Data("userID")=projid
+						Set %session.Data("username")=man.owner.name_" "_man.owner.lastName
+						Set %session.Data("role")=man.owner.roles
+						set status=projid
+					 }
+				} 
+			else 
+				{ 
+				set status=-1
+				}
+			}
+		} 
+	else 
+		{
+		set status=-1
+		}
+	
+	quit status
+]]></Implementation>
+</Method>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	set result = ..CheckUser(%request.Get("login"),%request.Get("password"))
+	if (result'=-1){
+		
+		do $SYSTEM.Security.Audit("scc","Авторизация","Вход в систему"
+				,"Успешный вход в систему","Пользователь "_%request.Get("login")_" вошел в систему")
+				
+		Set i=$Increment(^VisitCount)
+    	Set ^VisitCount=i
+		Set %response.Redirect = "view.StartPageView.cls"
+    	Quit $$$OK
+	}
+	else{ 
+		Set %response.Redirect = "view.IndexView.cls"
+		do $SYSTEM.Security.Audit("scc","Авторизация","Запрет доступа"
+				,"Попытка входа по неверным данным"
+				,"В систему пытался войти пользователь с логином: "_%request.Get("login")
+				_" и паролем: "_%request.Get("password")_". В доступе отказано.")
+    	Quit $$$OK
+	}
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.BaseService">
+<Abstract>1</Abstract>
+<IncludeCode>csp</IncludeCode>
+<Super>%CSP.Page</Super>
+<TimeChanged>63007,48609.223876</TimeChanged>
+<TimeCreated>62977,41793.405871</TimeCreated>
+
+<Parameter name="DOMAIN">
+<Description>
+node для текстовых ресурсов</Description>
+<Default>model</Default>
+</Parameter>
+
+<Parameter name="PRIVATE">
+<Description>
+Can only be referenced from another CSP page</Description>
+<Default>1</Default>
+</Parameter>
+
+<Method name="OnPage">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+
+    #; см. csp.inc
+    set oper=$$$get("oper") ;определяем тип запроса
+    
+    #; если определена операция - переходим к ее выполнению 
+    if ( oper = "add" )  Quit ..Add()
+    Q:oper="edit" ..Edit()
+    Q:oper="del" ..Del()
+    
+    do ..List()
+    
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Add">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+</Method>
+
+<Method name="Edit">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+</Method>
+
+<Method name="initSort">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+</Method>
+
+<Method name="initSearch">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>where:%String,params:%String</FormalSpec>
+</Method>
+
+<Method name="getTableName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+</Method>
+
+<Method name="getEntity">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>rs:%ResultSet</FormalSpec>
+<ReturnType>%String</ReturnType>
+</Method>
+
+<Method name="Del">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+</Method>
+
+<Method name="List">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#; Во всех остальных случаях - режим просмотра данных
+    #;количеством строк в порции данных приводим к положительному целому числу
+    set rows=$$$get("rows")\1 ;целочисленное деление
+    if ( rows < 1 ) { 
+        set rows = 100  ;это значение рекомендуется вынести в параметры класса
+    } 
+    
+    #;Аналогично поступаем с порядковым номером порции данных
+    s page=$$$get("page")\1 s:page<1 page=1
+    
+    #;Если был включен режим поиска (в данном примере - фильтрации)
+    #;собирем часть sql выражения where и его параметры
+    s where="", params="", search=$CASE( $$$get("_search"), "true": 1, : 0 )
+    if ( search ) {
+        do ..initSearch(.where,.params)
+    }
+    
+
+    #; зная какие данные надо отображать
+    #; можем узнать сколько всего записей будет в результатах запроса
+    s countSQL=" SELECT Count(*) as records FROM "_..getTableName()
+    if ( search ) s countSQL=countSQL_" WHERE "_where
+    s records=0
+    
+    #dim RS as %SQL.StatementResult
+    s stmt=##class(%SQL.Statement).%New()
+    s sc=stmt.%Prepare(countSQL) if 'sc d ..ShowError(sc) Q $$$OK
+    s RS=stmt.%Execute(params...) 
+    if RS.%SQLCODE d ##class(%SYSTEM.SQL).SQLCODE(RS.%SQLCODE) Q $$$OK
+    s:RS.%Next() records=RS.records
+    kill RS
+    
+    #; всего целых порций данных
+    s total = records\rows ;целочисленное деление
+    , part=records#rows ;остаток 
+    s:part total=total+1 ;если есть остаток добавляем еще одну порцию
+    
+    #; зная количество порций, еще раз проверяем номер запрощенной порцию
+    s:page>total page=total ;
+    
+    #; рассчитываем граничные номера записей для выводимой порции
+    s end=page*rows, start=end-rows
+    
+    
+    #; выводить данные надо в определенном порядке
+    #; строим часть выражения sql order by
+    #; в последних версиях jqgrid есть множественная сортировка
+    #; сортировку добавляем только по разрешенным столбцам
+    s order=..initSort()
+    
+    #; строим выражение для вывода данных
+    #; оптимизируем проход по результату, отбирая только ID 
+    s sql=" SELECT * From "_..getTableName()
+    s:search sql=sql_" WHERE "_where
+    s:order'="" sql=sql_" ORDER BY "_order
+    
+    s sc=stmt.%Prepare(sql) if 'sc d ..ShowError(sc) Q $$$OK
+    s RS=stmt.%Execute(params...) 
+    if RS.%SQLCODE d ##class(%SYSTEM.SQL).SQLCODE(RS.%SQLCODE) Q $$$OK
+    
+    write "{" 	;выводим заголовочную часть ответа
+    , """records"": ", records ;всего записей подходящих по условиям	
+    , ", ""total"": ", total	 ;всего порций данных
+    , ", ""page"": ", page 		 ;номер текущей порции анных
+    , ", ""rows"": ["			 ;выводим массив записей	
+        
+    #;здесь нам понадобится макрос квотирования данных 
+    #;в соответствии со стандартом JSON - http://json.org
+    #;стандартное квотирование ..QuoteJS() не подходит 
+    #;из-за символа одинарной кавычки
+    #define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+    
+    #;выводим строки 
+    if (start=0) s start=start+1
+    s sc="" for { s sc=RS.%Next() Quit:sc=0
+        s rnum=RS.%ROWCOUNT
+        if (rnum < start) continue  ;пропускаем строки до порции
+        if (rnum > end) Quit   ;прекращаем выводить после порции
+                s str=..getEntity(RS)
+        if (str=-1){
+	   		 s records=records-1
+	   		 if (rnum=start){
+		   		 s start=start+1
+		   		 }
+	    	 s end=end+1
+	    	 continue 
+	    } else{
+        #;строки после первой из порции, отделяем запятыми
+        #;rnum>1 - нужен для первой порции, когда start=0
+        if ( rnum > start ) && ( rnum > 1 ) { 
+            w "," 
+        }
+        
+			w str   
+		}
+    }
+    
+    w "]}"
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="wResult">
+<Description>
+Вывод результата</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>sc:%String="",id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s result="false", msg="", id=$g(id)
+    if $$$ISOK( $g(sc) ) {
+        s result="true"
+    } else {
+        s msg=##class(%SYSTEM.Status).GetOneErrorText(sc)
+    }
+    w "[",result,",",..QuoteJS(msg),",",..QuoteJS(id),"]"	
+    Q $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.DataTest">
+<TimeChanged>63006,42085.222055</TimeChanged>
+<TimeCreated>62968,37021.343604</TimeCreated>
+
+<Method name="CityName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s city=$lb("Минск","Витебск","Могилев","Гомель","Брест","Гродно","Орша","Сенно","Рогачев","Борисов","Кричев","Несвиж","Климовичи","Полоцк","Глубокое","Ушачи","Логойск","Браслав","Пинск","Столин","Слуцк")
+	q $lg(city,$r(21)+1)
+]]></Implementation>
+</Method>
+
+<Method name="StreetName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s street=$lb("ул. Чкалова","пр-т Фрунзе","ул. Кирова","пр-т Людникова","пр-т Победы","пр-т Московский","ул. Правды","пр-т Строителей","пер. Доватора","пер. Молодежный","ул. Ленина")
+	q $lg(street,$r(11)+1)
+]]></Implementation>
+</Method>
+
+<Method name="Skill">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s skill=$lb("Java-программист","Дизайнер","Тестировщик","C# программист","Бизнес-аналитик","Архитектор БД","Web-дизайнер")
+	q $lg(skill,$r(7)+1)
+]]></Implementation>
+</Method>
+
+<Method name="login">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s login=$lb("user","me","emp","utilizer","qwert","owl","fox","thor")
+	q $lg(login,$r(8)+1)_($r(2013)+1)
+]]></Implementation>
+</Method>
+
+<Method name="password">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s passwd=$lb("12345")
+	q $lg(passwd,$r(1)+1)
+]]></Implementation>
+</Method>
+
+<Method name="HouseName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s house=$lb("А","Б","В","Г","Д")
+	q $lg(house,$r(5)+1)_($r(21)+1)
+]]></Implementation>
+</Method>
+
+<Method name="FlatName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q $r(21)+1
+]]></Implementation>
+</Method>
+
+<Method name="OfficeName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s officeName=$lb("Сказка","Офис 1","Офис 2","Офис 3","Офис 4","Офис 5","Радуга","Фруктовый","Фрукты")
+	q $lg(officeName,$r(9)+1)
+]]></Implementation>
+</Method>
+
+<Method name="SaleSize">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Float</ReturnType>
+<Implementation><![CDATA[	q $r(1000000) // размер продажи в белорусских рублях
+]]></Implementation>
+</Method>
+
+<Method name="MenLastName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s mensLastNames=$lb("Симаш","Борисевич","Василевский","Дятковский","Боровков","Гренков","Москалев","Киселев","Ковалев","Кибисов","Ропаков","Станкевич","Похомович","Павлыго","Малиновский","Рудьков","Горень","Гаранский","Толстых","Ландарский")
+	q $lg(mensLastNames,$r(20)+1)
+]]></Implementation>
+</Method>
+
+<Method name="MenName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s mensNames=$lb("Дмитрий","Максим","Роман","Илья","Игорь","Павел","Кирилл","Евгений","Николай","Александр","Антон","Алексей","Сергей","Иван","Петр","Ян","Семен","Степан","Исак","Федор")
+	q $lg(mensNames,$r(20)+1)
+]]></Implementation>
+</Method>
+
+<Method name="MenPatronymic">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s mensPatronymic=$lb("Викторович","Сергеевич","Олегович","Николаевич","Игорович","Павлович","Евгеньевич","Александрович","Алексеевич","Антонович","Иванович","Петрович","Максимович","Дмитриевич","Романович","Андреевич","Семенович","Степанович","Федотович","Никитович")
+	q $lg(mensPatronymic,$r(20)+1)
+]]></Implementation>
+</Method>
+
+<Method name="FemaleLastName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s femalesLastNames=$lb("Симаш","Борисевич","Василевская","Дятковская","Боровкова","Гренкова","Москалева","Киселева","Ковалева","Кибисова","Ропакова","Станкевич","Похомович","Павлыго","Малиновская","Рудькова","Горень","Гаранская","Толстых","Ландарская")
+	q $lg(femalesLastNames,$r(20)+1)
+]]></Implementation>
+</Method>
+
+<Method name="FemaleName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s femalesNames=$lb("Светлана","Татьяна","Ирина","Любовь","Екатерина","Инна","Надежда","Ксения","Снежана","Мария","Виктория","Алеся","Лариса","Людмила","Афродита","Милана","Елизавета","Клавдия","Анжелика","Кристина")
+	q $lg(femalesNames,$r(20)+1)
+]]></Implementation>
+</Method>
+
+<Method name="FemalePatronymic">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s femalesPatronymic=$lb("Викторовна","Сергеевна","Олеговна","Николаевна","Игоровна","Павловна","Евгеньевна","Александровна","Алексеевна","Антоновна","Ивановна","Петровна","Максимовна","Дмитриевна","Романовна","Андреевна","Семеновна","Степановна","Федотовна","Никитовна")
+	q $lg(femalesPatronymic,$r(20)+1)
+]]></Implementation>
+</Method>
+
+<Method name="PostName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s post=$lb("Администратор","Руководитель компании","Менеджер","Топ-мнеджер")
+	q $lg(post,$r(4)+1)
+]]></Implementation>
+</Method>
+
+<Method name="GetDate">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Date</ReturnType>
+<Implementation><![CDATA[
+	s date = ##class(%Date).DisplayToLogical("01/01/2013")
+	s ldate = ##class(%PopulateUtils).Date(date)
+	q ##class(%Date).LogicalToDisplay(ldate)
+]]></Implementation>
+</Method>
+
+<Method name="DeveloperRoles">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s post=$lb("Разработчик","Мастер","Администратор")
+	q $lg(post,$r(3)+1)
+]]></Implementation>
+</Method>
+
+<Method name="OwnerRoles">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q "Владелец"
+]]></Implementation>
+</Method>
+
+<Method name="StartDate">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s date = ##class(%Date).DisplayToLogical("01/01/2013")
+	s ldate = ##class(%PopulateUtils).Date(date)
+	q ##class(%Date).LogicalToDisplay(ldate)
+]]></Implementation>
+</Method>
+
+<Method name="ExpectedDate">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>d:%Date</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	
+	s dateint=+d
+	s ldate = (3+dateint)_",00000"
+	q ##class(%Date).LogicalToDisplay(ldate)
+]]></Implementation>
+</Method>
+
+<Method name="RealDate">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>d:%Date</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s rand=$r(7)+1
+	s dateint=+d
+	s ldate = (rand+dateint)_",00000"
+	q ##class(%Date).LogicalToDisplay(ldate)
+]]></Implementation>
+</Method>
+
+<Method name="Task">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>Name:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=$lb("CRUD","UI","database","documenation","diagramm","test","production version")
+	q $lg(text,$r(4)+1)_" for "_Name
+]]></Implementation>
+</Method>
+
+<Method name="Description">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>Name:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=$lb("Create","Repair","Add","Make")
+	q $lg(text,$r(4)+1)_" "_Name
+]]></Implementation>
+</Method>
+
+<Method name="Phone">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q ##class(%PopulateUtils).USPhone()
+]]></Implementation>
+</Method>
+
+<Method name="Email">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>login:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q login_"@gmial.com"
+]]></Implementation>
+</Method>
+
+<Method name="Company">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s com=$lb("Epam","Edmunds","Facebook","RedHat","Gmail","Google.inc","Yandex","Ferrari","Youtube","ZTE","HTC","Nokia","Samsung")
+	q $lg(com,$r(13)+1)
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.DeveloperService">
+<IncludeCode>csp</IncludeCode>
+<Super>BaseService</Super>
+<TimeChanged>63006,41325.647633</TimeChanged>
+<TimeCreated>63004,64068.878892</TimeCreated>
+
+<Method name="initSearch">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>where:%String,params:%String</FormalSpec>
+<Implementation><![CDATA[
+		s lastName=$$$get( "lastName" ) if ( lastName'="" ) {
+            s where=where_$ListBuild( "lastName Like ?" )
+            , params( $increment(params) )="%"_lastName_"%"
+        }
+
+		s name=$$$get( "name" ) if ( name'="" ) {
+            s where=where_$ListBuild( "name Like ?" )
+            , params( $increment(params) )="%"_name_"%"
+        }
+        
+		s patronymic=$$$get( "patronymic" ) if ( patronymic'="" ) {
+            s where=where_$ListBuild( "patronymic Like ?" )
+            , params( $increment(params) )="%"_patronymic_"%"
+        }
+
+		s skill=$$$get( "skill" ) if ( skill'="" ) {
+            s where=where_$ListBuild( "skill Like ?" )
+            , params( $increment(params) )="%"_skill_"%"
+        }
+        s addressC=$$$get( "address.city" ) if ( addressC'="" ) {
+            s where=where_$ListBuild( "address_city Like ?" )
+            , params( $increment(params) )="%"_addressC_"%"
+        }
+ 		s addressS=$$$get( "address.street" ) if ( addressS'="" ) {
+            s where=where_$ListBuild( "address_street Like ?" )
+            , params( $increment(params) )="%"_addressS_"%"
+        }
+        s addressH=$$$get( "address.house" ) if ( addressH'="" ) {
+            s where=where_$ListBuild( "address_house Like ?" )
+            , params( $increment(params) )="%"_addressH_"%"
+        }
+        s addressF=$$$get( "address.flat" ) if ( addressF'="" ) {
+            s where=where_$ListBuild( "address_flat Like ?" )
+            , params( $increment(params) )="%"_addressF_"%"
+        }
+        s phone=$$$get( "phone" ) if ( phone'="" ) {
+            s where=where_$ListBuild( "phone Like ?" )
+            , params( $increment(params) )="%"_phone_"%"
+        }
+        s email=$$$get( "email" ) if ( email'="" ) {
+            s where=where_$ListBuild( "email Like ?" )
+            , params( $increment(params) )="%"_email_"%"
+        }
+        s where=$ListToString(where," AND ")
+]]></Implementation>
+</Method>
+
+<Method name="getTableName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q "model.Developer"
+]]></Implementation>
+</Method>
+
+<Method name="getEntity">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>rs:%ResultSet</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+	q "{""id"":"_rs.ID_",""lastName"":"_$$$json(rs.lastName)_",""name"":"_$$$json(rs.name)_",""patronymic"":"_$$$json(rs.patronymic)_",""skill"":"_$$$json(rs.skill)_",""address.city"":"_$$$json(rs.%Get("address_city"))_",""address.street"":"_$$$json(rs.%Get("address_street"))_",""address.house"":"_$$$json(rs.%Get("address_house"))_",""address.flat"":"_$$$json(rs.%Get("address_flat"))_",""phone"":"_$$$json(rs.%Get("phone"))_",""email"":"_$$$json(rs.%Get("email"))_"}"
+]]></Implementation>
+</Method>
+
+<Method name="Add">
+<Description>
+Создаем новый объект</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s obj=##class(model.Developer).%New()
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Edit">
+<Description>
+Открываем и редактируем существующий</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), obj=##class(model.Developer).%OpenId(id,.sc)
+    if $$$ISERR( sc ) {
+        Q ..wResult( sc, id )	
+    }
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Set">
+<Description>
+Обновление свойств, сохранение изменений, вывод результата</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>obj:model.Developer</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
+        s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
+        Q ..wResult( sc )
+    } 
+    s obj.lastName=$$$get("lastName")
+    s obj.name=$$$get("name")
+    s obj.patronymic=$$$get("patronymic")
+    s obj.skill=$$$get("skill")
+    s obj.address.city=$$$get("address.city")
+    s obj.address.street=$$$get("address.street")
+    s obj.address.house=$$$get("address.house")
+    s obj.address.flat=$$$get("address.flat")
+    s obj.phone=$$$get("phone")
+    s obj.email=$$$get("email")
+    s id="", sc=obj.%Save() 
+    s:$$$ISOK(sc) id=obj.%Id()
+    Q ..wResult( sc, id ) 
+    
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Del">
+<Description>
+Удаление объекта</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), sc=##class(model.Developer).%DeleteId(id)
+    Q ..wResult( sc, id )
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="initSort">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
+    if $ListFind( $ListBuild("name","lastName"), sidx ) {
+        s:sidx="lastName" sidx="""lastName""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }
+
+    if $ListFind( $ListBuild("name","name"), sidx ) {
+        s:sidx="name" sidx="""name""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+    
+    if $ListFind( $ListBuild("name","patronymic"), sidx ) {
+        s:sidx="patronymic" sidx="""patronymic""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }
+    
+    if $ListFind( $ListBuild("name","skill"), sidx ) {
+        s:sidx="skill" sidx="""skill""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+
+    if $ListFind( $ListBuild("name","address"), sidx ) {
+        s:sidx="address" sidx="""address""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+    if $ListFind( $ListBuild("name","phone"), sidx ) {
+        s:sidx="phone" sidx="""phone""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }  
+    if $ListFind( $ListBuild("name","email"), sidx ) {
+        s:sidx="email" sidx="""email""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }  
+    q order
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.ProjectService">
+<IncludeCode>csp</IncludeCode>
+<Super>BaseService</Super>
+<TimeChanged>63007,47537.462144</TimeChanged>
+<TimeCreated>63005,60622.838413</TimeCreated>
+
+<Query name="all">
+<Type>%SQLQuery</Type>
+<SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Query name="byID">
+<Type>%SQLQuery</Type>
+<FormalSpec>performerid:%Integer</FormalSpec>
+<SqlQuery>SELECT ID,name from model.Projects where ID in (select project from model.Task where performer=:performerid)</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Query name="byOID">
+<Type>%SQLQuery</Type>
+<FormalSpec>ownerid:%Integer</FormalSpec>
+<SqlQuery>SELECT ID,name from model.Projects where ID = :ownerid</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Method name="onProject">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>pid:%Integer,uid:%Integer</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	s text=-1
+	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:byID")
+	do rs.Execute(uid)
+	while (rs.Next() '= 0) {
+				if (rs.ID=pid){
+   					s text=$$$OK
+				}
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+
+<Method name="selectOwnerProjects">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=""
+	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:byOID")
+	do rs.Execute(%session.Data("userID"))
+	while (rs.Next() '= 0) {
+		s text=text_"<option value="
+		s text=text_rs.Get("ID")
+		s text=text_"> "_rs.Get("name")
+		s text=text_"</option>"
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+
+<Method name="selectDevProjects">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=""
+	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:byID")
+	do rs.Execute(%session.Data("userID"))
+	while (rs.Next() '= 0) {
+		s text=text_"<option value="
+		s text=text_rs.Get("ID")
+		s text=text_"> "_rs.Get("name")
+		s text=text_"</option>"
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+
+<Method name="projects">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=""
+	set rs = ##class(%Library.ResultSet).%New("service.ProjectService:all")
+	do rs.Execute()
+	while (rs.Next() '= 0) {
+		s text=text_"<option value="
+		s text=text_rs.Get("ID")
+		s text=text_"> "_rs.Get("name")
+		s text=text_"</option>"
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+
+<Method name="initSearch">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>where:%String,params:%String</FormalSpec>
+<Implementation><![CDATA[
+	
+		s pname=$$$get( "name" ) if ( pname'="" ) {
+            s where=where_$ListBuild( "name Like ?" )
+            , params( $increment(params) )="%"_pname_"%"
+        }
+        s stdate=$$$get( "startDate" ) if ( stdate'="" ) {
+            s where=where_$ListBuild( "startDate Like ?" )
+            , params( $increment(params) )="%"_##class(%Date).DisplayToLogical(stdate)_"%"
+        }
+        s date=$$$get( "endDate" ) if ( date'="" ) {
+            s where=where_$ListBuild( "endDate Like ?" )
+            , params( $increment(params) )="%"_##class(%Date).DisplayToLogical(date)_"%"
+        }
+		s lastName=$$$get( "owner.lastName" ) if ( lastName'="" ) {
+            s where=where_$ListBuild( "owner_lastName Like ?" )
+            , params( $increment(params) )="%"_lastName_"%"
+        }
+
+		s name=$$$get( "owner.name" ) if ( name'="" ) {
+            s where=where_$ListBuild( "owner_name Like ?" )
+            , params( $increment(params) )="%"_name_"%"
+        }
+        
+		s patronymic=$$$get( "owner.patronymic" ) if ( patronymic'="" ) {
+            s where=where_$ListBuild( "owner_patronymic Like ?" )
+            , params( $increment(params) )="%"_patronymic_"%"
+        }
+        s company=$$$get( "owner.company" ) if ( company'="" ) {
+            s where=where_$ListBuild( "owner_company Like ?" )
+            , params( $increment(params) )="%"_company_"%"
+        }
+		s post=$$$get( "owner.post" ) if ( post'="" ) {
+            s where=where_$ListBuild( "owner_post Like ?" )
+            , params( $increment(params) )="%"_post_"%"
+        }
+         s addressC=$$$get( "owner.address.city" ) if ( addressC'="" ) {
+            s where=where_$ListBuild( "owner_address_city Like ?" )
+            , params( $increment(params) )="%"_addressC_"%"
+        }
+ 		s addressS=$$$get( "owner.address.street" ) if ( addressS'="" ) {
+            s where=where_$ListBuild( "owner_address_street Like ?" )
+            , params( $increment(params) )="%"_addressS_"%"
+        }
+        s addressH=$$$get( "owner.address.house" ) if ( addressH'="" ) {
+            s where=where_$ListBuild( "owner_address_house Like ?" )
+            , params( $increment(params) )="%"_addressH_"%"
+        }
+        s addressF=$$$get( "owner.address.flat" ) if ( addressF'="" ) {
+            s where=where_$ListBuild( "owner_address_flat Like ?" )
+            , params( $increment(params) )="%"_addressF_"%"
+        }
+        s phone=$$$get( "owner.phone" ) if ( phone'="" ) {
+            s where=where_$ListBuild( "owner_phone Like ?" )
+            , params( $increment(params) )="%"_phone_"%"
+        }
+        s email=$$$get( "owner.email" ) if ( email'="" ) {
+            s where=where_$ListBuild( "owner_email Like ?" )
+            , params( $increment(params) )="%"_email_"%"
+        }
+        s login=$$$get( "owner.login" ) if ( login'="" ) {
+            s where=where_$ListBuild( "owner_login Like ?" )
+            , params( $increment(params) )="%"_login_"%"
+        }
+        s where=$ListToString(where," AND ")
+]]></Implementation>
+</Method>
+
+<Method name="getTableName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q "model.Projects"
+]]></Implementation>
+</Method>
+
+<Method name="getEntity">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>rs:%ResultSet</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+     
+	s role=%session.Data("role")
+	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+	s startDate=##class(%Date).LogicalToDisplay(rs.%Get("startDate"))
+	s endDate=##class(%Date).LogicalToDisplay(rs.%Get("endDate"))
+	s res="{""id"":"_rs.ID_",""name"":"_$$$json(rs.name)_",""startDate"":"_$$$json(startDate)_",""endDate"":"_$$$json(endDate)_",""owner.lastName"":"_$$$json(rs.%Get("owner_lastName"))_",""owner.name"":"_$$$json(rs.%Get("owner_name"))_",""owner.patronymic"":"_$$$json(rs.%Get("owner_patronymic"))_",""owner.login"":"_$$$json(rs.%Get("owner_login"))_",""owner.password"":"_$$$json("*****")_",""owner.company"":"_$$$json(rs.%Get("owner_company"))_",""owner.post"":"_$$$json(rs.%Get("owner_post"))_",""owner.address.city"":"_$$$json(rs.%Get("owner_address_city"))_",""owner.address.street"":"_$$$json(rs.%Get("owner_address_street"))_",""owner.address.house"":"_$$$json(rs.%Get("owner_address_house"))_",""owner.address.flat"":"_$$$json(rs.%Get("owner_address_flat"))_",""owner.phone"":"_$$$json(rs.%Get("owner_phone"))_",""owner.email"":"_$$$json(rs.%Get("owner_email"))_"}"
+	
+	if (role="Администратор"){
+		q res
+		}
+	if (role="Владелец"){
+		if (rs.ID=%session.Data("userID")){
+		q res
+		} else{
+		q -1	
+		}
+		}
+	s pid=rs.ID
+	
+	if (role="Мастер"){
+		if (..onProject(pid,%session.Data("userID"))=1){
+		q res
+		}else {
+			q -1
+			}
+		} 
+	if (role="Разработчик"){
+		if (..onProject(pid,%session.Data("userID"))=1){
+		q res
+		}else {
+			q -1
+			}
+		}
+	q -1
+]]></Implementation>
+</Method>
+
+<Method name="Add">
+<Description>
+Создаем новый объект</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s obj=##class(model.Projects).%New()
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Edit">
+<Description>
+Открываем и редактируем существующий</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), obj=##class(model.Projects).%OpenId(id,.sc)
+    if $$$ISERR( sc ) {
+        Q ..wResult( sc, id )	
+    }
+    Q ..Set(.obj)
+]]></Implementation>
+</Method>
+
+<Method name="Set">
+<Description>
+Обновление свойств, сохранение изменений, вывод результата</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>obj:model.Projects</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
+        s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
+        Q ..wResult( sc )
+    } 
+    s obj.name=$$$get("name")
+    s obj.owner=##class(model.Owner).Populate(1)
+    s obj.owner.lastName=$$$get("owner.lastName")
+    s obj.owner.name=$$$get("owner.name")
+    s obj.owner.patronymic=$$$get("owner.patronymic")
+    s obj.owner.post=$$$get("post")
+    s obj.owner.address.city=$$$get("owner.address.city")
+    s obj.owner.address.street=$$$get("owner.address.street")
+    s obj.owner.address.house=$$$get("owner.address.house")
+    s obj.owner.address.flat=$$$get("owner.address.flat")
+    s obj.owner.phone=$$$get("owner.phone")
+    s obj.owner.email=$$$get("owner.email")
+    s obj.owner.company=$$$get("owner.company")
+    s obj.owner.login=$$$get("owner.login")
+    s obj.owner.password=$$$get("owner.password")
+    s obj.owner.role="Владелец"
+    s id="", sc=obj.%Save() 
+    s:$$$ISOK(sc) id=obj.%Id()
+    Q ..wResult( sc, id ) 
+    
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Del">
+<Description>
+Удаление объекта</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s id=$$$get("id"), sc=##class(model.Projects).%DeleteId(id)
+    Q ..wResult( sc, id )
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="initSort">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+   s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
+   if $ListFind( $ListBuild("name","name"), sidx ) {
+        s:sidx="name" sidx="""name""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+    if $ListFind( $ListBuild("name","startDate"), sidx ) {
+        s:sidx="startDate" sidx="""startDate""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } if $ListFind( $ListBuild("name","endDate"), sidx ) {
+        s:sidx="endDate" sidx="""endDate""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }
+    if $ListFind( $ListBuild("name","owner"), sidx ) {
+        s:sidx="owner" sidx="""owner""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }  
+    q order
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="service.TaskService">
+<IncludeCode>csp</IncludeCode>
+<Super>BaseService</Super>
+<TimeChanged>63008,41941.165719</TimeChanged>
+<TimeCreated>62977,46056.568602</TimeCreated>
+
+<Query name="projs">
+<Type>%SQLQuery</Type>
+<SqlQuery>SELECT ID,name from model.Projects</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Query name="ts">
+<Type>%SQLQuery</Type>
+<SqlQuery>SELECT ID,lastName,name from model.Developer</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Query name="ownerTasks">
+<Type>%SQLQuery</Type>
+<FormalSpec>oid:%Integer</FormalSpec>
+<SqlQuery>SELECT ID from model.Task where project=:oid</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Query name="devTasks">
+<Type>%SQLQuery</Type>
+<FormalSpec>did:%Integer</FormalSpec>
+<SqlQuery>SELECT ID from model.Task where performer=:did</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Query name="masterTasks">
+<Type>%SQLQuery</Type>
+<FormalSpec>mid:%Integer</FormalSpec>
+<SqlQuery>SELECT ID from model.Task where project in 
+	(Select ID from model.Projects where ID in 
+		(Select project from model.Task where performer=:mid
+		)
+	)</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Method name="taskOwnCheck">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%Integer</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	s role=%session.Data("role")
+	s text=-1
+	if (role="Администратор"){
+		q $$$OK
+		}
+	if (role="Владелец"){
+		set rs = ##class(%Library.ResultSet).%New("service.TaskService:ownerTasks")
+		do rs.Execute(%session.Data("userID"))
+			while (rs.Next() '= 0) {
+				if (rs.ID=id) s text=$$$OK
+	      	}
+			do rs.Close()	; закрыть запрос
+		}
+	if (role="Мастер"){
+		set rs = ##class(%Library.ResultSet).%New("service.TaskService:masterTasks")
+		do rs.Execute(%session.Data("userID"))
+			while (rs.Next() '= 0) {
+				if (rs.ID=id) s text=$$$OK
+	      	}
+			do rs.Close()	; закрыть запрос
+		} 
+	if (role="Разработчик"){
+		set rs = ##class(%Library.ResultSet).%New("service.TaskService:devTasks")
+		do rs.Execute(%session.Data("userID"))
+			while (rs.Next() '= 0) {
+				if (rs.ID=id) s text=$$$OK
+	      	}
+			do rs.Close()	; закрыть запрос
+		}
+	q text
+]]></Implementation>
+</Method>
+
+<Method name="projects">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=""
+	set rs = ##class(%Library.ResultSet).%New("service.TaskService:projs")
+	do rs.Execute()
+	while (rs.Next() '= 0) {
+		s text=text_rs.Get("ID")
+		s text=text_":"_rs.Get("name")
+		s text=text_";"
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+
+<Method name="tasks">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s text=""
+	set rs = ##class(%Library.ResultSet).%New("service.TaskService:ts")
+	do rs.Execute()
+	
+	while (rs.Next() '= 0) {
+		s text=text_rs.Get("ID")
+		s text=text_":"_rs.Get("lastName")_" "_rs.Get("name")
+		s text=text_";"
+	      }
+	do rs.Close()	; закрыть запрос
+    q text
+]]></Implementation>
+</Method>
+
+<Method name="initSearch">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>where:%String,params:%String</FormalSpec>
+<Implementation><![CDATA[
+		s name=$$$get( "name" ) if ( name'="" ) {
+            s where=where_$ListBuild( "name Like ?" )
+            s params( $increment(params) )="%"_name_"%"
+        }
+        s description=$$$get( "description" ) if ( description'="" ) {
+            s where=where_$ListBuild( "description Like ?" )
+            s params( $increment(params) )="%"_description_"%"
+        }
+        
+        s performer=$$$get( "performer" ) if ( performer'="" ) {
+            s where=where_$ListBuild( "performer in (SELECT ID from model.Developer where lastName Like ?)" )
+            , params( $increment(params) )="%"_performer_"%"
+        }
+        
+        s project=$$$get( "project" ) if ( project'="" ) {
+            s where=where_$ListBuild( "project in (SELECT ID from model.Projects where name Like ?)" )
+            , params( $increment(params) )="%"_project_"%"
+        }
+        s stdate=$$$get( "startDate" ) if ( stdate'="" ) {
+            s where=where_$ListBuild( "startDate Like ?" )
+            , params( $increment(params) )="%"_##class(%Date).DisplayToLogical(stdate)_"%"
+        }
+        s exdate=$$$get( "expectedEndDate" ) if ( exdate'="" ) {
+            s where=where_$ListBuild( "expectedEndDate Like ?" )
+            , params( $increment(params) )="%"_##class(%Date).DisplayToLogical(exdate)_"%"
+        }
+        s date=$$$get( "endDate" ) if ( date'="" ) {
+            s where=where_$ListBuild( "endDate Like ?" )
+            , params( $increment(params) )="%"_##class(%Date).DisplayToLogical(date)_"%"
+        }
+        s where=$ListToString(where," AND ")
+]]></Implementation>
+</Method>
+
+<Method name="getTableName">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	q "model.Task"
+]]></Implementation>
+</Method>
+
+<Method name="getEntity">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>rs:%ResultSet</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	#define json(%str) """"_$replace($zcvt(%str,"O","JS"),"\'","'")_""""
+	s startDate=##class(%Date).LogicalToDisplay(rs.%Get("startDate"))
+	s expectedEndDate=##class(%Date).LogicalToDisplay(rs.%Get("expectedEndDate"))
+	s endDate=##class(%Date).LogicalToDisplay(rs.%Get("endDate"))
+	if (..taskOwnCheck(rs.ID)=1){
+		q "{""id"":"_rs.childsub_",""name"":"_$$$json(rs.%Get("name"))_",""description"":"_$$$json(rs.%Get("description"))_",""project"":"_$$$json(##class(model.Projects).%OpenId(rs.%Get("project")).name)_",""performer"":"_$$$json(##class(model.Developer).%OpenId(rs.%Get("performer")).lastName_" "_##class(model.Developer).%OpenId(rs.%Get("performer")).name)_",""startDate"":"_$$$json(startDate)_",""expectedEndDate"":"_$$$json(expectedEndDate)_",""endDate"":"_$$$json(endDate)_"}"
+		}
+		else {q -1}
+]]></Implementation>
+</Method>
+
+<Method name="Add">
+<Description>
+Создаем новый объект</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s obj=##class(model.Task).Populate(1)
+    Q ..Set(.obj,"add")
+]]></Implementation>
+</Method>
+
+<Method name="Edit">
+<Description>
+Открываем и редактируем существующий</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s pid=""
+	s name=$$$get("id")
+ 
+	&sql(
+		Select ID into :pid from model.Task where childsub=:name
+		)
+    s id=pid, obj=##class(model.Task).%OpenId(id,.sc)
+   	 
+    if $$$ISERR( sc ) {
+         s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
+        Q ..wResult( sc)	
+    }
+    Q ..Set(.obj,"edit")
+]]></Implementation>
+</Method>
+
+<Method name="Set">
+<Description>
+Обновление свойств, сохранение изменений, вывод результата</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>obj:model.Task,param:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+    if ( $g(obj) = "" ) || ( '$IsObject(obj) ) {
+        s sc=$$$ERROR( $$$GeneralError, $$$Text("Не удалось открыть объект") )
+        Q ..wResult( sc )
+    }
+    s role=%session.Data("role")
+    set v1 = (param="edit")
+    s v2=(role="Администратор")
+    s v3=(role="Владелец")
+    s v4=(role="Мастер")
+    if ((v1+v2+v3)>1){
+	s obj.name=$$$get("name")
+    s obj.description=$$$get("description")
+    s obj.project=##class(model.Projects).%OpenId($$$get("project"))
+    s obj.startDate=##class(%Date).DisplayToLogical($$$get("startDate"))
+    s obj.expectedEndDate=##class(%Date).DisplayToLogical($$$get("expectedEndDate"))
+    }
+    if ((v1+v2+v4)>1){
+	     s obj.performer=##class(model.Developer).%OpenId($$$get("performer"))
+	    }
+    if ($$$get("endDate")'=""){
+    s obj.endDate=##class(%Date).DisplayToLogical($$$get("endDate"))
+    }else{
+	    }
+    s id="", sc=obj.%Save() 
+    s:$$$ISOK(sc) id=obj.%Id()
+    if (param="add"){
+    do ##class(model.Projects).%OpenId($$$get("project")).Ntasks.Insert(obj)
+    }
+    Q ..wResult( sc, id ) 
+    
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Del">
+<Description>
+Удаление объекта</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	s pid=""
+	s name=$$$get("id")
+ 
+	&sql(
+		Select ID into :pid from model.Task where childsub=:name
+		)
+    s id=pid, sc=##class(model.Task).%DeleteId(id)
+    Q ..wResult( sc, id )
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="initSort">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	s order="",sidx=$$$get( "sidx" ), sord=$$$get( "sord" )
+    if $ListFind( $ListBuild("name","name"), sidx ) {
+        s:sidx="name" sidx="""name""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+
+    if $ListFind( $ListBuild("name","description"), sidx ) {
+        s:sidx="description" sidx="""description""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    }   
+   
+   if $ListFind( $ListBuild("name","performer"), sidx ) {
+        s:sidx="performer" sidx="""performer""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } 
+    if $ListFind( $ListBuild("name","project"), sidx ) {
+        s:sidx="project" sidx="""project""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } 
+    if $ListFind( $ListBuild("name","startDate"), sidx ) {
+        s:sidx="startDate" sidx="""startDate""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } 
+    if $ListFind( $ListBuild("name","expectedEndDate"), sidx ) {
+        s:sidx="expectedEndDate" sidx="""expectedEndDate""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } 
+    if $ListFind( $ListBuild("name","endDate"), sidx ) {
+        s:sidx="endDate" sidx="""endDate""" ;
+        s order=sidx _ " "_$CASE( sord, "desc": "desc", : "asc" ) 	
+    } 
+    q order
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.BaseView">
+<Abstract>1</Abstract>
+<IncludeCode>csp</IncludeCode>
+<Super>%CSP.Page</Super>
+<TimeChanged>63007,46507.629962</TimeChanged>
+<TimeCreated>62977,42470.908312</TimeCreated>
+
+<Parameter name="DOMAIN">
+<Description><![CDATA[
+Базовый класс для отображения данных экземпляров классов пакета model
+с помощью <a href="http://www.trirand.com/blog/">jqgrid</a>
+node для локализации текстовых ресурсов]]></Description>
+<Default>model</Default>
+</Parameter>
+
+<Method name="writeCSS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+
+///#($r(16)+1)#
+	&html<
+     <link rel="stylesheet" type="text/css" href="css/bootstrap_colored.css" id="basicStyle"/>
+    <link href="css/bootstrap-form.css" rel="stylesheet"/>
+    <!-- Цветовая схема по умолчанию  -->
+    <link rel="stylesheet" type="text/css"  href="css/jquery-ui.css" />
+    <!-- стили для оформления таблицы -->
+    <link rel="stylesheet" type="text/css" href="css/ui.jqgrid.css" />
+   <style type="text/css">
+    body {
+	    font-size: 11px; 
+	    font-family: Georgia,Verdana,Arial,sans-serif;
+        padding-top: 60px;
+        padding-bottom: 40px;
+        align:center;
+    }
+
+    .sidebar-nav {
+        padding: 9px 0;
+    }
+    .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    }
+
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+        margin-bottom: 10px;
+    }
+
+    .form-signin input[type="text"],
+    .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+    }
+
+    .pg-normal {
+        font-size: 15px;
+        cursor: pointer;
+        background: #c9cbc7;
+        padding: 2px 4px 2px 4px;
+    }
+
+    .pg-selected {
+        color: #fff;
+        font-size: 15px;
+        background: #000000;
+        padding: 2px 4px 2px 4px;
+    }
+
+    </style>
+    >
+]]></Implementation>
+</Method>
+
+<Method name="writeHeader">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	&html<<!DOCTYPE html>
+<html lang="ru"><head>
+    <meta charset="ru"/>
+    <title>#($$$Text("Intersystems Cache + jqGrid"))#</title>
+    
+    <!-- то, что любит нас -->
+    <script src="js/jquery.min.js"></script>
+    <!-- интерфейсная библиотека (диалоги, кнопки, etc.) -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- локализованные текстовые ресурсы jgGrid-->
+    <script src="js/grid.locale-ru.js"></script>
+    <!-- Собственно сам табличный плагин -->
+    <script src="js/jquery.jqGrid.min.js"></script>
+    <!-- Переключатель цветовых схем -->
+    
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/bootstrap-affix.js"></script>
+
+    <script src="js/holder.js"></script>
+    <script src="js/prettify.js"></script>
+
+    <script src="js/application.js"></script>
+    <script src="js/validator.js"></script>
+    <script src="js/bootstrap-form.js"> </script>
+    <script src="js/jqBootstrapValidation.js"></script>
+>
+]]></Implementation>
+</Method>
+
+<Method name="writeMenu">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+
+	 &html<
+
+<div class="navbar navbar-inverse">
+ 
+<div class="navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="nav-collapse collapse" style="display:inline">
+          <ul class="nav">
+          <li  class="brand"><a href='#(..Link("view.StartPageView.cls"))#'>Scrum Control Center</a></li>
+          </ul>          
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+       >
+            if ($Data(%session.Data("userID"))){
+	            	 s role=%session.Data("role")
+	 s link1="view.DeveloperView.cls"
+	 s link1=$$$link(role,link1)
+	 s link2="view.TaskView.cls"
+	 s link2=$$$link(role,link2)
+	 s link3="view.ProjectsView.cls"
+	 s link3=$$$link(role,link3)
+	            &html<
+
+            <ul class="nav">
+              <li class="brand"><a href='#(link1)#'>Employee</a>
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+           				<span class="icon-bar"></span>
+          			</button>
+              </li>
+              <li class="brand"><a href='#(link2)#'>Tasks</a>
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+           				<span class="icon-bar"></span>
+          			</button>
+              </li>
+               <li class="brand"><a href='#(link3)#'>Projects</a>
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+           				<span class="icon-bar"></span>
+          			</button>
+              </li>
+            </ul>
+            </div><!--/.nav-collapse --> 
+             <div class="btn-group pull-right">
+        		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            	<i class="icon-user"></i> #(%session.Data("username"))#
+            	<span class="caret"></span>
+        		</a>
+        		<ul class="dropdown-menu">
+            	<li><a href='#(..Link("view.IndexView.cls"))#'><i class="icon-ban-circle"></i>Logout</a></li>
+        	</ul>
+    		</div>
+          >
+	            }else{
+		            &html<       
+       	</div><!--/.nav-collapse --> >
+		            }
+       &html<
+   		<h5>Сегодня: #($Zdate($Horolog,4))#</h5>
+       </div>
+      </div>
+    </div>
+    >
+]]></Implementation>
+</Method>
+
+<Method name="writeHTML">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	&html<
+    <!-- Элемент для грида c адресом источника данных -->
+    <table id="grid"></table>
+    <!--Элемент для панели управления гридом-->
+    <div id="bar"></div>
+    <!--Элемент для переключателя тем -->
+    <div id="theme"></div>
+    >
+]]></Implementation>
+</Method>
+
+<Method name="OnPage">
+<Description>
+Метод вывода содержимого страницы </Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	do ..writeHeader()
+	do ..writeCSS()
+	&html<</head><body>>
+ 	do ..writeMenu()
+ 	do ..writeHTML()
+    do ..writeJS()
+    
+ 	&html<</body></html>>
+    Quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+</Method>
+</Class>
+
+
+<Class name="view.IndexView">
+<IncludeCode>csp</IncludeCode>
+<Super>BaseView</Super>
+<TimeChanged>63007,35233.445262</TimeChanged>
+<TimeCreated>62987,18014.352801</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ($Data(%session.Data("userID"))) {
+		do $SYSTEM.Security.Audit("scc","Авторизация","Выход из системы"
+				,"Пользователь успешно вышел из системы"
+				,"Пользователь: "_%session.Get("username")
+				_" покинул систему.")
+		set %session.EndSession = 1
+		set %response.Redirect = "view.IndexView.cls"
+		}
+	
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeHTML">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	&html<
+		
+	<div ><h5>Сегодня: #($Zdate($Horolog,4))#</h5></div>
+
+	<div >
+ 	 Вы #(^VisitCount)#-й посетитель нашего сайта.<br>
+ 	 Время и дата компиляции: ##($zdt($h,4))##<br>
+ 	 Время и дата просмотра: #($zdt($h,4))#
+  	</div>
+	<div class="form-signin" >
+		<form name="Log"action='#(..Link("service.Authorization.cls"))#'>
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="input-block-level" required placeholder="Login" name=login>
+        <input type="password" class="input-block-level" required placeholder="Password" name=password>
+        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+		</form>
+    </div>
+	>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.StartPageView">
+<Super>BaseView</Super>
+<TimeChanged>63007,37942.406695</TimeChanged>
+<TimeCreated>63005,34288.633969</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeHTML">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	 s role=%session.Data("role")
+	 s link1="view.DeveloperView.cls"
+	 s link1=$$$link(role,link1)
+	 s link2="view.TaskView.cls"
+	 s link2=$$$link(role,link2)
+	 s link3="view.ProjectsView.cls"
+	 s link3=$$$link(role,link3)
+	 &html<     
+         <div class="bs-docs-example">
+            <div class="hero-unit">
+              <h1 style="text-align:center">Приветствуем вас в системе "Scrum Control Center"!</h1>
+              <p></p>
+              <p>Система представляет собой информационную базу 
+              для компаний, ведущих разработку проектов по 
+              методологии Scrum.</p>
+              <p>Для начала работы воспользуйтесь ссылками:</p>
+              <div class="nav-pills nav-stacked">
+         <ul class="btn-group-horizontal">
+           <li class="btn" style="text-align: left"><i class="icon-home"></i><a href="view.StartPageView.cls">Scrum Control Center</a></li>
+           <li class="btn" style="text-align: left"><i class="icon-hand-right"></i><a href=#(link1)#>Employee</a></li>
+           <li class="btn" style="text-align: left"><i class="icon-hand-right"></i><a href=#(link2)#>Tasks</a></li>
+           <li class="btn" style="text-align: left"><i class="icon-hand-right"></i><a href=#(link3)#>Projects</a></li>
+         </ul>
+     </div>
+   </div>
+   </div>
+    >
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.TeamView">
+<IncludeCode>csp</IncludeCode>
+<Super>BaseView</Super>
+<TimeChanged>63007,40720.484176</TimeChanged>
+<TimeCreated>63006,54068.870216</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if ('$Data(%request.Data("id",1))) {
+			 s role=%session.Data("role")
+	 s link1="view.ProjectsView.cls"
+	 s link1=$$$link(role,link1)
+		set %response.Redirect = link1
+		quit $$$OK
+		}	
+		
+	/*if (%session.Data("role")="Администратор") {
+		set %response.Redirect = "view.AdminView.cls"
+		}*/
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeHTML">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	 s role=%session.Data("role")
+	 s link1="view.ProjectsView.cls"
+	 s link1=$$$link(role,link1)
+	&html<
+    <div>
+    <h2>Команда проекта #(##class(model.Projects).%OpenId(%request.Data("id",1)).name)#:</h2>
+    	#(##class(model.Projects).team(%request.Data("id",1)))#
+    </div>
+    <a href="#(..Link(link1))#" class="btn">Вернуться</a>
+    >
+    q $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.admin.DeveloperView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,39471.241752</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Администратор") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.DeveloperView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.AdminService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Admin"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'lastName',width:90, editable: true ,editrules:{required:true} }
+            ,{ name: 'name',width:80, editable: true,editrules:{required:true}  }
+            ,{ name: 'patronymic',width:100, editable: true ,editrules:{required:true} }
+            ,{ name: 'roles',width:110, editable: true, edittype:'select',editoptions:{value:"Разработчик:Разработчик;Мастер:Мастер;Администратор:Администратор"},editrules:{required:true}  }
+            ,{ name: 'login',width:110, editable: true,editrules:{required:true}  }
+            ,{ name: 'password',width:90, editable: true,editrules:{required:true}  }
+            ,{ name: 'skill',width:110, editable: true ,editrules:{required:true} }
+            ,{ name: 'address.city',width:90, editable: true ,editrules:{required:true} }
+             ,{ name: 'address.street',width:140, editable: true ,editrules:{required:true} }
+              ,{ name: 'address.house',width:70, editable: true ,editrules:{required:true} }
+               ,{ name: 'address.flat',width:70, editable: true ,editrules:{required:true} }
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: true, addtext: '#($$$Text("Создать"))#'
+          , del: true, deltext: '#($$$Text("Удалить"))#'
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.admin.ProjectsView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,40126.923259</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Администратор") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.ProjectsView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+  <p>Просмотреть команду разработчиков для проекта:</p>
+     <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
+     <select id="id" name="id">>
+    	w ##class(service.ProjectService).projects()
+	 &html<
+	 </select>
+	 <button type="submit" class="btn" style="margin:0">Просмотреть</button>
+	 </form>
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.ProjectService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: 'Projects'
+        , colModel: [ // описание модели колонок
+        	{ name: 'name', editable: true,editrules:{required:true}  }
+            ,{ name: 'startDate', editable: false }
+            ,{ name: 'endDate', editable: false  }
+            ,{ name: 'owner.lastName', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.name', editable: true,editrules:{required:true}  }
+            ,{ name: 'owner.patronymic', editable: true ,editrules:{required:true} }
+       		,{ name: 'owner.login', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.password', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.company', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.post', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.address.city', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.address.street', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.address.house', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.address.flat', editable: true ,editrules:{required:true} }
+            ,{ name: 'owner.phone', editable: true ,editrules:{required:true} }
+      		,{ name: 'owner.email', editable: true ,editrules:{required:true} }
+       	]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+    	.jqGrid('gridResize', {})
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: true, addtext: '#($$$Text("Создать"))#'
+          , del: true, deltext: '#($$$Text("Удалить"))#'
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.admin.TaskView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,39542.242944</TimeChanged>
+<TimeCreated>62977,43652.458129</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Администратор") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.TaskView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.TaskService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Task"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'name',width:200, editable: true,editrules:{required:true} }
+            ,{ name: 'description',width:300, editable: true,editrules:{required:true} }
+             ,{ name: 'performer',width:60,edittype:'select', editoptions:{value:"#(##class(service.TaskService).tasks())#"}, editable: true,editrules:{required:true} }
+             ,{ name: 'project',width:50, editable: true,edittype:'select', editoptions:{value:"#(##class(service.TaskService).projects())#"},editrules:{required:true} }
+             ,{ name: 'startDate', editable: true,editrules:{required:true, pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+             ,{ name: 'expectedEndDate', editable: true,editrules:{required:true, pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+              ,{ name: 'endDate', editable: true,editrules:{pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'name' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+        //.jqGrid('gridResize', {}) //разрешаем изменять высоту и ширину грида
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: true, addtext: '#($$$Text("Создать"))#'
+          , del: true, deltext: '#($$$Text("Удалить"))#'
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.developer.DeveloperView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,74617.737306</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Разработчик") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.DeveloperView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.DeveloperService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Developer"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'lastName', editable: true ,editrules:{required:true} }
+            ,{ name: 'name', editable: true,editrules:{required:true}  }
+            ,{ name: 'patronymic', editable: true ,editrules:{required:true} }
+            ,{ name: 'skill', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.city', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.street', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.house', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.flat', editable: true ,editrules:{required:true} }
+            ,{ name: 'phone', editable: true ,editrules:{required:true} }
+            ,{ name: 'email', editable: true ,editrules:{required:true} }
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+        .jqGrid('gridResize', {})
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: false
+          , add: false
+          , del: false
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.developer.ProjectsView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,49120.071472</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		/*quit $$$OK*/
+		}
+	if (%session.Data("role")'="Разработчик") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.ProjectsView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+  <p>Просмотреть команду разработчиков для проекта:</p>
+     <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
+     <select id="id" name="id">>
+    	w ##class(service.ProjectService).selectDevProjects()
+	 &html<
+	 </select>
+	 <button type="submit" class="btn" style="margin:0">Просмотреть</button>
+	 </form>
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.ProjectService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: 'Projects'
+        , colModel: [ // описание модели колонок
+        	{ name: 'name', editable: false }
+            ,{ name: 'startDate', editable: false }
+            ,{ name: 'endDate', editable: false  }
+            ,{ name: 'owner.lastName', editable: false }
+            ,{ name: 'owner.name', editable: false }
+            ,{ name: 'owner.patronymic', editable: false }
+       		,{ name: 'owner.login', editable: false }
+            ,{ name: 'owner.password', editable: false }          
+       		,{ name: 'owner.company', editable: false }
+            ,{ name: 'owner.post', editable: false }
+            ,{ name: 'owner.address.city', editable: false }
+            ,{ name: 'owner.address.street', editable: false }
+            ,{ name: 'owner.address.house', editable: false }
+            ,{ name: 'owner.address.flat', editable: false }
+            ,{ name: 'owner.phone', editable: false }
+      		,{ name: 'owner.email', editable: false }
+       	]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+    	.jqGrid('gridResize', {})
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        {edit:false         , add: false
+          , del: false 
+        ,view: false, search: false }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.developer.TaskView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,49056.182316</TimeChanged>
+<TimeCreated>62977,43652.458129</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Разработчик") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.TaskView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.TaskService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Task"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'name',width:200, editable: false }
+            ,{ name: 'description',width:300, editable: false }
+             ,{ name: 'performer',width:60, editable: false}
+             ,{ name: 'project',width:50, editable: false}
+             ,{ name: 'startDate', editable: false}
+             ,{ name: 'expectedEndDate', editable: false}
+              ,{ name: 'endDate', editable: true,editrules:{pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'name' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+        //.jqGrid('gridResize', {}) //разрешаем изменять высоту и ширину грида
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: false
+          , del: false
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.master.DeveloperView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,49416.238617</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Мастер") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.DeveloperView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.DeveloperService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Developer"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'lastName', editable: true ,editrules:{required:true} }
+            ,{ name: 'name', editable: true,editrules:{required:true}  }
+            ,{ name: 'patronymic', editable: true ,editrules:{required:true} }
+            ,{ name: 'skill', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.city', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.street', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.house', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.flat', editable: true ,editrules:{required:true} }
+            ,{ name: 'phone', editable: true ,editrules:{required:true} }
+            ,{ name: 'email', editable: true ,editrules:{required:true} }
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: false
+          , add: false
+          , del: false
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.master.ProjectsView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,49107.724791</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Мастер") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.ProjectsView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+       &html<
+  <p>Просмотреть команду разработчиков для проекта:</p>
+     <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
+     <select id="id" name="id">>
+    	w ##class(service.ProjectService).selectDevProjects()
+	 &html<
+	 </select>
+	 <button type="submit" class="btn" style="margin:0">Просмотреть</button>
+	 </form>
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.ProjectService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: 'Projects'
+        , colModel: [ // описание модели колонок
+        	{ name: 'name', editable: false }
+            ,{ name: 'startDate', editable: false }
+            ,{ name: 'endDate', editable: false  }
+            ,{ name: 'owner.lastName', editable: false }
+            ,{ name: 'owner.name', editable: false }
+            ,{ name: 'owner.patronymic', editable: false }
+       		,{ name: 'owner.login', editable: false }
+            ,{ name: 'owner.password', editable: false }          
+       		,{ name: 'owner.company', editable: false }
+            ,{ name: 'owner.post', editable: false }
+            ,{ name: 'owner.address.city', editable: false }
+            ,{ name: 'owner.address.street', editable: false }
+            ,{ name: 'owner.address.house', editable: false }
+            ,{ name: 'owner.address.flat', editable: false }
+            ,{ name: 'owner.phone', editable: false }
+      		,{ name: 'owner.email', editable: false }
+       	]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+    	.jqGrid('gridResize', {})
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit:false         , add: false
+          , del: false 
+        ,view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.master.TaskView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,49263.677766</TimeChanged>
+<TimeCreated>62977,43652.458129</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Мастер") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.TaskView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.TaskService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Task"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'name',width:200, editable: false }
+            ,{ name: 'description',width:300, editable: false }
+             ,{ name: 'performer',width:60,edittype:'select', editoptions:{value:"#(##class(service.TaskService).tasks())#"}, editable: true,editrules:{required:true} }
+             ,{ name: 'project',width:50, editable: false }
+             ,{ name: 'startDate', editable: false}
+             ,{ name: 'expectedEndDate', editable: false}
+              ,{ name: 'endDate', editable: true,editrules:{pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'name' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+        //.jqGrid('gridResize', {}) //разрешаем изменять высоту и ширину грида
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: false
+          , del: false
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.owner.DeveloperView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,39285.779526</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Владелец") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.DeveloperView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.DeveloperService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Developer"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'lastName', editable: true ,editrules:{required:true} }
+            ,{ name: 'name', editable: true,editrules:{required:true}  }
+            ,{ name: 'patronymic', editable: true ,editrules:{required:true} }
+            ,{ name: 'skill', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.city', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.street', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.house', editable: true ,editrules:{required:true} }
+            ,{ name: 'address.flat', editable: true ,editrules:{required:true} }
+            ,{ name: 'phone', editable: true ,editrules:{required:true} }
+            ,{ name: 'email', editable: true ,editrules:{required:true} }
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: true, addtext: '#($$$Text("Создать"))#'
+          , del: true, deltext: '#($$$Text("Удалить"))#'
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.owner.ProjectsView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,49075.100812</TimeChanged>
+<TimeCreated>62977,43054.35361</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Владелец") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.ProjectsView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+  <p>Просмотреть команду разработчиков для проекта:</p>
+     <form class="form-inline" action="#(..Link("view.TeamView.cls"))#">
+     <select id="id" name="id">>
+    	w ##class(service.ProjectService).selectOwnerProjects()
+	 &html<
+	 </select>
+	 <button type="submit" class="btn" style="margin:0">Просмотреть</button>
+	 </form>
+     <p>#(%session.Data("role"))#</p>
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.ProjectService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: 'Projects'
+        , colModel: [ // описание модели колонок
+        	{ name: 'name', editable: true,editrules:{required:true}  }
+            ,{ name: 'startDate', editable: false }
+            ,{ name: 'endDate', editable: false  }
+            ,{ name: 'owner.lastName', editable: false }
+            ,{ name: 'owner.name', editable: false }
+            ,{ name: 'owner.patronymic', editable: false }
+       		,{ name: 'owner.company', editable: false }
+            ,{ name: 'owner.post', editable: false}
+            ,{ name: 'owner.address.city', editable: false }
+            ,{ name: 'owner.address.street', editable: false }
+            ,{ name: 'owner.address.house', editable: false }
+            ,{ name: 'owner.address.flat', editable: false }
+            ,{ name: 'owner.phone', editable: false }
+      		,{ name: 'owner.email', editable: false}
+       	]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'lastName' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+    	.jqGrid('gridResize', {})
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: false
+          , del: false
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="view.owner.TaskView">
+<IncludeCode>csp</IncludeCode>
+<Super>view.BaseView</Super>
+<TimeChanged>63007,76467.418277</TimeChanged>
+<TimeCreated>62977,43652.458129</TimeCreated>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	if ('$Data(%session.Data("userID"))) {
+		set %response.Redirect = "view.IndexView.cls"
+		quit $$$OK
+		}
+	if (%session.Data("role")'="Владелец") {
+		s role=%session.Data("role")
+		set %response.Redirect = $$$link(role,"view.TaskView.cls")
+		}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="writeJS">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+     &html<
+
+   <!-- инициализации страницы -->
+<script type="text/javascript">
+$( function(){ //функция обработчик document.ready
+    var $grid=$( "#grid" ) //находим элемент крепления для грида
+        , bar="#bar" //элемент крепления панели управления
+        , url='#(..Link("service.TaskService.cls"))#'
+    ;
+    
+    $grid.jqGrid({ //инициализируем плагин грида, передавая ему объект с настройками
+        caption: '#($$$Text("Task"))#'
+        , colModel: [ // описание модели колонок
+            { name: 'name',width:200, editable: true,editrules:{required:true} }
+            ,{ name: 'description',width:300, editable: true,editrules:{required:true} }
+             ,{ name: 'performer',width:60,editable: false }
+             ,{ name: 'project',width:50, editable: false }
+             ,{ name: 'startDate', editable: true,editrules:{required:true, pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+             ,{ name: 'expectedEndDate', editable: true,editrules:{required:true, pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+              ,{ name: 'endDate', editable: true,editrules:{pattern:'^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'}}
+        ]
+        , pager: bar //передаем селектор для панели управления гридом
+        , url: url //источник данных
+        , editurl: url //он же для редактирования
+        , datatype: "json" // тип получаемых данных
+        , mtype: 'POST'
+        , jsonReader: { // особенности формата получаемых данных
+            // каждое свойство под своим именем
+            // увеличивает объем данных передаваемых сервером
+            // но делает источник данных более универсальным
+            repeatitems: false 
+        }
+        , height: 350 //определяем размеры грида
+        , rownumbers: true //включаем показ порядкового номера строк
+        , rownumWidth: 45 // ширина колонки с порядковым номером строк
+        , viewrecords: true // покажем какую порцию данных просматриваем
+        , gridview: true // ускорим загрузку строк, отключив события добавления строки
+        , scroll: 1 // режим виртуального скроллинга
+        , hoverrows: true // выделение строки под курсором мыши
+        , rowNum: 100 // размер порции данных, запрашиваемых у сервера
+        , sortable: true //разрешаем перетаскивать колонки грида
+        , sortname: 'name' //по какой колонке сортируем по умолчанию
+        
+    }) 
+        .jqGrid('filterToolbar',{searchOnEnter:false}) //включаем фильтр 
+        //.jqGrid('gridResize', {}) //разрешаем изменять высоту и ширину грида
+    ;
+        
+    /// функция обработчик ответа сервера на запросы редактирования
+    var serverHandler=function( resp ){
+        var array=[]; 
+        try {
+            array=eval(resp.responseText);
+        } catch(err){
+            return ["",e.description];  
+        }
+        return array; 
+    };  
+    
+    /// Типовые настройки для форм редактирования / создания, удаления
+    var opts={ afterSubmit: serverHandler //стандартный обработчик ответа сервера
+        , closeAfterAdd: true //закрываем диалог после выполнения на сервере
+        , clearAfterAdd: true //очищаем поля диалога после выполнения на сервере
+        , closeAfterEdit: true //закрываем диалог после выполнения на сервере
+        //в режиме вирт. скроллинга кнопки перехода к след. записи не нужны
+        , viewPagerButtons: false 
+    };
+    // формируем панель управления 
+    $grid.jqGrid('navGrid',bar, 
+        { edit: true, edittext: '#($$$Text("Редактировать"))#'
+          , add: true, addtext: '#($$$Text("Создать"))#'
+          , del: true, deltext: '#($$$Text("Удалить"))#'
+          , view: false, search: false 
+        }
+        , opts //опции редактирования
+        , opts //опции создания
+        , opts //опции удаления
+    );
+    //работаем в режиме виртуального скроллинга
+    //элемент зарезервированный под pager не нужен
+    $(bar+"_center").remove(); 
+
+    //запускаем переключатель тем, см UPD
+    themeswitcher( $( "#theme" ) );
+
+});</script>>
+]]></Implementation>
+</Method>
+</Class>
+</Export>
