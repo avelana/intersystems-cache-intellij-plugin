@@ -1,4 +1,4 @@
-package by.vsu.cacheplugin.actions;
+package by.vsu.cacheplugin.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

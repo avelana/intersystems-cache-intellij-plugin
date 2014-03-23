@@ -12,16 +12,35 @@
     <actions>
         <group id="CacheStudioMenu" text="Cache Studio options" description="Import/export with Cache Studio"
                popup="true">
-            <action id="CacheExport" class="by.vsu.cacheplugin.actions.CacheExport" text="Export to Cache Studio XML"
+            <action id="CacheExport" class="by.vsu.cacheplugin.action.CacheExport" text="Export to Cache Studio XML"
                     description="Export to Cache Studio XML file">
             </action>
-            <action id="CacheImport" class="by.vsu.cacheplugin.actions.CacheImport" text="Import from Cache Studio XML"
+            <action id="CacheImport" class="by.vsu.cacheplugin.action.CacheImport" text="Import from Cache Studio XML"
                     description="Import from Cache Studio XML file">
             </action>
             <add-to-group group-id="MainMenu" relative-to-action="HelpMenu" anchor="before"/>
         </group>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <!-- file types registration block -->
+        <fileTypeFactory implementation="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacFileTypeFactory"/>
+        <fileTypeFactory implementation="by.vsu.cacheplugin.lang.cls.CacheObjectScriptClsFileTypeFactory"/>
+        <fileTypeFactory implementation="by.vsu.cacheplugin.lang.inc.CacheObjectScriptIncFileTypeFactory"/>
+
+        <!-- parser definitions block -->
+        <lang.parserDefinition language="COS"
+                               implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacParserDefinition"/>
+
+        <!-- syntax highlighter factories block -->
+        <lang.syntaxHighlighterFactory key="COS"
+                                       implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacSyntaxHighlighterFactory"/>
+
+        <!-- color settings pages block -->
+        <colorSettingsPage implementation="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacColorSettingsPage"/>
+
+        <!-- completion contributors block -->
+        <completion.contributor language="COS"
+                                implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacCompletionContributor"/>
+
     </extensions>
 </idea-plugin>

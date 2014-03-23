@@ -1,0 +1,22 @@
+
+{
+  parserClass="by.vsu.cacheplugin.lang.mac.parser.CacheObjectScriptMacParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+  psiClassPrefix="CacheObjectScriptMac"
+  psiImplClassSuffix="Impl"
+  psiPackage="by.vsu.cacheplugin.lang.mac.psi"
+  psiImplPackage="by.vsu.cacheplugin.lang.mac.psi.impl"
+ 
+  elementTypeHolderClass="by.vsu.cacheplugin.lang.mac.psi.CacheObjectScriptMacTypes"
+  elementTypeClass="by.vsu.cacheplugin.lang.mac.psi.CacheObjectScriptMacElementType"
+  tokenTypeClass="by.vsu.cacheplugin.lang.mac.psi.CacheObjectScriptMacTokenType"
+}
+ 
+cosFile ::= item_*
+ 
+private item_ ::= (commandString|COMMENT|CRLF)
+
+commandString::= (LABEL COMMAND args* CRLF)|( COMMAND args* CRLF)|(LABEL? COMMAND CRLF)
+args::= arg [{ arg }]
+arg::= operand | operation | comma
+operand::= local | global | sys | globalsys | number | string

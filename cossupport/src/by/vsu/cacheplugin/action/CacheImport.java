@@ -1,9 +1,9 @@
-package by.vsu.cacheplugin.actions;
+package by.vsu.cacheplugin.action;
 
-import by.vsu.cacheplugin.parsers.importers.ProjectListSax;
-import by.vsu.cacheplugin.parsers.importers.filetypes.AbstractObjectSax;
-import by.vsu.cacheplugin.parsers.importers.filetypes.ClassSax;
-import by.vsu.cacheplugin.parsers.importers.filetypes.RoutineSax;
+import by.vsu.cacheplugin.parser.importer.CacheProjectParser;
+import by.vsu.cacheplugin.parser.importer.filetype.BaseParser;
+import by.vsu.cacheplugin.parser.importer.filetype.ClassParser;
+import by.vsu.cacheplugin.parser.importer.filetype.RoutineParser;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
@@ -20,14 +20,14 @@ public class CacheImport extends AnAction {
         if (retval == JFileChooser.APPROVE_OPTION) {
             String xmlURL = fileChooser.getSelectedFile().getPath();
             String workspaceURL = fileChooser.getSelectedFile().getParent() + File.separatorChar + "test";
-            ProjectListSax listSax = new ProjectListSax(workspaceURL);
+            CacheProjectParser listSax = new CacheProjectParser(workspaceURL);
             listSax.buildFileTree(xmlURL);
             if (listSax.isHasRoutine()) {
-                AbstractObjectSax routineSax = new RoutineSax(workspaceURL, xmlURL);
+                BaseParser routineSax = new RoutineParser(workspaceURL, xmlURL);
                 routineSax.run();
             }
             if (listSax.isHasClass()) {
-                AbstractObjectSax classSax = new ClassSax(workspaceURL, xmlURL);
+                BaseParser classSax = new ClassParser(workspaceURL, xmlURL);
                 classSax.run();
             }
         }

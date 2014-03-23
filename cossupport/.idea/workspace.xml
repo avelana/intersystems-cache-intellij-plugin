@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87db374b-2c80-4efe-8fe5-cf15ec026aaf" name="Default" comment="Reformat code">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheImport.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheImport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/ClassSax.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/ClassSax.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/RoutineSax.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/RoutineSax.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TEMP.xml" afterPath="$PROJECT_DIR$/TEMP.xml" />
+    <list default="true" id="87db374b-2c80-4efe-8fe5-cf15ec026aaf" name="Default" comment=".mac files support with a part of xml import">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/mac_file_obj.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsElementType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileTypeFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsTokenType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptIcons.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncElementType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileTypeFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptLanguage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacColorSettingsPage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacCompletionContributor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacElementType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacFile.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileTypeFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexerAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighterFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/INC.bnf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/INC.flex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.bnf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.flex" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cossupport.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test.java" afterPath="$PROJECT_DIR$/src/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scc.xml" afterPath="$PROJECT_DIR$/scc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cossupport.iml" afterPath="$PROJECT_DIR$/cossupport.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\actions\CacheExport.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheExport.java" />
+      <change type="MOVED" beforePath="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\actions\CacheImport.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheImport.java" />
+      <change type="MOVED" beforePath="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\parsers\importers\ProjectListSax.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/CacheProjectParser.java" />
+      <change type="MOVED" beforePath="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\parsers\importers\filetypes\AbstractObjectSax.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/BaseParser.java" />
+      <change type="MOVED" beforePath="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\parsers\importers\filetypes\ClassSax.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/ClassParser.java" />
+      <change type="MOVED" beforePath="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\parsers\importers\filetypes\RoutineSax.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/RoutineParser.java" />
     </list>
     <ignored path="cossupport.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +62,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -64,10 +98,10 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <breakpoint_rules />
-    <ui_properties />
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true" />
+    <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -75,64 +109,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CacheImport.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheImport.java">
+      <file leaf-file-name="MAC.bnf" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.bnf">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="58" selection-start="1483" selection-end="1483" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="697">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClassSax.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/ClassSax.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="29" selection-start="1458" selection-end="1458" vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="1207">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CacheExport.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheExport.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="5" selection-start="439" selection-end="439" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="391">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="50" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectListSax.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="17" selection-start="2533" selection-end="2533" vertical-scroll-proportion="0.8016336" vertical-offset="452" max-vertical-offset="1309">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AnAction.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/actionSystem/AnAction.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="22" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1462">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TEMP.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TEMP.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="44" selection-start="3357" selection-end="3357" vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="72318">
+            <state vertical-scroll-proportion="0.21820304" vertical-offset="0" max-vertical-offset="857">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -152,19 +133,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/Test.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/Sax.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/FileSax.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/RoutineSax.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/AbstractObjectSax.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ClassSax.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/RoutineSax.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/AbstractObjectSax.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheImport.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/ClassSax.java" />
         <option value="$PROJECT_DIR$/src/Test.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importers/ProjectListSax.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/ProjectListSax.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/COSFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/MacTokenType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/MacElementType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/MacFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MacParserDefinition.java" />
+        <option value="E:/soft/jflex-1.5.0/jflex-1.5.0/bin/jflex.bat" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MacSyntaxHighlighter.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MacLexer.java" />
+        <option value="$PROJECT_DIR$/gen/by/vsu/cacheplugin/lang/mac/parser/MacParser.java" />
+        <option value="$PROJECT_DIR$/resources/mac/_MacLexer.flex" />
+        <option value="$APPLICATION_HOME_DIR$/bin/idea.bat" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MacLexerAdapter.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptLanguage.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptLanguage.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileTypeFactory.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileTypeFactory.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/MacFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/MacFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java" />
+        <option value="$PROJECT_DIR$/resources/mac/MAC.bnf" />
+        <option value="$PROJECT_DIR$/resources/inc/INC.bnf" />
+        <option value="$PROJECT_DIR$/resources/cls/CLS.bnf" />
+        <option value="$PROJECT_DIR$/resources/mac/MAC.flex" />
+        <option value="$PROJECT_DIR$/resources/inc/INC.flex" />
+        <option value="$PROJECT_DIR$/resources/cls/CLS.flex" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexerAdapter.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighter.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/CacheProjectParser.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/BaseParser.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptIcons.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.flex" />
       </list>
     </option>
   </component>
@@ -181,6 +200,140 @@
     <option name="width" value="1288" />
     <option name="height" value="1007" />
   </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+          <State>
+            <id>Assignment issues</id>
+          </State>
+          <State>
+            <id>Assignment issuesGroovy</id>
+          </State>
+          <State>
+            <id>Class structure</id>
+          </State>
+          <State>
+            <id>Code style issues</id>
+          </State>
+          <State>
+            <id>Control FlowGroovy</id>
+          </State>
+          <State>
+            <id>Control flow issues</id>
+          </State>
+          <State>
+            <id>Data flow issues</id>
+          </State>
+          <State>
+            <id>Declaration redundancy</id>
+          </State>
+          <State>
+            <id>Error handling</id>
+          </State>
+          <State>
+            <id>Error handlingGroovy</id>
+          </State>
+          <State>
+            <id>Grammar Inspections</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>Inheritance issues</id>
+          </State>
+          <State>
+            <id>J2ME issues</id>
+          </State>
+          <State>
+            <id>JUnit issues</id>
+          </State>
+          <State>
+            <id>Java language level issues</id>
+          </State>
+          <State>
+            <id>Java language level migration aids</id>
+          </State>
+          <State>
+            <id>Logging issues</id>
+          </State>
+          <State>
+            <id>Maven</id>
+          </State>
+          <State>
+            <id>Method MetricsGroovy</id>
+          </State>
+          <State>
+            <id>Method metrics</id>
+          </State>
+          <State>
+            <id>Naming ConventionsGroovy</id>
+          </State>
+          <State>
+            <id>Naming conventions</id>
+          </State>
+          <State>
+            <id>Numeric issues</id>
+          </State>
+          <State>
+            <id>Pattern Validation</id>
+          </State>
+          <State>
+            <id>Performance issues</id>
+          </State>
+          <State>
+            <id>Probable bugs</id>
+          </State>
+          <State>
+            <id>Properties Files</id>
+          </State>
+          <State>
+            <id>Scala: General</id>
+          </State>
+          <State>
+            <id>Scala: Method signature</id>
+          </State>
+          <State>
+            <id>Scala: Scaladoc</id>
+          </State>
+          <State>
+            <id>Scaladoc</id>
+          </State>
+          <State>
+            <id>Security issues</id>
+          </State>
+          <State>
+            <id>TestNG</id>
+          </State>
+          <State>
+            <id>Threading issues</id>
+          </State>
+          <State>
+            <id>Threading issuesGroovy</id>
+          </State>
+          <State>
+            <id>Verbose or redundant code constructs</id>
+          </State>
+          <State>
+            <id>Visibility issues</id>
+          </State>
+          <State>
+            <id>XSLT</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -195,7 +348,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -275,7 +428,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="actions" />
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mac" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -289,14 +446,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cacheplugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cossupport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cossupport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cacheplugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -306,10 +497,10 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -319,7 +510,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="last_opened_file_path" value="E:/repo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SimpleCustomLangPlugin/META-INF/plugin.xml" />
     <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="PsiViewer.ProjectComponent">
@@ -332,15 +523,29 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="by.vsu.cacheplugin.lang.inc" />
+      <recent name="by.vsu.cacheplugin.lang.cls" />
       <recent name="by.vsu.cacheplugin.parsers.importers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\к диплому\cossupport" />
-      <recent name="E:\к диплому\cossupport\src\by\vsu\cacheplugin\actions" />
-      <recent name="E:\к диплому\cossupport\META-INF" />
+      <recent name="E:\к диплому\diploma\cossupport\resources\cls" />
+      <recent name="E:\к диплому\diploma\cossupport\resources\inc" />
+      <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\cls" />
+      <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\inc" />
+      <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="by.vsu.cacheplugin.lang.mac.parser" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\common" />
+      <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\mac" />
+      <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\inc" />
+      <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\cls" />
+      <recent name="E:\к диплому\diploma\cossupport\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Plugin.cossupp">
     <configuration default="false" name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Test" />
       <option name="VM_PARAMETERS" value="" />
@@ -363,7 +568,7 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="cossupport" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
@@ -387,6 +592,7 @@
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -395,32 +601,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -448,6 +628,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -501,19 +694,7 @@
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="false" name="cossupp" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
@@ -546,22 +727,8 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -569,18 +736,23 @@
       <created>1394649437953</created>
       <updated>1394649437953</updated>
     </task>
+    <task id="LOCAL-00001" summary="Reformat code">
+      <created>1395338046296</created>
+      <updated>1395338046296</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="1007" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933994" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -592,18 +764,21 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18671875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997735" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2296875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32842582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2328125" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" x="96" y="96" width="1088" height="807" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997735" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
   </component>
@@ -615,7 +790,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Reformat code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reformat code" />
+    <MESSAGE value=".mac files support with a part of xml import" />
+    <option name="LAST_COMMIT_MESSAGE" value=".mac files support with a part of xml import" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -627,295 +803,562 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheImport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0" vertical-offset="160" max-vertical-offset="680">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/wm/impl/FocusManagerImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="16" selection-start="7906" selection-end="7906" vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="3876" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/wm/impl/IdeFocusManagerImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="16" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.0" vertical-offset="799" max-vertical-offset="1088" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="5" selection-start="937" selection-end="937" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="493" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="82" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheExport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="41" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="391" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="6" selection-start="3269" selection-end="3274" vertical-scroll-proportion="0.0" vertical-offset="1394" max-vertical-offset="71791">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheImport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="73" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="612">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="31" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheExport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="41" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="391" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="6" selection-start="3269" selection-end="3274" vertical-scroll-proportion="0.0" vertical-offset="1394" max-vertical-offset="71791">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="32" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="1190" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/RoutineSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="57" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.0" vertical-offset="1088" max-vertical-offset="1292" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="1" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="272" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/ClassSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="23" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="221" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="71774">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="32" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="1190" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/RoutineSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="0" selection-start="2185" selection-end="2185" vertical-scroll-proportion="0.0" vertical-offset="1054" max-vertical-offset="1224" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="289" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/ClassSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="23" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="221" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="71774">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="13" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="969" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cossupport.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.7.0_04/src.zip!/org/xml/sax/ContentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="354" column="16" selection-start="14351" selection-end="14351" vertical-scroll-proportion="-1.7654109" vertical-offset="6556" max-vertical-offset="7140" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/xerces.jar!/org/apache/xerces/impl/XMLDocumentFragmentScannerImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="64" selection-start="8195" selection-end="8195" vertical-scroll-proportion="0.6152263" vertical-offset="1860" max-vertical-offset="2652" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/xerces.jar!/org/apache/xerces/impl/XMLNSDocumentScannerImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="22" selection-start="908" selection-end="908" vertical-scroll-proportion="0.3195266" vertical-offset="161" max-vertical-offset="714" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.7.0_04/src.zip!/org/xml/sax/InputSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="342" column="0" selection-start="9893" selection-end="9893" vertical-scroll-proportion="0.0" vertical-offset="4893" max-vertical-offset="5474" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/xerces.jar!/org/apache/xerces/parsers/AbstractSAXParser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="16" selection-start="7724" selection-end="7724" vertical-scroll-proportion="0.0" vertical-offset="1361" max-vertical-offset="3553" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/xerces.jar!/org/apache/xerces/jaxp/SAXParserImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="16" selection-start="2846" selection-end="2846" vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="1717" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.7.0_04/src.zip!/javax/xml/parsers/SAXParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="22" selection-start="2301" selection-end="2301" vertical-scroll-proportion="-12.609615" vertical-offset="7271" max-vertical-offset="8534" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.7.0_04/src.zip!/javax/xml/parsers/SAXParserFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="22" selection-start="756" selection-end="756" vertical-scroll-proportion="-5.903353" vertical-offset="3265" max-vertical-offset="7531" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.7.0_04/src.zip!/org/xml/sax/helpers/DefaultHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="285" column="20" selection-start="9273" selection-end="9273" vertical-scroll-proportion="0.0" vertical-offset="3937" max-vertical-offset="7786" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/RoutineSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="34" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037" />
-      </provider>
-    </entry>
-    <entry file="file://E:/Учебное/эмуляция диска курсовая 7 семестр/Project/browser/BROWSER.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="499" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/ide/IdeEventQueue.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="16" selection-start="7224" selection-end="7224" vertical-scroll-proportion="0.33333334" vertical-offset="2235" max-vertical-offset="3162" />
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/actionSystem/ex/ActionUtil.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="23" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="578" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="578">
+          <caret line="28" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/wm/impl/FocusManagerImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="16" selection-start="7906" selection-end="7906" vertical-scroll-proportion="0.0" vertical-offset="2109" max-vertical-offset="3859" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2109" max-vertical-offset="3859">
+          <caret line="135" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/wm/impl/IdeFocusManagerImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="16" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1071" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1071">
+          <caret line="47" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/actionSystem/impl/ActionMenuItem.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="16" selection-start="1479" selection-end="1479" vertical-scroll-proportion="0.0" vertical-offset="229" max-vertical-offset="1360" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="229" max-vertical-offset="1360">
+          <caret line="24" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/ui/plaf/beg/BegMenuItemUI.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="20" selection-start="4210" selection-end="4210" vertical-scroll-proportion="0.7201646" vertical-offset="1027" max-vertical-offset="1513" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="82" selection-start="378" selection-end="378" vertical-scroll-proportion="0.23103058" vertical-offset="0" max-vertical-offset="883">
-          <folding />
+        <state vertical-scroll-proportion="0.7201646" vertical-offset="1027" max-vertical-offset="1513">
+          <caret line="82" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/AbstractObjectSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="31" selection-start="820" selection-end="820" vertical-scroll-proportion="0.40430352" vertical-offset="0" max-vertical-offset="883" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3852" column="28" selection-start="131663" selection-end="131663" vertical-scroll-proportion="0.0" vertical-offset="65309" max-vertical-offset="71791">
+        <state vertical-scroll-proportion="0.0" vertical-offset="65309" max-vertical-offset="71791">
+          <caret line="3852" column="28" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheImport.java">
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheImport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="58" selection-start="1483" selection-end="1483" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="697">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/filetypes/ClassSax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="29" selection-start="1458" selection-end="1458" vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="1207">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="697">
+          <caret line="29" column="54" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/actionSystem/AnAction.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="22" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="1445">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="1445">
+          <caret line="6" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/actions/CacheExport.java">
+    <entry file="file://C:/NEWSCXC.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="5" selection-start="439" selection-end="439" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+        <state vertical-scroll-proportion="0.5403423" vertical-offset="41480" max-vertical-offset="77741">
+          <caret line="2466" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheExport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27771294" vertical-offset="0" max-vertical-offset="857">
+          <caret line="15" column="5" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17852975" vertical-offset="0" max-vertical-offset="857">
+          <caret line="15" column="50" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TEMP.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="44" selection-start="3357" selection-end="3357" vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="72318">
+        <state vertical-scroll-proportion="-0.02014218" vertical-offset="1428" max-vertical-offset="72318">
+          <caret line="83" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/NEWSCXC.xml">
+    <entry file="file://E:/soft/jflex-1.5.0/jflex-1.5.0/bin/jflex.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2466" column="41" selection-start="78494" selection-end="78494" vertical-scroll-proportion="0.5403423" vertical-offset="41480" max-vertical-offset="77741" />
+        <state vertical-scroll-proportion="0.12259615" vertical-offset="0" max-vertical-offset="832">
+          <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacColorSettingsPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="50" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+        <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1547">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/bin/idea.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59225094" vertical-offset="529" max-vertical-offset="1479">
+          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.7.0_04/src.zip!/java/io/Reader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="270" max-vertical-offset="3961">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../SimpleCustomLangPlugin/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24170616" vertical-offset="0" max-vertical-offset="844">
+          <caret line="12" column="16" selection-start-line="11" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parsers/importers/ProjectListSax.java">
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/mac_file_obj.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="17" selection-start="2533" selection-end="2533" vertical-scroll-proportion="0.8016336" vertical-offset="452" max-vertical-offset="1309">
+        <state vertical-scroll-proportion="0.3570595" vertical-offset="0" max-vertical-offset="857">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding>
+            <element signature="e#658#659#0" expanded="true" />
+            <element signature="e#710#711#0" expanded="true" />
+            <element signature="e#775#776#0" expanded="true" />
+            <element signature="e#841#842#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37689614" vertical-offset="0" max-vertical-offset="857">
+          <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+          <folding>
+            <element signature="e#543#544#0" expanded="true" />
+            <element signature="e#600#601#0" expanded="true" />
+            <element signature="e#658#659#0" expanded="true" />
+            <element signature="e#710#711#0" expanded="true" />
+            <element signature="e#775#776#0" expanded="true" />
+            <element signature="e#831#832#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileTypeFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07934656" vertical-offset="0" max-vertical-offset="857">
+          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileTypeFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.119019836" vertical-offset="0" max-vertical-offset="857">
+          <caret line="9" column="76" selection-start-line="9" selection-start-column="76" selection-end-line="9" selection-end-column="76" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19836639" vertical-offset="0" max-vertical-offset="857">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21820304" vertical-offset="0" max-vertical-offset="857">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsTokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07934656" vertical-offset="0" max-vertical-offset="857">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsElementType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncElementType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacElementType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13885647" vertical-offset="0" max-vertical-offset="857">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15869312" vertical-offset="0" max-vertical-offset="857">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/INC.bnf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.01983664" vertical-offset="0" max-vertical-offset="857">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
+          <folding>
+            <element signature="e#1#563#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0545024" vertical-offset="1026" max-vertical-offset="1870">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420218" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/INC.flex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8187204" vertical-offset="1026" max-vertical-offset="1870">
+          <caret line="101" column="106" selection-start-line="101" selection-start-column="106" selection-end-line="101" selection-end-column="106" />
+          <folding>
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395575420234" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/idea-flex.skeleton">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.705467" vertical-offset="3802" max-vertical-offset="4369">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.329806" vertical-offset="0" max-vertical-offset="567">
+          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#257#258#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41975307" vertical-offset="0" max-vertical-offset="567">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41975307" vertical-offset="0" max-vertical-offset="567">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8104693" vertical-offset="517" max-vertical-offset="1071">
+          <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
+          <folding>
+            <element signature="e#1360#1361#0" expanded="true" />
+            <element signature="e#1444#1445#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptLanguage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.119929455" vertical-offset="0" max-vertical-offset="567">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2892417" vertical-offset="0" max-vertical-offset="867">
+          <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4296029" vertical-offset="136" max-vertical-offset="1496">
+          <caret line="22" column="105" selection-start-line="22" selection-start-column="105" selection-end-line="22" selection-end-column="105" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17989418" vertical-offset="0" max-vertical-offset="567">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/RoutineParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21480145" vertical-offset="0" max-vertical-offset="1003">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/ClassParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70017636" vertical-offset="249" max-vertical-offset="1071">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/BaseParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44268078" vertical-offset="38" max-vertical-offset="646">
+          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/CacheProjectParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53968257" vertical-offset="0" max-vertical-offset="1275">
+          <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/cls_file_obj.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptIcons.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29982364" vertical-offset="0" max-vertical-offset="567">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20216607" vertical-offset="13947" max-vertical-offset="14501">
+          <caret line="848" column="23" selection-start-line="848" selection-start-column="23" selection-end-line="848" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.flex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33212996" vertical-offset="3" max-vertical-offset="1904">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <folding>
+            <marker date="1395581848468" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1395581848468" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.bnf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21820304" vertical-offset="0" max-vertical-offset="857">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>IDEA IC-133.696</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>cossupport</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

@@ -1,4 +1,4 @@
-package by.vsu.cacheplugin.parsers.importers.filetypes;
+package by.vsu.cacheplugin.parser.importer.filetype;
 
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
@@ -10,7 +10,7 @@ import java.util.Stack;
 /**
  * Created by Admin on 14.03.14.
  */
-public class AbstractObjectSax extends DefaultHandler {
+public class BaseParser extends DefaultHandler {
     protected Stack<String> currentElement = new Stack<String>();
     protected String workspaceURL;
     protected String fileName;
@@ -29,7 +29,7 @@ public class AbstractObjectSax extends DefaultHandler {
         }
     }
 
-    public AbstractObjectSax(String workspaceURL, String XMLName) {
+    public BaseParser(String workspaceURL, String XMLName) {
         this.workspaceURL = workspaceURL;
         this.XMLName = XMLName;
     }

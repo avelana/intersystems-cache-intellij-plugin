@@ -1,4 +1,4 @@
-package by.vsu.cacheplugin.parsers.importers.filetypes;
+package by.vsu.cacheplugin.parser.importer.filetype;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -8,10 +8,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class RoutineSax extends AbstractObjectSax {
+public class RoutineParser extends BaseParser {
     private boolean isStart;
 
-    public RoutineSax(String workspaceURL, String XMLName) {
+    public RoutineParser(String workspaceURL, String XMLName) {
         super(workspaceURL, XMLName);
     }
 

@@ -1,6 +1,6 @@
-import by.vsu.cacheplugin.parsers.importers.ProjectListSax;
-import by.vsu.cacheplugin.parsers.importers.filetypes.AbstractObjectSax;
-import by.vsu.cacheplugin.parsers.importers.filetypes.RoutineSax;
+import by.vsu.cacheplugin.parser.importer.CacheProjectParser;
+import by.vsu.cacheplugin.parser.importer.filetype.BaseParser;
+import by.vsu.cacheplugin.parser.importer.filetype.RoutineParser;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,10 +15,10 @@ public class Test {
         if (retval == JFileChooser.APPROVE_OPTION) {
             String xmlURL = fileChooser.getSelectedFile().getName();
             String workspaceURL = fileChooser.getSelectedFile().getParent() + File.separatorChar + "test";
-            ProjectListSax listSax = new ProjectListSax(workspaceURL);
+            CacheProjectParser listSax = new CacheProjectParser(workspaceURL);
             listSax.buildFileTree(xmlURL);
             if (listSax.isHasRoutine()) {
-                AbstractObjectSax routineSax = new RoutineSax(workspaceURL, xmlURL);
+                BaseParser routineSax = new RoutineParser(workspaceURL, xmlURL);
                 routineSax.run();
             }
         }

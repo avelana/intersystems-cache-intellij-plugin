@@ -1,0 +1,22 @@
+
+{
+  parserClass="by.vsu.cacheplugin.lang.inc.parser.CacheObjectScriptIncParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+  psiClassPrefix="CacheObjectScriptInc"
+  psiImplClassSuffix="Impl"
+  psiPackage="by.vsu.cacheplugin.lang.inc.psi"
+  psiImplPackage="by.vsu.cacheplugin.lang.inc.psi.impl"
+ 
+  elementTypeHolderClass="by.vsu.cacheplugin.lang.inc.psi.CacheObjectScriptIncTypes"
+  elementTypeClass="by.vsu.cacheplugin.lang.inc.psi.CacheObjectScriptIncElementType"
+  tokenTypeClass="by.vsu.cacheplugin.lang.inc.psi.CacheObjectScriptIncTokenType"
+}
+
+cosFile ::= item_*
+ 
+private item_ ::= (commandString|COMMENT|CRLF)
+
+commandString::= (LABEL COMMAND args* CRLF)|( COMMAND args* CRLF)|(LABEL? COMMAND CRLF)
+args::= arg [{ arg }]
+arg::= operand | operation | comma
+operand::= local | global | sys | globalsys | number | string

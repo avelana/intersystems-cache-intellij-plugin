@@ -1,4 +1,4 @@
-package by.vsu.cacheplugin.parsers.importers.filetypes;
+package by.vsu.cacheplugin.parser.importer.filetype;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -11,10 +11,10 @@ import java.io.IOException;
 /**
  * Created by Admin on 13.03.14.
  */
-public class ClassSax extends AbstractObjectSax {
+public class ClassParser extends BaseParser {
     private boolean isStartDef;
 
-    public ClassSax(String workspaceURL, String XMLName) {
+    public ClassParser(String workspaceURL, String XMLName) {
         super(workspaceURL, XMLName);
     }
 

@@ -1,4 +1,4 @@
-package by.vsu.cacheplugin.parsers.importers;
+package by.vsu.cacheplugin.parser.importer;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -8,7 +8,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.io.File;
 import java.io.IOException;
 
-public class ProjectListSax extends DefaultHandler {
+public class CacheProjectParser extends DefaultHandler {
 
     private String workspaceURL;
     private boolean hasClass = false;
@@ -22,7 +22,7 @@ public class ProjectListSax extends DefaultHandler {
         return hasRoutine;
     }
 
-    public ProjectListSax(String workspaceURL) {
+    public CacheProjectParser(String workspaceURL) {
         this.workspaceURL = workspaceURL;
     }
 
