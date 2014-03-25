@@ -6,6 +6,7 @@ import by.vsu.cacheplugin.parser.importer.filetype.ClassParser;
 import by.vsu.cacheplugin.parser.importer.filetype.RoutineParser;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataKeys;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -16,10 +17,11 @@ public class CacheImport extends AnAction {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("XML files", "xml");
         JFileChooser fileChooser = new JFileChooser("");
         fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Choose .xml file to import");
         int retval = fileChooser.showOpenDialog(fileChooser.getParent());
         if (retval == JFileChooser.APPROVE_OPTION) {
             String xmlURL = fileChooser.getSelectedFile().getPath();
-            String workspaceURL = fileChooser.getSelectedFile().getParent() + File.separatorChar + "test";
+            String workspaceURL = DataKeys.PROJECT.getData(e.getDataContext()).getBasePath() + File.separator + "src";
             CacheProjectParser listSax = new CacheProjectParser(workspaceURL);
             listSax.buildFileTree(xmlURL);
             if (listSax.isHasRoutine()) {

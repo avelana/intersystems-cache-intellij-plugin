@@ -24,8 +24,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- file types registration block -->
         <fileTypeFactory implementation="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacFileTypeFactory"/>
-        <fileTypeFactory implementation="by.vsu.cacheplugin.lang.cls.CacheObjectScriptClsFileTypeFactory"/>
-        <fileTypeFactory implementation="by.vsu.cacheplugin.lang.inc.CacheObjectScriptIncFileTypeFactory"/>
+        <!-- <fileTypeFactory implementation="by.vsu.cacheplugin.lang.cls.CacheObjectScriptClsFileTypeFactory"/>
+         <fileTypeFactory implementation="by.vsu.cacheplugin.lang.inc.CacheObjectScriptIncFileTypeFactory"/>-->
 
         <!-- parser definitions block -->
         <lang.parserDefinition language="COS"
@@ -41,6 +41,12 @@
         <!-- completion contributors block -->
         <completion.contributor language="COS"
                                 implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacCompletionContributor"/>
+        <!-- module block -->
+        <!--        <moduleType id="CACHE_OBJECTSCRIPT_MODULE" classpathProvider="false"
+                    implementationClass="by.vsu.cacheplugin.module.CacheObjectScriptModuleType"/>
+                <moduleConfigurationEditorProvider
+                        implementation="by.vsu.cacheplugin.module.CacheObjectScriptModuleConfigEditor"/>-->
+
 
     </extensions>
 </idea-plugin>
