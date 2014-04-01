@@ -2,7 +2,6 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/main_icon.ico" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleBuilder.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleConfigEditor.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleType.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/module/OutputEditor.java" charset="windows-1251" />
