@@ -32,7 +32,7 @@ public final class CacheObjectScriptModuleType extends ModuleType<CacheObjectScr
     }
 
     public Icon getNodeIcon(boolean isOpened) {
-        return CacheObjectScriptIcons.MACFILE; // todo: another icon?
+        return CacheObjectScriptIcons.LARGEICON; // todo: another icon?
     }
 
     @Override
