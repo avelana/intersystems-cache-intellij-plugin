@@ -18,8 +18,12 @@
             <action id="CacheImport" class="by.vsu.cacheplugin.action.CacheImport" text="Import from Cache Studio XML"
                     description="Import from Cache Studio XML file">
             </action>
+            <action id="CacheConnection" class="by.vsu.cacheplugin.action.CacheConnection" text="CacheConnection"
+                    description="CacheConnection">
+            </action>
             <add-to-group group-id="MainMenu" relative-to-action="HelpMenu" anchor="before"/>
         </group>
+
     </actions>
     <extensions defaultExtensionNs="com.intellij">
         <!-- file types registration block -->
