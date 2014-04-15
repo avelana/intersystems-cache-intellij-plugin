@@ -17,9 +17,6 @@ cosFile ::= item_*
 private item_ ::= (commandString|COMMENT|CRLF)
 
 commandString::= (LABEL COMMAND args* CRLF)|( COMMAND args* CRLF)|(LABEL? COMMAND CRLF)
-args::= arg [{ arg }] | method
+args::= arg [{ arg }]
 arg::= operand | operation | comma
-method::= class classname methodname operand? | super methodname operand? | this methodname operand?
-classname::=operand
-methodname::=operand
 operand::= local | global | sys | globalsys | number | string

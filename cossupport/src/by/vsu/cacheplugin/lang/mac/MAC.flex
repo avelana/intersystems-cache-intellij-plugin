@@ -49,19 +49,16 @@ OPS1 = "++"|"--"|"'="|"<"|">"|"<="|">="|"<<"|">>"|"&"|"&&"|"|"|"||"|"+="|"-="|"*
 OPS2 = "|="|"^="|"%="|"<<="|">>="|"="|"\'"|"~"|"?"|":"|"+"|"-"|"*"|"/"|"^"|"%"
 
 /* identifiers & symbols */
-DOT="."
 IDENTIFIER = ([:letter:]|%) ([:letter:]|{DIGIT}|_ )*
 VALUE_CHARACTER=[^\n\r\f\\] | "\\"{CRLF} | "\\".
 VALUE = {VALUE_CHARACTER}* {CRLF}
 KEY_SEPARATOR=[\ \t]*[=][\ \t]* | [\ \t]+
-KEY_CHARACTER=[a-zA-Z0-9]
-LABEL_STRING={KEY_CHARACTER}{KEY_CHARACTER}*+ [:]
+KEY_CHARACTER=[a-zA-Z0-9]+ [:]
 SYS = "$"
 GLOBAL = "^"
 STRING = "\""+{VALUE_CHARACTER}*+"\"" | "'"+{VALUE_CHARACTER}*+"'"
 /* comments */
 COMMENT = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment} | {CacheComment}
-CLASSNAME = {IDENTIFIER}{DOT}*{IDENTIFIER}*
 
 TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 EndOfLineComment     = "//" {InputCharacter}*
@@ -80,37 +77,33 @@ COMMAND_6=[Zz][Kk][Ii][Ll][Ll]|[Zz][Nn][Ss][Pp][Aa][Cc][Ee]|[Zz][Tt][Rr][Aa][Pp]
 COMMAND_7=[Zz][Zz][Dd][Uu][Mm][Pp]|[Mm][Ee][Rr][Gg][Ee]|[Nn][Ee][Ww]|[Oo][Pp][Ee][Nn]
 COMMAND_8=[Kk][Ii][Ll][Ll]|[Ll][Oo][Cc][Kk]|[Tt][Rr][Oo][Ll][Ll][Bb][Aa][Cc][Kk]|[Ww][Rr][Ii][Tt][Ee]
 
-ObjectClass = "##"[Cc][Ll][Aa][Ss][Ss];
-ObjectSuper = "##"[Ss][Uu][Pp][Ee][Rr];
-ObjectThis = "##"[Tt][Hh][Ii][Ss];
-
-%state IN_COMMAND,IN_ARGS,IN_METHOD
+%state IN_COMMAND
 %state WAIT
 %%
 
 //command string
-<YYINITIAL>{LABEL_STRING}                                       { yybegin (IN_COMMAND); return CacheObjectScriptMacTypes.LABEL; }
-<YYINITIAL>{WHITE_SPACE_CHAR}+                                  { yybegin (IN_COMMAND); return TokenType.WHITE_SPACE; }
-<YYINITIAL>{COMMENT}                                            { return CacheObjectScriptMacTypes.COMMENT;}
+{KEY_CHARACTER}                                                 { yybegin(IN_COMMAND); return CacheObjectScriptMacTypes.LABEL; }
+{WHITE_SPACE_CHAR}+                                             { yybegin(IN_COMMAND); return TokenType.WHITE_SPACE; }
+{COMMENT}                                                       { yybegin(IN_COMMAND); return CacheObjectScriptMacTypes.COMMENT;}
 {CRLF}                                                          { yybegin (YYINITIAL); return CacheObjectScriptMacTypes.CRLF; }
-<IN_COMMAND>{COMMAND}                                           { yybegin (IN_ARGS);return CacheObjectScriptMacTypes.COMMAND; }
-<IN_ARGS>{ObjectClass}                                          { yybegin (IN_METHOD);return CacheObjectScriptMacTypes.CLASS;}
-<IN_ARGS>{ObjectSuper}                                          { yybegin (IN_METHOD);return CacheObjectScriptMacTypes.SUPER;}
-<IN_ARGS>{ObjectThis}                                           { yybegin (IN_METHOD);return CacheObjectScriptMacTypes.THIS;}
-<IN_METHOD>"("{CLASSNAME}")."
-<IN_ARGS>{OPERATIONS}                                           { return CacheObjectScriptMacTypes.OPERATION;}
-<IN_ARGS>{IDENTIFIER}                                           { return CacheObjectScriptMacTypes.LOCAL;}
-<IN_ARGS>{GLOBAL} {IDENTIFIER}                                  { return CacheObjectScriptMacTypes.GLOBAL;}
-<IN_ARGS>{SYS} {IDENTIFIER}                                     { return CacheObjectScriptMacTypes.SYS;}
-<IN_ARGS>{GLOBAL} {SYS} {IDENTIFIER}                            { return CacheObjectScriptMacTypes.GLOBALSYS;}
-<IN_ARGS>{STRING}                                               { return CacheObjectScriptMacTypes.STRING;}
-<IN_ARGS>{COMMA}                                                { return CacheObjectScriptMacTypes.COMMA;}
-<IN_ARGS>{COMMENT}                                              { return CacheObjectScriptMacTypes.COMMENT;}
-<IN_ARGS>{INTEGER_LITERAL}                                      { return CacheObjectScriptMacTypes.NUMBER; }
-<IN_ARGS>{FLOAT_LITERAL}                                        { return CacheObjectScriptMacTypes.NUMBER; }
-<IN_ARGS>{QUOTED_LITERAL}                                       { return CacheObjectScriptMacTypes.NUMBER; }
-<IN_ARGS>{DOUBLE_QUOTED_LITERAL}                                { return CacheObjectScriptMacTypes.NUMBER; }
-.                                                               { return TokenType.BAD_CHARACTER; }
+<IN_COMMAND> {COMMAND}                                                       { return CacheObjectScriptMacTypes.COMMAND; }
+<IN_COMMAND> {OPERATIONS}                                                    { return CacheObjectScriptMacTypes.OPERATION;}
+
+<IN_COMMAND> {IDENTIFIER}                                                    { return CacheObjectScriptMacTypes.LOCAL;}
+<IN_COMMAND> {GLOBAL}{IDENTIFIER}                                            { return CacheObjectScriptMacTypes.GLOBAL;}
+<IN_COMMAND> {SYS}{IDENTIFIER}                                               { return CacheObjectScriptMacTypes.SYS;}
+<IN_COMMAND> {GLOBAL}{SYS}{IDENTIFIER}                                       { return CacheObjectScriptMacTypes.GLOBALSYS;}
+<IN_COMMAND> {STRING}                                                        { return CacheObjectScriptMacTypes.STRING;}
+
+<IN_COMMAND> {COMMA}                                                         { return CacheObjectScriptMacTypes.COMMA;}
+<IN_COMMAND> {CRLF}                                                          { yybegin (YYINITIAL); return CacheObjectScriptMacTypes.CRLF; }
+<IN_COMMAND> {COMMENT}                                                       { return CacheObjectScriptMacTypes.COMMENT;}
+
+<IN_COMMAND> {INTEGER_LITERAL}                                               { return CacheObjectScriptMacTypes.NUMBER; }
+<IN_COMMAND> {FLOAT_LITERAL}                                                 { return CacheObjectScriptMacTypes.NUMBER; }
+<IN_COMMAND> {QUOTED_LITERAL}                                                { return CacheObjectScriptMacTypes.NUMBER; }
+<IN_COMMAND> {DOUBLE_QUOTED_LITERAL}                                         { return CacheObjectScriptMacTypes.NUMBER; }
+.                                                                            { return TokenType.BAD_CHARACTER; }
 
 
 
