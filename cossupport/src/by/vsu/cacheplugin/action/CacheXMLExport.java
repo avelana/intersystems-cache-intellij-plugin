@@ -10,7 +10,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
  * Time: 13:04
  * To change this template use File | Settings | File Templates.
  */
-public class CacheExport extends AnAction {
+public class CacheXMLExport extends AnAction {
     public void actionPerformed(AnActionEvent e) {
         // TODO: insert action logic here
     }

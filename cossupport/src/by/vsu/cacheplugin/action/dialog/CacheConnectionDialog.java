@@ -1,5 +1,8 @@
 package by.vsu.cacheplugin.action.dialog;
 
+import by.vsu.cacheplugin.service.ConnectionStorage;
+import com.intersys.objects.CacheException;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -18,32 +21,10 @@ public class CacheConnectionDialog extends JDialog {
     private JTextField namespaceField;
     private JTextField portField;
     private JTextField hostField;
-    private String host, namespase, username, password;
-    private Integer port;
     private boolean isOk;
 
     public boolean isOk() {
         return isOk;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getNamespase() {
-        return namespase;
-    }
-
-    public String getHost() {
-        return host;
     }
 
     public CacheConnectionDialog() {
@@ -80,26 +61,24 @@ public class CacheConnectionDialog extends JDialog {
     }
 
     private void onOK() {
-// add your code here
-        host = hostField.getText();
-        port = Integer.parseInt(portField.getText());
-        namespase = namespaceField.getText();
-        username = usernameField.getText();
-        password = String.valueOf(passwordField.getPassword());
-        isOk = true;
-        dispose();
+        try {
+            ConnectionStorage.getInstance().setParams(hostField.getText(),
+                    namespaceField.getText(),
+                    usernameField.getText(),
+                    String.valueOf(passwordField.getPassword()),
+                    Integer.parseInt(portField.getText()));
+            isOk = true;
+            dispose();
+        } catch (CacheException e1) {
+            e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Connection haven't been established: " + e1.getMessage(),
+                    "Error!", JOptionPane.OK_OPTION);
+        }
     }
 
     private void onCancel() {
-// add your code here if necessary
         isOk = false;
         dispose();
     }
 
-   /* public static void main(String[] args) {
-        CacheConnectionDialog dialog = new CacheConnectionDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }  */
 }

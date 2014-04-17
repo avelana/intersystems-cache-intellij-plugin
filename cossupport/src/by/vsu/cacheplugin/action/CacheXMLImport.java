@@ -12,7 +12,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
-public class CacheImport extends AnAction {
+public class CacheXMLImport extends AnAction {
     public void actionPerformed(AnActionEvent e) {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("XML files", "xml");
         JFileChooser fileChooser = new JFileChooser("");

@@ -12,13 +12,14 @@
     <actions>
         <group id="CacheStudioMenu" text="Cache Studio options" description="Import/export with Cache Studio"
                popup="true">
-            <action id="CacheExport" class="by.vsu.cacheplugin.action.CacheExport" text="Export to Cache Studio XML"
+            <action id="CacheExport" class="by.vsu.cacheplugin.action.CacheXMLExport" text="Export to Cache Studio XML"
                     description="Export to Cache Studio XML file">
             </action>
-            <action id="CacheImport" class="by.vsu.cacheplugin.action.CacheImport" text="Import from Cache Studio XML"
+            <action id="CacheImport" class="by.vsu.cacheplugin.action.CacheXMLImport"
+                    text="Import from Cache Studio XML"
                     description="Import from Cache Studio XML file">
             </action>
-            <action id="CacheConnection" class="by.vsu.cacheplugin.action.CacheConnection" text="CacheConnection"
+            <action id="CacheConnection" class="by.vsu.cacheplugin.action.CacheServerImport" text="CacheConnection"
                     description="CacheConnection">
             </action>
             <add-to-group group-id="MainMenu" relative-to-action="HelpMenu" anchor="before"/>
