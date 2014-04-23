@@ -20,11 +20,11 @@ public final class CacheObjectScriptModuleType extends ModuleType<CacheObjectScr
     }
 
     public String getName() {
-        return "CacheObjectScript Project";
+        return "    CacheObjectScript Module";
     }
 
     public String getDescription() {
-        return "<b>CacheObjectScript</b> project similar to Cache Studio project"; // todo: more wordy!
+        return "<b>CacheObjectScript</b> module similar to Cache Studio project"; // todo: more wordy!
     }
 
     public Icon getBigIcon() {

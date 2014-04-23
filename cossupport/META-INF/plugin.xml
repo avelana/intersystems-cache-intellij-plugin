@@ -6,9 +6,6 @@
 
     <idea-version since-build="107.105"/>
 
-    <project-components>
-    </project-components>
-
     <actions>
         <group id="CacheStudioMenu" text="Cache Studio options" description="Import/export with Cache Studio"
                popup="true">
@@ -19,14 +16,24 @@
                     text="Import from Cache Studio XML"
                     description="Import from Cache Studio XML file">
             </action>
-            <action id="CacheConnection" class="by.vsu.cacheplugin.action.CacheServerImport" text="CacheConnection"
-                    description="CacheConnection">
-            </action>
             <add-to-group group-id="MainMenu" relative-to-action="HelpMenu" anchor="before"/>
         </group>
-
+        <group id="CacheServerMenu" text="Cache Server options" description="Import/export with Cache Server"
+               popup="true">
+            <action id="CacheServerImport" class="by.vsu.cacheplugin.action.CacheServerImport"
+                    text="Cache Server Import"
+                    description="Cache Server Import">
+            </action>
+            <action id="CacheServerExport" class="by.vsu.cacheplugin.action.CacheServerExport"
+                    text="Cache Server Export"
+                    description="Cache Server Export">
+            </action>
+            <add-to-group group-id="ProjectViewPopupMenuSettingsGroup" relative-to-action="MarkDirectoryAs"
+                          anchor="before"/>
+        </group>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
+        <sdkType implementation="by.vsu.cacheplugin.sdk.CacheSdkType"/>
         <!-- file types registration block -->
         <fileTypeFactory implementation="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacFileTypeFactory"/>
         <fileTypeFactory implementation="by.vsu.cacheplugin.lang.cls.CacheObjectScriptClsFileTypeFactory"/>
@@ -47,9 +54,7 @@
         <completion.contributor language="COS"
                                 implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacCompletionContributor"/>
         <!-- module block -->
-        <!--        <moduleType id="CACHE_OBJECTSCRIPT_MODULE" classpathProvider="false"
-                   implementationClass="by.vsu.cacheplugin.module.CacheObjectScriptModuleType"/>
-               <moduleConfigurationEditorProvider
-                       implementation="by.vsu.cacheplugin.module.CacheObjectScriptModuleConfigEditor"/>-->
+        <moduleType id="CACHE_OBJECTSCRIPT_MODULE" classpathProvider="false"
+                    implementationClass="by.vsu.cacheplugin.module.CacheObjectScriptModuleType"/>
     </extensions>
 </idea-plugin>

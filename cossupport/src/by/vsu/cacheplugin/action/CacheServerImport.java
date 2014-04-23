@@ -21,7 +21,12 @@ import java.sql.SQLException;
 public class CacheServerImport extends AnAction {
 
     public void actionPerformed(AnActionEvent e) {
-        String workspaceURL = DataKeys.PROJECT.getData(e.getDataContext()).getBasePath() + File.separator + "src";
+        String workspaceURL = DataKeys.MODULE.getData(e.getDataContext()).getModuleFilePath();
+        workspaceURL = workspaceURL.substring(0,
+                workspaceURL.indexOf(DataKeys.MODULE.getData(e.getDataContext()).getModuleFile().getName()) - 1);
+        workspaceURL += File.separator + "src";
+        File f = new File(workspaceURL);
+        f.mkdir();
         CacheConnectionDialog dialog = new CacheConnectionDialog();
         dialog.pack();
         dialog.setVisible(true);
@@ -59,6 +64,7 @@ public class CacheServerImport extends AnAction {
                                         .callClassMethod("%Compiler.UDL.TextServices", "GetTextAsFile",
                                                 connStorage.getNamespace(), clsName,
                                                 NamePathGenerator.createPathFromName(clsName + ".cls", workspaceURL)));
+                                System.out.println(workspaceURL);
                             }
                         } catch (CacheException e1) {
                             e1.printStackTrace();
