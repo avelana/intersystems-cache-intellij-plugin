@@ -1,6 +1,5 @@
 package by.vsu.cacheplugin.lang.mac;
 
-import by.vsu.cacheplugin.lang.common.CacheObjectScriptLanguage;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;

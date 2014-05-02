@@ -48,7 +48,7 @@ OPS1 = "++"|"--"|"'="|"<"|">"|"<="|">="|"<<"|">>"|"&"|"&&"|"|"|"||"|"+="|"-="|"*
 OPS2 = "|="|"^="|"%="|"<<="|">>="|"="|"\'"|"~"|"?"|":"|"+"|"-"|"*"|"/"|"^"|"%"
 
 /* identifiers & symbols */
-IDENTIFIER = ([:letter:]|%) ([:letter:]|{DIGIT}|_ )*
+IDENTIFIER = ([:letter:]|%|_) ([:letter:]|{DIGIT}|_ )*
 VALUE_CHARACTER=[^\n\r\f\\] | "\\"{CRLF} | "\\".
 VALUE = {VALUE_CHARACTER}* {CRLF}
 KEY_SEPARATOR=[\ \t]*[=][\ \t]* | [\ \t]+
@@ -57,14 +57,15 @@ SYS = "$"
 GLOBAL = "^"
 STRING = "\""+{VALUE_CHARACTER}*+"\"" | "'"+{VALUE_CHARACTER}*+"'"
 /* comments */
-COMMENT = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment} | {CacheComment}
-
+COMMENT = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
+//| {CacheComment}
+DOT= "."
 TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 EndOfLineComment     = "//" {InputCharacter}*
-CacheComment = ";" {InputCharacter}*
+//CacheComment = ";" {InputCharacter}*
 DocumentationComment = "/**" {CommentContent} "*"+ "/"
 CommentContent       = ( [^*] | \*+ [^/*] )*
-
+DescriptionComment = "///" {InputCharacter}*
 /* commands */
 COMMAND = {COMMAND_1} | {COMMAND_2} | {COMMAND_3}
 COMMAND_1="BREAK"|"CATCH"|"CLOSE"|"CONTINUE"|"DO"|"DO WHILE"|"ELSE"|"ELSEIF"|"FOR"|"GOTO"|"HALT"|"HANG"
@@ -73,32 +74,146 @@ COMMAND_3="TRY"|"TSTART"|"USE"|"VIEW"|"WHILE"|"WRITE"|"XECUTE"|"ZKILL"|"ZNSPACE"
 START = {KEY_CHARACTER} | {WHITE_SPACE_CHAR}+ | {COMMENT}
 ERROR = !{START}
 
-%state IN_COMMAND
+/*class def*/
+IMPORT = "Import"
+INCLUDE = "Include" | "IncludeGenerator"
+CLASS= "Class"
+LBRASE = "{"
+RBRASE = "}"
+PACKAGE = {IDENTIFIER} {DOT}
+EXTENDS = "Extends"
+AS = "As"
+CLASSNAME={PACKAGE}*{IDENTIFIER}
+LPARENTHESIS="("
+RPARENTHESIS=")"
+LBRACKET="["
+RBRACKET="]"
+EQ="="
+
+/*foreign key def*/
+FKEY="ForeignKey"
+REF="References"
+SEMICOLON=";"
+
+/*class states*/
+%state IN_CLASSNAME, IN_CLASSENTRY, IN_CLASSICLUDE, IN_CLASSIMPORT,IN_OTHER,IN_FILENAME
+%state IN_CLASS_LIST,IN_AS,IN_EXTENDS,IN_KEYWORDS,IN_ARGS,IN_CLASS,IN_CLASS_LIST_EXT
+/*foreign key states*/
+%state IN_FKEY,IN_FKEY_PROPS,IN_FKEY_OTHER,IN_FKEY_REF,IN_FKEYWORDS,IN_FARGS
+
 %state WAIT
 %%
 
 //command string
-{KEY_CHARACTER}                                                 { yybegin(IN_COMMAND); return CacheObjectScriptClsTypes.LABEL; }
-{WHITE_SPACE_CHAR}+                                             { yybegin(IN_COMMAND); return TokenType.WHITE_SPACE; }
-{COMMENT}                                                       { yybegin(IN_COMMAND); return CacheObjectScriptClsTypes.COMMENT;}
-{CRLF}                                                          { yybegin (YYINITIAL); return CacheObjectScriptClsTypes.CRLF; }
-<IN_COMMAND> {COMMAND}                                                       { return CacheObjectScriptClsTypes.COMMAND; }
-<IN_COMMAND> {OPERATIONS}                                                    { return CacheObjectScriptClsTypes.OPERATION;}
+{CLASS}                                                { yybegin (IN_CLASS);  return CacheObjectScriptClsTypes.CLASS; }
+<IN_CLASS> {
+        {CLASSNAME}                                    { yybegin (IN_OTHER);return CacheObjectScriptClsTypes.CLASSNAME;  }
+}
+{INCLUDE}                                              { yybegin (IN_FILENAME); return CacheObjectScriptClsTypes.INCLUDE; }
+{IMPORT}                                               { yybegin (IN_CLASSNAME); return CacheObjectScriptClsTypes.IMPORT; }
+<IN_FILENAME> {
+    {CLASSNAME}                                        { yybegin (YYINITIAL);return CacheObjectScriptClsTypes.FILENAME;  }
+    {LPARENTHESIS}                                     { yybegin (IN_CLASS_LIST);return CacheObjectScriptClsTypes.LPAR;}
+    <IN_CLASS_LIST>{
+        {CLASSNAME}                                    { return CacheObjectScriptClsTypes.FILENAME;}
+        {COMMA}                                        { return CacheObjectScriptClsTypes.COMMA;}
+        {RPARENTHESIS}                                 { yybegin (YYINITIAL); return CacheObjectScriptClsTypes.RPAR;}
+    }
+    {WHITE_SPACE_CHAR}+                                { return TokenType.WHITE_SPACE; }
+}
+<IN_CLASSNAME> {
+    {CLASSNAME}                                        { yybegin (YYINITIAL);return CacheObjectScriptClsTypes.CLASSNAME;  }
+    {LPARENTHESIS}                                     { yybegin (IN_CLASS_LIST);return CacheObjectScriptClsTypes.LPAR;}
+    <IN_CLASS_LIST>{
+        {CLASSNAME}                                    { return CacheObjectScriptClsTypes.CLASSNAME;}
+        {COMMA}                                        { return CacheObjectScriptClsTypes.COMMA;}
+        {RPARENTHESIS}                                 { yybegin (YYINITIAL); return CacheObjectScriptClsTypes.RPAR;}
+    }
+    {WHITE_SPACE_CHAR}+                                { return TokenType.WHITE_SPACE; }
+}
+<IN_OTHER> {
+    {AS}                                               { yybegin (IN_AS); return CacheObjectScriptClsTypes.AS;}
+        {EXTENDS}                                      { yybegin (IN_EXTENDS); return CacheObjectScriptClsTypes.EXTENDS;}
+    <IN_AS>{
+        {CLASSNAME}                                    { yybegin (IN_OTHER); return CacheObjectScriptClsTypes.CLASSNAME; }
+    }
+    <IN_EXTENDS>{
+        {LPARENTHESIS}                                 { yybegin (IN_CLASS_LIST_EXT);return CacheObjectScriptClsTypes.LPAR;}
+        <IN_CLASS_LIST_EXT>{
+            {CLASSNAME}                                { return CacheObjectScriptClsTypes.CLASSNAME;}
+            {COMMA}                                    { return CacheObjectScriptClsTypes.COMMA;}
+            {RPARENTHESIS}                             { yybegin (IN_OTHER);return CacheObjectScriptClsTypes.RPAR; }
+        }
+    }
+    {LBRACKET}                                         { yybegin (IN_KEYWORDS); return CacheObjectScriptClsTypes.LBRACKET;}
+    <IN_KEYWORDS>{
+        {STRING}                                       { return CacheObjectScriptClsTypes.KEYWORD;}
+        {IDENTIFIER}                                   { return CacheObjectScriptClsTypes.KEYWORD;}
+        {CLASSNAME}                                    { return CacheObjectScriptClsTypes.KEYWORD;}
+        {COMMA}                                        { return CacheObjectScriptClsTypes.COMMA;}
+        {EQ}                                           { return CacheObjectScriptClsTypes.EQ;}
+        {LPARENTHESIS}                                 { yybegin (IN_ARGS);return CacheObjectScriptClsTypes.LPAR;}
+        <IN_ARGS>{
+            {NUM}                                      { return CacheObjectScriptClsTypes.KEYWORD;}
+            {STRING}                                   { return CacheObjectScriptClsTypes.KEYWORD;}
+            {IDENTIFIER}                               { return CacheObjectScriptClsTypes.KEYWORD;}
+            {CLASSNAME}                                { return CacheObjectScriptClsTypes.KEYWORD;}
+            {COMMA}                                    { return CacheObjectScriptClsTypes.COMMA;}
+            {RPARENTHESIS}                             { yybegin (IN_KEYWORDS);return CacheObjectScriptClsTypes.RPAR;}
+        }
+        {RBRACKET}                                     {yybegin (IN_OTHER); return CacheObjectScriptClsTypes.RBRACKET;}
+    }
+    {WHITE_SPACE_CHAR}+                                { return TokenType.WHITE_SPACE; }
+    {LBRASE}                                           { yybegin (IN_CLASSENTRY);return CacheObjectScriptClsTypes.LBRACE;}
+}
+<IN_CLASSENTRY> {
+    {FKEY}                                             { yybegin (IN_FKEY); return CacheObjectScriptClsTypes.FKEY_KEYWORD; }
+    <IN_FKEY> {
+        {IDENTIFIER}                                   { return CacheObjectScriptClsTypes.FKEY_NAME;}
+        {LPARENTHESIS}                                 { yybegin (IN_FKEY_PROPS); return CacheObjectScriptClsTypes.LPAR; }
+        <IN_FKEY_PROPS>{
+            {IDENTIFIER}                               { return CacheObjectScriptClsTypes.FPROP;}
+            {COMMA}                                    { return CacheObjectScriptClsTypes.COMMA;}
+            {RPARENTHESIS}                             { yybegin (IN_FKEY_OTHER); return CacheObjectScriptClsTypes.RPAR; }
+        }
+        <IN_FKEY_OTHER>{
+            {REF}                                          { yybegin (IN_FKEY_REF); return CacheObjectScriptClsTypes.FREF_WORD; }
+            <IN_FKEY_REF>{
+                {CLASSNAME}                                { return CacheObjectScriptClsTypes.FREF_CLASS; }
+                {LPARENTHESIS}                             { yybegin (IN_FKEY_PROPS); return CacheObjectScriptClsTypes.LPAR; }
+                <IN_FKEY_PROPS>{
+                    {IDENTIFIER}                           { return CacheObjectScriptClsTypes.FPROP;}
+                    {COMMA}                                { return CacheObjectScriptClsTypes.COMMA;}
+                    {RPARENTHESIS}                         { yybegin (IN_FKEY_OTHER); return CacheObjectScriptClsTypes.RPAR; }
+                }
+                {SEMICOLON}                                { yybegin (IN_CLASSENTRY); return CacheObjectScriptClsTypes.SEMICOLON;}
+                {LBRACKET}                                 { yybegin (IN_FKEYWORDS); return CacheObjectScriptClsTypes.LBRACKET;}
+                <IN_FKEYWORDS>{
+                    {STRING}                               { return CacheObjectScriptClsTypes.FKEYWORD;}
+                    {IDENTIFIER}                           { return CacheObjectScriptClsTypes.FKEYWORD;}
+                    {CLASSNAME}                            { return CacheObjectScriptClsTypes.FKEYWORD;}
+                    {COMMA}                                { return CacheObjectScriptClsTypes.COMMA;}
+                    {EQ}                                   { return CacheObjectScriptClsTypes.EQ;}
+                    {LPARENTHESIS}                         { yybegin (IN_FARGS);return CacheObjectScriptClsTypes.LPAR;}
+                    <IN_FARGS>{
+                        {NUM}                              { return CacheObjectScriptClsTypes.FKEYWORD;}
+                        {STRING}                           { return CacheObjectScriptClsTypes.FKEYWORD;}
+                        {IDENTIFIER}                       { return CacheObjectScriptClsTypes.FKEYWORD;}
+                        {CLASSNAME}                        { return CacheObjectScriptClsTypes.FKEYWORD;}
+                        {COMMA}                            { return CacheObjectScriptClsTypes.COMMA;}
+                        {RPARENTHESIS}                     { yybegin (IN_FKEYWORDS);return CacheObjectScriptClsTypes.RPAR;}
+                    }
+                    {RBRACKET}                             { yybegin (IN_FKEY); return CacheObjectScriptClsTypes.RBRACKET;}
+                }
+            }
+        }
+    }
+    {RBRASE}                                           { yybegin (YYINITIAL); return CacheObjectScriptClsTypes.RBRACE;}
+}
 
-<IN_COMMAND> {IDENTIFIER}                                                    { return CacheObjectScriptClsTypes.LOCAL;}
-<IN_COMMAND> {GLOBAL}{IDENTIFIER}                                            { return CacheObjectScriptClsTypes.GLOBAL;}
-<IN_COMMAND> {SYS}{IDENTIFIER}                                               { return CacheObjectScriptClsTypes.SYS;}
-<IN_COMMAND> {GLOBAL}{SYS}{IDENTIFIER}                                       { return CacheObjectScriptClsTypes.GLOBALSYS;}
-<IN_COMMAND> {STRING}                                                        { return CacheObjectScriptClsTypes.STRING;}
+{DescriptionComment}                                   { return CacheObjectScriptClsTypes.DESCRIPTION;}
+{COMMENT}                                              { return CacheObjectScriptClsTypes.COMMENT;}
 
-<IN_COMMAND> {COMMA}                                                         { return CacheObjectScriptClsTypes.COMMA;}
-<IN_COMMAND> {CRLF}                                                          { yybegin (YYINITIAL); return CacheObjectScriptClsTypes.CRLF; }
-.                                                                            { return TokenType.BAD_CHARACTER; }
-<IN_COMMAND> {COMMENT}                                                       { return CacheObjectScriptClsTypes.COMMENT;}
-
-<IN_COMMAND> {INTEGER_LITERAL}                                               { return CacheObjectScriptClsTypes.NUMBER; }
-<IN_COMMAND> {FLOAT_LITERAL}                                                 { return CacheObjectScriptClsTypes.NUMBER; }
-<IN_COMMAND> {QUOTED_LITERAL}                                                { return CacheObjectScriptClsTypes.NUMBER; }
-<IN_COMMAND> {DOUBLE_QUOTED_LITERAL}                                         { return CacheObjectScriptClsTypes.NUMBER; }
-
-
+{CRLF}                                                 { return TokenType.WHITE_SPACE; }
+{WHITE_SPACE_CHAR}+                                    { return TokenType.WHITE_SPACE; }
+.                                                      { return TokenType.BAD_CHARACTER; }

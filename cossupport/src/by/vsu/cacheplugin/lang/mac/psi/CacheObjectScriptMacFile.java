@@ -1,6 +1,6 @@
 package by.vsu.cacheplugin.lang.mac.psi;
 
-import by.vsu.cacheplugin.lang.common.CacheObjectScriptLanguage;
+import by.vsu.cacheplugin.lang.mac.CacheObjectScriptLanguage;
 import by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacFileType;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;

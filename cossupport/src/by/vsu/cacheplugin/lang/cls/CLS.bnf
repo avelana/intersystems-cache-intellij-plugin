@@ -14,9 +14,25 @@
  
 cosFile ::= item_*
  
-private item_ ::= (commandString|COMMENT|CRLF)
+private item_ ::= (classdef|COMMENT|DESCRIPTION)
 
-commandString::= (LABEL COMMAND args* CRLF)|( COMMAND args* CRLF)|(LABEL? COMMAND CRLF)
-args::= arg [{ arg }]
-arg::= operand | operation | comma
-operand::= local | global | sys | globalsys | number | string
+//class definition
+classdef::= [includeBlock]{DESCRIPTION* COMMENT*}[importBlock] defBlock  classEntry
+classEntry::=lbrace {fkey* method* property* query* xdata* param* trigger* index* projection* DESCRIPTION* COMMENT*} rbrace
+includeBlock::=(include fileList)
+importBlock::=(import classList)
+defBlock::= classNameBlock [extendBlock] [keywordsBlock]
+classNameBlock::=class className
+extendBlock::= [as className ] [extends classList]
+classList::= className | (lpar (className comma)+ className rpar)
+fileList::= fileName | (lpar (fileName comma)+ fileName rpar)
+keywordsBlock::=lbracket(keywordItem comma)* keywordItem rbracket
+keywordItem::= keyword [(eq keyword) |(eq lpar (keyword comma)+ keyword rpar)]
+
+//foreign key definition
+fkey::=fkey_keyWord fkey_Name lpar fprops rpar [fref_Word fref_Class lpar fprops rpar] [fkeyKeywordBlock] semicolon
+fkeyKeywordBlock::=lbracket(fkeywordItem comma)* fkeywordItem rbracket
+fkeywordItem::= fkeyword [(eq fkeyword) |(eq lpar (fkeyword comma)+ fkeyword rpar)]
+fprops::= fprop | ((fprop comma)* fprop)
+
+//

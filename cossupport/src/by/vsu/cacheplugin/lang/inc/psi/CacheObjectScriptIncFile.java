@@ -1,7 +1,7 @@
 package by.vsu.cacheplugin.lang.inc.psi;
 
-import by.vsu.cacheplugin.lang.common.CacheObjectScriptLanguage;
 import by.vsu.cacheplugin.lang.inc.CacheObjectScriptIncFileType;
+import by.vsu.cacheplugin.lang.inc.CacheObjectScriptIncLanguage;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class CacheObjectScriptIncFile extends PsiFileBase {
     public CacheObjectScriptIncFile(@NotNull FileViewProvider viewProvider) {
-        super(viewProvider, CacheObjectScriptLanguage.INSTANCE);
+        super(viewProvider, CacheObjectScriptIncLanguage.INSTANCE);
     }
 
     @NotNull

@@ -42,7 +42,8 @@
         <!-- parser definitions block -->
         <lang.parserDefinition language="COS"
                                implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacParserDefinition"/>
-
+        <lang.parserDefinition language="CDL"
+                               implementationClass="by.vsu.cacheplugin.lang.cls.CacheObjectScriptClsParserDefinition"/>
         <!-- syntax highlighter factories block -->
         <lang.syntaxHighlighterFactory key="COS"
                                        implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacSyntaxHighlighterFactory"/>

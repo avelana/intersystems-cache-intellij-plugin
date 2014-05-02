@@ -6,26 +6,30 @@ import by.vsu.cacheplugin.service.NamePathGenerator;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
+import com.intersys.classes.RoutineMgr;
+import com.intersys.objects.BooleanHolder;
+import com.intersys.objects.CacheException;
 import com.intersys.xep.XEPException;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by mmaya on 15.04.2014.
  */
 public class CacheServerExport extends AnAction {
+    private ConnectionStorage connStorage;
 
     public void actionPerformed(AnActionEvent e) {
         CacheConnectionDialog dialog = new CacheConnectionDialog();
         dialog.pack();
         dialog.setVisible(true);
         if (dialog.isOk()) {
-            ConnectionStorage connStorage = ConnectionStorage.getInstance();
+            connStorage = ConnectionStorage.getInstance();
             try {
                 connStorage.connectToPersister();
                 try {
@@ -36,18 +40,22 @@ public class CacheServerExport extends AnAction {
                             JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE
                     ) == JOptionPane.OK_OPTION) {
                         //todo change when the bug in method will be removed
-                        String vfs = DataKeys.MODULE.getData(e.getDataContext()).getModuleFilePath();
-                        vfs = vfs.replace("/", File.separator);
-                        vfs = vfs.substring(0, vfs.lastIndexOf(File.separator))
+                        String root = DataKeys.MODULE.getData(e.getDataContext()).getModuleFilePath();
+                        root = root.replace("/", File.separator);
+                        root = root.substring(0, root.lastIndexOf(File.separator))
                                 + File.separator + "src";
-                        File f = new File(vfs);
+                        File f = new File(root + File.separator + "classes");
                         if (f.isDirectory()) {
-                            exportFiles(f, connStorage, vfs);
+                            exportClasses(f, f.getAbsolutePath());
+                        }
+                        f = new File(root + File.separator + "programs");
+                        if (f.isDirectory()) {
+                            exportRoutines(f);
                         }
                         JOptionPane.showMessageDialog(null, "Export completed!", "Success!", JOptionPane.CLOSED_OPTION);
                     }
                     DataKeys.PROJECT.getData(e.getDataContext()).getWorkspaceFile().getFileSystem().refresh(true);
-                } catch (XEPException ex) {
+                } catch (Exception ex) {
                     System.out.println("export failed:\n" + ex);
                     JOptionPane.showMessageDialog(null, "export failed:" + ex.getMessage(), "Error!", JOptionPane.OK_OPTION);
                 }
@@ -59,11 +67,39 @@ public class CacheServerExport extends AnAction {
         }
     }
 
-    private void exportFiles(File f, ConnectionStorage connStorage, String home) {
+    private void exportRoutines(File rootDir) throws CacheException, IOException {
+        List<File> allFiles = Arrays.asList(rootDir.listFiles());
+        List<File> incFiles = new ArrayList<File>();
+        for (File child : allFiles) {
+            System.out.println(child.getName());
+            RoutineMgr routineMgr = new RoutineMgr(connStorage.getDb(),
+                    child.getName());
+            writeRoutine(routineMgr, child);
+            BooleanHolder refresh = new BooleanHolder(false);
+            routineMgr.sys_Save(refresh);
+        }
+    }
+
+    private void writeRoutine(RoutineMgr routineMgr, File child) throws CacheException, IOException {
+        Writer out = routineMgr.getCodeOut();
+        BufferedWriter bout = new BufferedWriter(out);
+        FileReader in = new FileReader(child);
+        BufferedReader bin = new BufferedReader(in);
+        while (bin.ready()) {
+            bout.write(new String(bin.readLine().getBytes(), Charset.forName("UTF-8")));
+            bout.newLine();
+        }
+        bin.close();
+        in.close();
+        bout.close();
+        out.close();
+    }
+
+    private void exportClasses(File f, String home) {
         for (File child : f.listFiles()) {
             System.out.println(child.getName());
             if (child.isDirectory()) {
-                exportFiles(child, connStorage, home);
+                exportClasses(child, home);
             } else {
                 String name = child.getAbsolutePath();
                 String clsPath = child.getAbsolutePath().

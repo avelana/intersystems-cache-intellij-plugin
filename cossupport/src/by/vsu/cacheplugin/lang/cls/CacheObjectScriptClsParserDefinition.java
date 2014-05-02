@@ -1,8 +1,8 @@
-package by.vsu.cacheplugin.lang.mac;
+package by.vsu.cacheplugin.lang.cls;
 
-import by.vsu.cacheplugin.lang.mac.parser.CacheObjectScriptMacParser;
-import by.vsu.cacheplugin.lang.mac.psi.CacheObjectScriptMacFile;
-import by.vsu.cacheplugin.lang.mac.psi.CacheObjectScriptMacTypes;
+import by.vsu.cacheplugin.lang.cls.parser.CacheObjectScriptClsParser;
+import by.vsu.cacheplugin.lang.cls.psi.CacheObjectScriptClsFile;
+import by.vsu.cacheplugin.lang.cls.psi.CacheObjectScriptClsTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.ParserDefinition;
@@ -20,16 +20,19 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
 
-public class CacheObjectScriptMacParserDefinition implements ParserDefinition {
+/**
+ * Created by mmaya on 02.05.2014.
+ */
+public class CacheObjectScriptClsParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-    public static final TokenSet COMMENTS = TokenSet.create(CacheObjectScriptMacTypes.COMMENT);
+    public static final TokenSet COMMENTS = TokenSet.create(CacheObjectScriptClsTypes.COMMENT);
 
-    public static final IFileElementType FILE = new IFileElementType(Language.<CacheObjectScriptLanguage>findInstance(CacheObjectScriptLanguage.class));
+    public static final IFileElementType FILE = new IFileElementType(Language.<CacheDefinitionLanguage>findInstance(CacheDefinitionLanguage.class));
 
     @NotNull
     @Override
     public Lexer createLexer(Project project) {
-        return new FlexAdapter(new CacheObjectScriptMacLexer((Reader) null));
+        return new FlexAdapter(new CacheObjectScriptClsLexer((Reader) null));
     }
 
     @NotNull
@@ -49,7 +52,7 @@ public class CacheObjectScriptMacParserDefinition implements ParserDefinition {
 
     @NotNull
     public PsiParser createParser(final Project project) {
-        return new CacheObjectScriptMacParser();
+        return new CacheObjectScriptClsParser();
     }
 
     @Override
@@ -58,7 +61,7 @@ public class CacheObjectScriptMacParserDefinition implements ParserDefinition {
     }
 
     public PsiFile createFile(FileViewProvider viewProvider) {
-        return new CacheObjectScriptMacFile(viewProvider);
+        return new CacheObjectScriptClsFile(viewProvider);
     }
 
     public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
@@ -67,6 +70,7 @@ public class CacheObjectScriptMacParserDefinition implements ParserDefinition {
 
     @NotNull
     public PsiElement createElement(ASTNode node) {
-        return CacheObjectScriptMacTypes.Factory.createElement(node);
+        return CacheObjectScriptClsTypes.Factory.createElement(node);
     }
 }
+

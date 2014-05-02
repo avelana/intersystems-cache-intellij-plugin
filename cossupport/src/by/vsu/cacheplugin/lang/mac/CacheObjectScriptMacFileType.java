@@ -1,7 +1,6 @@
 package by.vsu.cacheplugin.lang.mac;
 
 import by.vsu.cacheplugin.lang.common.CacheObjectScriptIcons;
-import by.vsu.cacheplugin.lang.common.CacheObjectScriptLanguage;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

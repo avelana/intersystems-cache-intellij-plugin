@@ -1,7 +1,6 @@
 package by.vsu.cacheplugin.lang.cls;
 
 import by.vsu.cacheplugin.lang.common.CacheObjectScriptIcons;
-import by.vsu.cacheplugin.lang.common.CacheObjectScriptLanguage;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +11,7 @@ public class CacheObjectScriptClsFileType extends LanguageFileType {
     public static final CacheObjectScriptClsFileType INSTANCE = new CacheObjectScriptClsFileType();
 
     private CacheObjectScriptClsFileType() {
-        super(CacheObjectScriptLanguage.INSTANCE);
+        super(CacheDefinitionLanguage.INSTANCE);
     }
 
     @NotNull

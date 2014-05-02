@@ -1,6 +1,6 @@
 package by.vsu.cacheplugin.lang.mac.psi;
 
-import by.vsu.cacheplugin.lang.common.CacheObjectScriptLanguage;
+import by.vsu.cacheplugin.lang.mac.CacheObjectScriptLanguage;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

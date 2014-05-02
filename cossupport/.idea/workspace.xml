@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87db374b-2c80-4efe-8fe5-cf15ec026aaf" name="Default" comment="Some updates and refactoring for import system">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/sdk/CacheSdkType.java" />
-      <change type="DELETED" beforePath="E:\cacheide\cossupport\src\by\vsu\cacheplugin\module\CacheObjectScriptModuleConfigEditor.java" afterPath="" />
-      <change type="DELETED" beforePath="E:\cacheide\cossupport\src\by\vsu\cacheplugin\module\OutputEditor.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleBuilder.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleType.java" />
+    <list default="true" id="87db374b-2c80-4efe-8fe5-cf15ec026aaf" name="Default" comment="Working import/export with Cache server&#10;Class definition syntax parser/lexer&#10;Foreign key definition syntax parser/lexer">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheDefinitionLanguage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsLexerAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsParserDefinition.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncLanguage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptLanguage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/intersys/classes/RoutineMgr.java" />
+      <change type="DELETED" beforePath="E:\cacheide\cossupport\src\by\vsu\cacheplugin\lang\common\CacheObjectScriptLanguage.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cossupport.zip" afterPath="$PROJECT_DIR$/cossupport.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsElementType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsElementType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsTokenType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsTokenType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncElementType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncElementType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacCompletionContributor.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacCompletionContributor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacElementType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacElementType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacFile.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerExport.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerExport.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerImport.java" afterPath="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerImport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -28,6 +48,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -64,8 +85,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true" />
     <breakpoint_rules converted="true" />
     <ui_properties converted="true" />
   </component>
@@ -74,7 +93,145 @@
     <favorites_list name="cossupport" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="CLS.bnf" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="731">
+              <caret line="30" column="65" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding>
+                <element signature="e#1#563#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoutineMgr.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/intersys/classes/RoutineMgr.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.46961325" vertical-offset="561" max-vertical-offset="38029">
+              <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CLS.flex" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="3825">
+              <caret line="200" column="96" selection-start-line="200" selection-start-column="96" selection-end-line="200" selection-end-column="96" />
+              <folding>
+                <marker date="1399050186895" expanded="true" signature="45:218" placeholder="..." />
+                <marker date="1399050186895" expanded="true" signature="3410:3472" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3427:3774" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3445:3648" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3428:3494" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3578:3643" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3703:3769" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3827:4593" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3827:3893" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="3967:4032" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4090:4153" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4232:4275" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4333:4373" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4431:4491" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4555:4586" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4663:4707" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4663:4729" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4787:4827" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4787:4850" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4908:4975" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="4929:4973" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5031:5062" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5031:5071" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5129:5189" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5253:5284" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5357:5411" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5361:5560" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5469:5533" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5595:5659" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5733:5808" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5880:5924" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="5905:5945" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6007:6050" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6007:6047" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6007:6047" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6105:6164" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6236:6301" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6381:6429" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6381:6423" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6381:6423" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6381:6423" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6481:6523" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6581:6623" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6681:6747" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6681:6721" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6681:6721" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6779:6850" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6779:6816" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6779:6816" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="6874:6931" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7004:7048" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7104:7144" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7204:7272" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7208:7250" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7308:7350" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7408:7448" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7506:7574" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7506:7567" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7625:7685" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7634:7697" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7755:7820" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7761:7792" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7850:7915" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="7993:8060" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="8134:8178" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="8236:8301" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="8384:8424" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="8482:8522" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="8580:8645" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="8742:8810" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="8899:8945" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9007:9072" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9167:9207" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9269:9309" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9371:9436" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9516:9585" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9647:9714" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9808:9851" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="9913:9956" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10018:10061" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10123:10163" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10225:10262" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10324:10382" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10476:10519" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10581:10624" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10686:10729" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10791:10834" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10896:10936" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="10998:11060" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11144:11206" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11288:11352" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11537:11603" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11539:11607" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11292:11354" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11294:11337" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11311:11351" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11435:11481" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11537:11605" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11539:11602" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11539:11581" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11640:11658" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11640:11671" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11729:11760" placeholder="{...}" />
+                <marker date="1399050186895" expanded="true" signature="11818:11851" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -89,32 +246,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/MacFile.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java" />
-        <option value="$PROJECT_DIR$/resources/mac/MAC.bnf" />
-        <option value="$PROJECT_DIR$/resources/inc/INC.bnf" />
-        <option value="$PROJECT_DIR$/resources/cls/CLS.bnf" />
-        <option value="$PROJECT_DIR$/resources/mac/MAC.flex" />
-        <option value="$PROJECT_DIR$/resources/inc/INC.flex" />
-        <option value="$PROJECT_DIR$/resources/cls/CLS.flex" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexerAdapter.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighter.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/BaseParser.java" />
-        <option value="$PROJECT_DIR$/src/Test.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/module/OutputEditor.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/module/HaskellModuleType.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptIcons.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheImport.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.bnf" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.flex" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/j.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/MyActionClass.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/CacheConnectionPanel.java" />
-        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/CacheConnectionForm.form" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/MyVisualPanel.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/CacheConnectionForm.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/CacheConnection.java" />
@@ -137,9 +268,35 @@
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleBuilder.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/sdk/CacheSdkType.java" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/CacheConnectionDialog.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/RoutineFile.java" />
+        <option value="$PROJECT_DIR$/lib/cachedb.jar!/com/intersys/objects/DatabaseUtilities.class" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerImport.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerExport.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsLexerAdapter.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptClsParserDefinition.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptLanguage.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheDefinitionLanguage.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsElementType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsTokenType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsParserDefinition.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptLanguage.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacElementType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacCompletionContributor.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptLanguage.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncLanguage.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncElementType.java" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex" />
+        <option value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf" />
       </list>
     </option>
   </component>
@@ -153,7 +310,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1378" />
     <option name="height" value="754" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -316,6 +473,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -332,12 +490,25 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="cossupport" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cossupport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cossupport" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gen" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -360,7 +531,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/ДИПЛОМ/intellij-erlang-master" />
+    <property name="last_opened_file_path" value="E:/cacheextremetest" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="154" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -379,6 +550,10 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="829" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="LayoutCode.rearrangeEntriesXML" value="false" />
+    <property name="last.edited.regexp" value="Sampl1eTex1t.inc" />
+    <property name="LayoutCode.rearrangeEntriesJetBrains Grammar" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJFlex" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac" />
   </component>
   <component name="PsiViewer.ProjectComponent">
     <option name="HIGHLIGHT" value="false" />
@@ -390,11 +565,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="by.vsu.cacheplugin.lang.inc" />
+      <recent name="by.vsu.cacheplugin.lang.mac" />
       <recent name="by.vsu.cacheplugin" />
       <recent name="by.vsu.cacheplugin.module" />
-      <recent name="by.vsu.cacheplugin.lang.inc" />
       <recent name="by.vsu.cacheplugin.lang.cls" />
-      <recent name="by.vsu.cacheplugin.parsers.importers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\cacheide\cossupport\lib" />
@@ -406,12 +581,15 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="by.vsu.cacheplugin.lang.mac.parser" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="by.vsu.cacheplugin.lang.cls" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\cacheide\cossupport\src\com\intersys\classes" />
       <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\common" />
       <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\mac" />
       <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\inc" />
       <recent name="E:\к диплому\diploma\cossupport\src\by\vsu\cacheplugin\lang\cls" />
-      <recent name="E:\к диплому\diploma\cossupport\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Plugin.cossupp">
@@ -472,6 +650,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -497,19 +688,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -634,72 +812,98 @@
       <created>1397766704318</created>
       <updated>1397766704318</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Export classes to server + module and fake sdk for Cache">
+      <created>1398291010574</created>
+      <updated>1398291010574</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1378" height="754" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12102874" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12102874" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39865997" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32608697" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="ANTLR Parse Tree" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21633889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3115578" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" x="96" y="96" width="1088" height="807" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21623673" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3110368" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3296875" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" x="96" y="96" width="1088" height="807" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19364598" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Parse Tree" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2328125" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2328125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997735" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19515885" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" x="96" y="96" width="1088" height="807" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3296875" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" x="96" y="96" width="1088" height="807" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19364598" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Parse Tree" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21633889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2043551" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21623673" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3110368" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2328125" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2328125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12102874" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12102874" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39865997" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32608697" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="ANTLR Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997735" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -724,13 +928,15 @@
     <MESSAGE value="libs+template for dialog window" />
     <MESSAGE value="IMPORT CLASSES FROM CONNECTED SERVER!!!:))) IT WORKS!!!:))))" />
     <MESSAGE value="Some updates and refactoring for import system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some updates and refactoring for import system" />
+    <MESSAGE value="Export classes to server + module and fake sdk for Cache" />
+    <MESSAGE value="Working import/export with Cache server&#10;Class definition syntax parser/lexer&#10;Foreign key definition syntax parser/lexer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working import/export with Cache server&#10;Class definition syntax parser/lexer&#10;Foreign key definition syntax parser/lexer" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="16" />
+      <option name="time" value="17" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -738,300 +944,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsElementType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncElementType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacElementType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13885647" vertical-offset="0" max-vertical-offset="857">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15869312" vertical-offset="0" max-vertical-offset="857">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/INC.bnf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.01983664" vertical-offset="0" max-vertical-offset="857">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0545024" vertical-offset="1026" max-vertical-offset="1870">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/INC.flex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8187204" vertical-offset="1026" max-vertical-offset="1870">
-          <caret line="101" column="106" selection-start-line="101" selection-start-column="106" selection-end-line="101" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.329806" vertical-offset="0" max-vertical-offset="567">
-          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41975307" vertical-offset="0" max-vertical-offset="567">
-          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41975307" vertical-offset="0" max-vertical-offset="567">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8104693" vertical-offset="517" max-vertical-offset="1071">
-          <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4296029" vertical-offset="136" max-vertical-offset="1496">
-          <caret line="22" column="105" selection-start-line="22" selection-start-column="105" selection-end-line="22" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17989418" vertical-offset="0" max-vertical-offset="567">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/RoutineParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21480145" vertical-offset="0" max-vertical-offset="1003">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/ClassParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70017636" vertical-offset="249" max-vertical-offset="1071">
-          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/BaseParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44268078" vertical-offset="38" max-vertical-offset="646">
-          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21820304" vertical-offset="0" max-vertical-offset="857">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="10" selection-end-line="38" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/main_icon.ico">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptIcons.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08374384" vertical-offset="0" max-vertical-offset="406">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="72318">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.bnf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
-          <caret line="22" column="26" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.flex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38848922" vertical-offset="1348" max-vertical-offset="1904">
-          <caret line="95" column="26" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/common/CacheObjectScriptLanguage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11950791" vertical-offset="0" max-vertical-offset="569">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/CacheProjectParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12820514" vertical-offset="788" max-vertical-offset="1275">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="69" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/dialog/CacheConnectionDialog.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheXMLExport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6363636" vertical-offset="0" max-vertical-offset="374">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheXMLImport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.95454544" vertical-offset="0" max-vertical-offset="544">
-          <caret line="31" column="62" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/service/NamePathGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36363637" vertical-offset="0" max-vertical-offset="544">
-          <caret line="8" column="76" selection-start-line="8" selection-start-column="76" selection-end-line="8" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_33/src.zip!/javax/swing/JOptionPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.770082" vertical-offset="16980" max-vertical-offset="42466">
-          <caret line="617" column="23" selection-start-line="617" selection-start-column="23" selection-end-line="617" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_33/src.zip!/java/awt/Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33179724" vertical-offset="5160" max-vertical-offset="77418">
-          <caret line="361" column="21" selection-start-line="361" selection-start-column="21" selection-end-line="361" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_33/src.zip!/java/awt/Frame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="6770" max-vertical-offset="19550">
-          <caret line="432" column="17" selection-start-line="432" selection-start-column="17" selection-end-line="432" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_33/src.zip!/javax/swing/JFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7235023" vertical-offset="3664" max-vertical-offset="15062">
-          <caret line="242" column="68" selection-start-line="242" selection-start-column="37" selection-end-line="242" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/project/impl/DefaultProject.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11950791" vertical-offset="0" max-vertical-offset="569">
-          <caret line="5" column="27" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/project/Project.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11950791" vertical-offset="0" max-vertical-offset="867">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/project/impl/ProjectImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.0845323" vertical-offset="1379" max-vertical-offset="9316">
-          <caret line="288" column="16" selection-start-line="288" selection-start-column="16" selection-end-line="288" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/actionSystem/AnAction.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12230216" vertical-offset="0" max-vertical-offset="3264">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
-          <caret line="32" column="48" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#873#874#0" expanded="false" />
-            <element signature="e#920#921#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/module/CacheObjectScriptModuleType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35852373" vertical-offset="0" max-vertical-offset="569">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/service/ConnectionStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.97012305" vertical-offset="247" max-vertical-offset="1071">
-          <caret line="68" column="51" selection-start-line="68" selection-start-column="51" selection-end-line="68" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/projectRoots/impl/JavaSdkImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.9837837" vertical-offset="3621" max-vertical-offset="9894">
-          <caret line="120" column="36" selection-start-line="120" selection-start-column="36" selection-end-line="120" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/projectRoots/impl/SdkVersionUtil.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1039,10 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73513514" vertical-offset="1173" max-vertical-offset="1598">
           <caret line="105" column="32" selection-start-line="105" selection-start-column="32" selection-end-line="105" selection-end-column="32" />
-          <folding>
-            <element signature="e#3606#3607#0" expanded="true" />
-            <element signature="e#3663#3664#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1050,7 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18378378" vertical-offset="0" max-vertical-offset="1173">
           <caret line="16" column="27" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,7 +969,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.3432434" vertical-offset="0" max-vertical-offset="3400">
           <caret line="76" column="45" selection-start-line="76" selection-start-column="45" selection-end-line="76" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1066,11 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3315927" vertical-offset="0" max-vertical-offset="663">
           <caret line="40" column="35" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#815#816#0" expanded="false" />
-            <element signature="e#843#844#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1078,16 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.5509138" vertical-offset="1045" max-vertical-offset="1428">
           <caret line="8" column="50" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="50" />
-          <folding>
-            <element signature="e#954#1081#0" expanded="true" />
-            <element signature="e#1070#1071#0" expanded="true" />
-            <element signature="e#1124#1255#0" expanded="true" />
-            <element signature="e#1244#1245#0" expanded="true" />
-            <element signature="e#1381#1509#0" expanded="true" />
-            <element signature="e#1498#1499#0" expanded="true" />
-            <element signature="e#1585#1716#0" expanded="true" />
-            <element signature="e#1705#1706#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1095,7 +990,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33159268" vertical-offset="2253" max-vertical-offset="2975">
           <caret line="149" column="15" selection-start-line="149" selection-start-column="15" selection-end-line="149" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1103,33 +997,444 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.997389" vertical-offset="196" max-vertical-offset="1088">
           <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerImport.java">
+    <entry file="jar://$PROJECT_DIR$/lib/cachedb.jar!/com/intersys/objects/DatabaseUtilities.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4229765" vertical-offset="671" max-vertical-offset="1411">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="65" selection-end-column="119" />
-          <folding />
+        <state vertical-scroll-proportion="8.248555" vertical-offset="5085" max-vertical-offset="16388">
+          <caret line="492" column="95" selection-start-line="492" selection-start-column="95" selection-end-line="492" selection-end-column="95" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/parser/importer/filetype/RoutineParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7780679" vertical-offset="178" max-vertical-offset="1054">
-          <caret line="28" column="124" selection-start-line="28" selection-start-column="124" selection-end-line="28" selection-end-column="124" />
-          <folding />
+        <state vertical-scroll-proportion="1.3070176" vertical-offset="3" max-vertical-offset="1003">
+          <caret line="52" column="38" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_33/src.zip!/java/nio/charset/Charset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.9427084" vertical-offset="5952" max-vertical-offset="14229">
+          <caret line="426" column="27" selection-start-line="426" selection-start-column="27" selection-end-line="426" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerExport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1331593" vertical-offset="807" max-vertical-offset="1598">
-          <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.48697916" vertical-offset="0" max-vertical-offset="2261">
+          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheServerImport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8229167" vertical-offset="1180" max-vertical-offset="1836">
+          <caret line="104" column="41" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/service/ConnectionStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1770834" vertical-offset="330" max-vertical-offset="1071">
+          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheXMLImport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3359375" vertical-offset="160" max-vertical-offset="544">
+          <caret line="27" column="88" selection-start-line="27" selection-start-column="80" selection-end-line="27" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/action/CacheXMLExport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6197917" vertical-offset="0" max-vertical-offset="384">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsElementType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0877192" vertical-offset="0" max-vertical-offset="306">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09418283" vertical-offset="17" max-vertical-offset="527">
+          <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/psi/CacheObjectScriptClsTokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09418283" vertical-offset="0" max-vertical-offset="361">
+          <caret line="2" column="59" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheDefinitionLanguage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47091413" vertical-offset="0" max-vertical-offset="361">
+          <caret line="12" column="59" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.091412745" vertical-offset="1" max-vertical-offset="629">
+          <caret line="2" column="61" selection-start-line="2" selection-start-column="61" selection-end-line="2" selection-end-column="61" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#478#479#0" expanded="false" />
+            <element signature="e#533#534#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsFileTypeFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17708333" vertical-offset="0" max-vertical-offset="384">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsLexerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44270834" vertical-offset="0" max-vertical-offset="384">
+          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsParserDefinition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54986525" vertical-offset="0" max-vertical-offset="1122">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding>
+            <element signature="e#1189#1214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacElementType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/psi/CacheObjectScriptMacTokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptLanguage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacColorSettingsPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1360">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacCompletionContributor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacFileTypeFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="14518">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacLexerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacParserDefinition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1496">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/CacheObjectScriptMacSyntaxHighlighterFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="1122">
+          <caret line="44" column="43" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncLanguage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="595">
+          <caret line="2" column="61" selection-start-line="2" selection-start-column="61" selection-end-line="2" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/CacheObjectScriptIncFileTypeFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncTokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/inc/psi/CacheObjectScriptIncElementType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.408" vertical-offset="0" max-vertical-offset="375">
+          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CacheObjectScriptClsLexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32552084" vertical-offset="9701" max-vertical-offset="10795">
+          <caret line="599" column="45" selection-start-line="599" selection-start-column="16" selection-end-line="599" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.flex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8948787" vertical-offset="1232" max-vertical-offset="1904">
+          <caret line="95" column="26" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/mac/MAC.bnf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48697916" vertical-offset="0" max-vertical-offset="384">
+          <caret line="22" column="49" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.flex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="3825">
+          <caret line="200" column="96" selection-start-line="200" selection-start-column="96" selection-end-line="200" selection-end-column="96" />
+          <folding>
+            <marker date="1399050186895" expanded="true" signature="45:218" placeholder="..." />
+            <marker date="1399050186895" expanded="true" signature="3410:3472" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3427:3774" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3445:3648" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3428:3494" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3578:3643" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3703:3769" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3827:4593" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3827:3893" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="3967:4032" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4090:4153" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4232:4275" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4333:4373" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4431:4491" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4555:4586" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4663:4707" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4663:4729" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4787:4827" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4787:4850" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4908:4975" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="4929:4973" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5031:5062" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5031:5071" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5129:5189" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5253:5284" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5357:5411" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5361:5560" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5469:5533" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5595:5659" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5733:5808" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5880:5924" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="5905:5945" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6007:6050" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6007:6047" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6007:6047" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6105:6164" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6236:6301" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6381:6429" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6381:6423" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6381:6423" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6381:6423" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6481:6523" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6581:6623" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6681:6747" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6681:6721" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6681:6721" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6779:6850" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6779:6816" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6779:6816" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="6874:6931" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7004:7048" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7104:7144" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7204:7272" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7208:7250" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7308:7350" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7408:7448" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7506:7574" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7506:7567" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7625:7685" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7634:7697" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7755:7820" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7761:7792" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7850:7915" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="7993:8060" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="8134:8178" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="8236:8301" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="8384:8424" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="8482:8522" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="8580:8645" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="8742:8810" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="8899:8945" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9007:9072" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9167:9207" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9269:9309" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9371:9436" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9516:9585" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9647:9714" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9808:9851" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="9913:9956" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10018:10061" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10123:10163" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10225:10262" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10324:10382" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10476:10519" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10581:10624" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10686:10729" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10791:10834" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10896:10936" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="10998:11060" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11144:11206" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11288:11352" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11537:11603" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11539:11607" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11292:11354" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11294:11337" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11311:11351" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11435:11481" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11537:11605" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11539:11602" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11539:11581" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11640:11658" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11640:11671" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11729:11760" placeholder="{...}" />
+            <marker date="1399050186895" expanded="true" signature="11818:11851" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/vsu/cacheplugin/lang/cls/CLS.bnf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="731">
+          <caret line="30" column="65" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#563#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/intersys/classes/RoutineMgr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.46961325" vertical-offset="561" max-vertical-offset="38029">
+          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
