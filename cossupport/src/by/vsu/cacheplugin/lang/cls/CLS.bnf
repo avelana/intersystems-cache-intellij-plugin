@@ -18,7 +18,8 @@ private item_ ::= (classdef|COMMENT|DESCRIPTION)
 
 //class definition
 classdef::= [includeBlock]{DESCRIPTION* COMMENT*}[importBlock] defBlock  classEntry
-classEntry::=lbrace {fkey* method* property* query* xdata* param* trigger* index* projection* DESCRIPTION* COMMENT*} rbrace
+classEntry::=lbrace elem* rbrace
+elem::=fkey| method| property| query| xdata| param| trigger| index| projection| DESCRIPTION| COMMENT
 includeBlock::=(include fileList)
 importBlock::=(import classList)
 defBlock::= classNameBlock [extendBlock] [keywordsBlock]
@@ -36,8 +37,21 @@ fkeywordItem::= fkeyword [(eq fkeyword) |(eq lpar (fkeyword comma)+ fkeyword rpa
 fprops::= (fprop comma)* fprop
 
 //index definition
-index::= indexWord indexName on indexProps [indexKeywordBlock] indexEnd
-indexEnd::= semicolon | lbrace rbrace
+index::= indexWord indexName on indexProps [indexKeywordBlock] indexBody
+indexBody::= semicolon | lbrace rbrace
 indexKeywordBlock::=lbracket(ikeywordItem comma)* ikeywordItem rbracket
 ikeywordItem::= ikeyword [(eq ikeyword) |(eq lpar (ikeyword comma)+ ikeyword rpar)]
 indexProps::= indexProp | lpar((indexProp comma)+ indexProp)rpar
+
+//method definition
+method::=methodWord methodName  methodArgs [retVal] [methodKeywordsBlock] methodBody
+methodArgs::= lpar ([argModifier] argName argClass [eq argDefault])* rpar
+argClass::=as className [argParams]
+retVal::= as className [retParams]
+methodKeywordsBlock::=lbracket(mkeywordItem comma)* mkeywordItem rbracket
+mkeywordItem::= mkeyword [(eq mkeyword) |(eq lpar (mkeyword comma)+ mkeyword rpar)]
+argParams::=lpar(argParam comma)* argParam rpar
+argParam::= argKeyword [(eq argKeyword) |(eq lpar (argKeyword comma)+ argKeyword rpar)]
+retParams::=lpar(retParam comma)* retParam rpar
+retParam::= retKeyword [(eq retKeyword) |(eq lpar (retKeyword comma)+ retKeyword rpar)]
+methodBody::= lbrace [methodCode] rbrace
