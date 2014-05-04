@@ -75,14 +75,14 @@ START = {KEY_CHARACTER} | {WHITE_SPACE_CHAR}+ | {COMMENT}
 ERROR = !{START}
 
 /*class def*/
-IMPORT = "Import"
-INCLUDE = "Include" | "IncludeGenerator"
-CLASS= "Class"
+IMPORT = [Ii][Mm][Pp][Oo][Rr][Tt]
+INCLUDE = [Ii][Nn][Cc][Ll][Uu][Dd][Ee] | [Ii][Nn][Cc][Ll][Uu][Dd][Ee][Gg][Ee][Nn][Ee][Rr][Aa][Tt][Oo][Rr]
+CLASS= [Cc][Ll][Aa][Ss][Ss]
 LBRASE = "{"
 RBRASE = "}"
 PACKAGE = {IDENTIFIER} {DOT}
-EXTENDS = "Extends"
-AS = "As"
+EXTENDS = [Ee][Xx][Tt][Ee][Nn][Dd][Ss]
+AS = [Aa][Ss]
 CLASSNAME={PACKAGE}*{IDENTIFIER}
 LPARENTHESIS="("
 RPARENTHESIS=")"
@@ -91,16 +91,21 @@ RBRACKET="]"
 EQ="="
 
 /*foreign key def*/
-FKEY="ForeignKey"
-REF="References"
+FKEY=[Ff][Oo][Rr][Ee][Ii][Gg][Nn][Kk][Ee][Yy]
+REF=[Rr][Ee][Ff][Ee][Rr][Ee][Nn][Cc][Ee][Ss]
 SEMICOLON=";"
+
+/*index def*/
+INDEX=[Ii][Nn][Dd][Ee][Xx]
+ON=[Oo][Nn]
 
 /*class states*/
 %state IN_CLASSNAME, IN_CLASSENTRY, IN_CLASSICLUDE, IN_CLASSIMPORT,IN_OTHER,IN_FILENAME
 %state IN_CLASS_LIST,IN_AS,IN_EXTENDS,IN_KEYWORDS,IN_ARGS,IN_CLASS,IN_CLASS_LIST_EXT
 /*foreign key states*/
 %state IN_FKEY,IN_FKEY_PROPS,IN_FKEY_OTHER,IN_FKEY_REF,IN_FKEYWORDS,IN_FARGS
-
+/*index key states*/
+%state IN_INDEX,IN_INDEX_PROPS,IN_INDEX_OTHER,IN_INDEX_ON,IN_IKEYWORDS,IN_IARGS,IN_INDEX_ENTRY
 %state WAIT
 %%
 
@@ -168,6 +173,8 @@ SEMICOLON=";"
 }
 <IN_CLASSENTRY> {
     {FKEY}                                             { yybegin (IN_FKEY); return CacheObjectScriptClsTypes.FKEY_KEYWORD; }
+    {INDEX}                                             { yybegin (IN_INDEX); return CacheObjectScriptClsTypes.INDEXWORD; }
+    //foreign key def
     <IN_FKEY> {
         {IDENTIFIER}                                   { return CacheObjectScriptClsTypes.FKEY_NAME;}
         {LPARENTHESIS}                                 { yybegin (IN_FKEY_PROPS); return CacheObjectScriptClsTypes.LPAR; }
@@ -208,6 +215,45 @@ SEMICOLON=";"
             }
         }
     }
+    //index def
+        <IN_INDEX> {
+            {IDENTIFIER}                                   { yybegin (IN_INDEX_OTHER); return CacheObjectScriptClsTypes.INDEXNAME;}
+            <IN_INDEX_OTHER>{
+                {ON}                                          { yybegin (IN_INDEX_ON); return CacheObjectScriptClsTypes.ON; }
+                <IN_INDEX_ON>{
+                    {IDENTIFIER}                               { return CacheObjectScriptClsTypes.INDEXPROP; }
+                    {LPARENTHESIS}                             { yybegin (IN_INDEX_PROPS); return CacheObjectScriptClsTypes.LPAR; }
+                    <IN_INDEX_PROPS>{
+                        {IDENTIFIER}                           { return CacheObjectScriptClsTypes.INDEXPROP;}
+                        {COMMA}                                { return CacheObjectScriptClsTypes.COMMA;}
+                        {RPARENTHESIS}                         { yybegin (IN_INDEX_OTHER); return CacheObjectScriptClsTypes.RPAR; }
+                    }
+                    {SEMICOLON}                                { yybegin (IN_CLASSENTRY); return CacheObjectScriptClsTypes.SEMICOLON;}
+                    {LBRASE}                                   { yybegin (IN_INDEX_ENTRY);return CacheObjectScriptClsTypes.LBRACE;}
+                    <IN_INDEX_ENTRY>{
+                        {RBRASE}                               { yybegin (IN_CLASSENTRY);return CacheObjectScriptClsTypes.RBRACE;}
+                    }
+                    {LBRACKET}                                 { yybegin (IN_IKEYWORDS); return CacheObjectScriptClsTypes.LBRACKET;}
+                    <IN_IKEYWORDS>{
+                        {STRING}                               { return CacheObjectScriptClsTypes.IKEYWORD;}
+                        {IDENTIFIER}                           { return CacheObjectScriptClsTypes.IKEYWORD;}
+                        {CLASSNAME}                            { return CacheObjectScriptClsTypes.IKEYWORD;}
+                        {COMMA}                                { return CacheObjectScriptClsTypes.COMMA;}
+                        {EQ}                                   { return CacheObjectScriptClsTypes.EQ;}
+                        {LPARENTHESIS}                         { yybegin (IN_IARGS);return CacheObjectScriptClsTypes.LPAR;}
+                        <IN_IARGS>{
+                            {NUM}                              { return CacheObjectScriptClsTypes.IKEYWORD;}
+                            {STRING}                           { return CacheObjectScriptClsTypes.IKEYWORD;}
+                            {IDENTIFIER}                       { return CacheObjectScriptClsTypes.IKEYWORD;}
+                            {CLASSNAME}                        { return CacheObjectScriptClsTypes.IKEYWORD;}
+                            {COMMA}                            { return CacheObjectScriptClsTypes.COMMA;}
+                            {RPARENTHESIS}                     { yybegin (IN_IKEYWORDS);return CacheObjectScriptClsTypes.RPAR;}
+                        }
+                        {RBRACKET}                             { yybegin (IN_INDEX); return CacheObjectScriptClsTypes.RBRACKET;}
+                    }
+                }
+            }
+        }
     {RBRASE}                                           { yybegin (YYINITIAL); return CacheObjectScriptClsTypes.RBRACE;}
 }
 

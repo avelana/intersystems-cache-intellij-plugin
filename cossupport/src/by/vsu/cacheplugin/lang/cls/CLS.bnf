@@ -33,6 +33,11 @@ keywordItem::= keyword [(eq keyword) |(eq lpar (keyword comma)+ keyword rpar)]
 fkey::=fkey_keyWord fkey_Name lpar fprops rpar [fref_Word fref_Class lpar fprops rpar] [fkeyKeywordBlock] semicolon
 fkeyKeywordBlock::=lbracket(fkeywordItem comma)* fkeywordItem rbracket
 fkeywordItem::= fkeyword [(eq fkeyword) |(eq lpar (fkeyword comma)+ fkeyword rpar)]
-fprops::= fprop | ((fprop comma)* fprop)
+fprops::= (fprop comma)* fprop
 
-//
+//index definition
+index::= indexWord indexName on indexProps [indexKeywordBlock] indexEnd
+indexEnd::= semicolon | lbrace rbrace
+indexKeywordBlock::=lbracket(ikeywordItem comma)* ikeywordItem rbracket
+ikeywordItem::= ikeyword [(eq ikeyword) |(eq lpar (ikeyword comma)+ ikeyword rpar)]
+indexProps::= indexProp | lpar((indexProp comma)+ indexProp)rpar
