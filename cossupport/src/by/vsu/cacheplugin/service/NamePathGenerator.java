@@ -19,8 +19,14 @@ public class NamePathGenerator {
         return filename;
     }
 
-    public static String pathToName(String path) {
-        String name = "";
-        return name;
+    public static String[] pathToName(String path) {
+        String name = "", ext = "";
+        path = path.replace("\\", File.separator);
+        path = path.substring(path.lastIndexOf(File.separator));
+        ext = path.substring(path.lastIndexOf(".") + 1);
+        System.out.println(ext);
+        name = path.substring(1, path.lastIndexOf("."));
+        System.out.println(name);
+        return new String[]{name, ext};
     }
 }

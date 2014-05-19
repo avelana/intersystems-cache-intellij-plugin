@@ -2,7 +2,6 @@ package by.vsu.cacheplugin.action;
 
 import by.vsu.cacheplugin.parser.importer.CacheProjectParser;
 import by.vsu.cacheplugin.parser.importer.filetype.BaseParser;
-import by.vsu.cacheplugin.parser.importer.filetype.ClassParser;
 import by.vsu.cacheplugin.parser.importer.filetype.RoutineParser;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -28,10 +27,10 @@ public class CacheXMLImport extends AnAction {
                 BaseParser routineSax = new RoutineParser(workspaceURL, xmlURL);
                 routineSax.run();
             }
-            if (listSax.isHasClass()) {
+           /* if (listSax.isHasClass()) {
                 BaseParser classSax = new ClassParser(workspaceURL, xmlURL);
                 classSax.run();
-            }
+            } */
         }
     }
 }

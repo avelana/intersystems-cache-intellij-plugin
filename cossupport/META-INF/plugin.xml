@@ -47,10 +47,11 @@
         <!-- syntax highlighter factories block -->
         <lang.syntaxHighlighterFactory key="COS"
                                        implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacSyntaxHighlighterFactory"/>
-
+        <lang.syntaxHighlighterFactory key="CDL"
+                                       implementationClass="by.vsu.cacheplugin.lang.cls.CacheObjectScriptClsSyntaxHighlighterFactory"/>
         <!-- color settings pages block -->
-        <colorSettingsPage implementation="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacColorSettingsPage"/>
-
+        <colorSettingsPage id="COS" implementation="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacColorSettingsPage"/>
+        <colorSettingsPage id="CDL" implementation="by.vsu.cacheplugin.lang.cls.CacheObjectScriptClsColorSettingsPage"/>
         <!-- completion contributors block -->
         <completion.contributor language="COS"
                                 implementationClass="by.vsu.cacheplugin.lang.mac.CacheObjectScriptMacCompletionContributor"/>

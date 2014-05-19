@@ -22,13 +22,13 @@ classEntry::=lbrace elem* rbrace
 elem::=fkey| method| property| query| xdata| param| trigger| index| projection| DESCRIPTION| COMMENT
 includeBlock::=(include fileList)
 importBlock::=(import classList)
-defBlock::= classNameBlock [extendBlock] [keywordsBlock]
+defBlock::=classNameBlock [extendBlock] [keywordsBlock]
 classNameBlock::=class className
-extendBlock::= [as className ] [extends classList]
-classList::= className | (lpar (className comma)+ className rpar)
-fileList::= fileName | (lpar (fileName comma)+ fileName rpar)
+extendBlock::=(as className)|(extends classList)
+classList::=className|{lpar (className comma)+ className rpar}
+fileList::=fileName | {lpar (fileName comma)+ fileName rpar}
 keywordsBlock::=lbracket(keywordItem comma)* keywordItem rbracket
-keywordItem::= keyword [(eq keyword) |(eq lpar (keyword comma)+ keyword rpar)]
+keywordItem::=keyword [(eq keyword) |(eq lpar (keyword comma)+ keyword rpar)]
 
 //foreign key definition
 fkey::=fkey_keyWord fkey_Name lpar fprops rpar [fref_Word fref_Class lpar fprops rpar] [fkeyKeywordBlock] semicolon
@@ -54,4 +54,4 @@ argParams::=lpar(argParam comma)* argParam rpar
 argParam::= argKeyword [(eq argKeyword) |(eq lpar (argKeyword comma)+ argKeyword rpar)]
 retParams::=lpar(retParam comma)* retParam rpar
 retParam::= retKeyword [(eq retKeyword) |(eq lpar (retKeyword comma)+ retKeyword rpar)]
-methodBody::= lbrace [methodCode] rbrace
+methodBody::= lbrace methodCode* rbrace

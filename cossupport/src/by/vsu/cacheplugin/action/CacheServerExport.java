@@ -14,7 +14,6 @@ import com.intersys.xep.XEPException;
 import javax.swing.*;
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -69,7 +68,6 @@ public class CacheServerExport extends AnAction {
 
     private void exportRoutines(File rootDir) throws CacheException, IOException {
         List<File> allFiles = Arrays.asList(rootDir.listFiles());
-        List<File> incFiles = new ArrayList<File>();
         for (File child : allFiles) {
             System.out.println(child.getName());
             RoutineMgr routineMgr = new RoutineMgr(connStorage.getDb(),

@@ -12,8 +12,13 @@ import com.intellij.psi.TokenType;
 %unicode
 %function advance
 %type IElementType
+
+
 %eof{  return;
 %eof}
+
+%{ int bcounter=0;
+%}
 
 /* digits */
 DIGIT=[0-9]
@@ -80,6 +85,7 @@ INCLUDE = [Ii][Nn][Cc][Ll][Uu][Dd][Ee] | [Ii][Nn][Cc][Ll][Uu][Dd][Ee][Gg][Ee][Nn
 CLASS= [Cc][Ll][Aa][Ss][Ss]
 LBRACE = "{"
 RBRACE = "}"
+NOTBRACE=[^\{}]
 PACKAGE = {IDENTIFIER} {DOT}
 EXTENDS = [Ee][Xx][Tt][Ee][Nn][Dd][Ss]
 AS = [Aa][Ss]
@@ -149,6 +155,7 @@ ARGMODIFIER=[Bb][Yy][Rr][Ee][Ff]|[Bb][Yy][Vv][Aa][Ll]|[Oo][Uu][Tt][Pp][Uu][Tt]
         {CLASSNAME}                                    { yybegin (IN_OTHER); return CacheObjectScriptClsTypes.CLASSNAME; }
     }
     <IN_EXTENDS>{
+        {CLASSNAME}                                    { yybegin (IN_OTHER); return CacheObjectScriptClsTypes.CLASSNAME;}
         {LPARENTHESIS}                                 { yybegin (IN_CLASS_LIST_EXT);return CacheObjectScriptClsTypes.LPAR;}
         <IN_CLASS_LIST_EXT>{
             {CLASSNAME}                                { return CacheObjectScriptClsTypes.CLASSNAME;}
@@ -339,7 +346,9 @@ ARGMODIFIER=[Bb][Yy][Rr][Ee][Ff]|[Bb][Yy][Vv][Aa][Ll]|[Oo][Uu][Tt][Pp][Uu][Tt]
                 {RBRACKET}                                     {yybegin (IN_M_DEF); return CacheObjectScriptClsTypes.RBRACKET;}
             }
             <IN_METHOD_BODY>{
-                {RBRACE}                               { yybegin (IN_CLASSENTRY);return CacheObjectScriptClsTypes.RBRACE;}
+                {LBRACE}                               { bcounter++;}
+                {NOTBRACE}                             { return TokenType.WHITE_SPACE;}
+                {RBRACE}                               { if(bcounter!=0) bcounter--; else {yybegin (IN_CLASSENTRY);return CacheObjectScriptClsTypes.RBRACE;}}
             }
         }
     }
