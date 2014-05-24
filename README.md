@@ -1,1 +1,1 @@
-"# This is my README" 
+Plugin for IntelliJ IDEA to support Cache Object Script language
